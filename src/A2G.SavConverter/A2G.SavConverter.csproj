@@ -10,12 +10,13 @@
     <Nullable>disable</Nullable>
     <RootNamespace>A2G.SavConverter</RootNamespace>
     <AssemblyName>A2G-SAV-Converter</AssemblyName>
-    <ApplicationIcon />
+    <ApplicationIcon>Assets\app.ico</ApplicationIcon>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
 
   <ItemGroup>
     <Resource Include="Assets\**\*.png" />
+    <Resource Include="Assets\app.ico" />
     <EmbeddedResource Include="Localization/*.txt" LogicalName="Localization.%(Filename)%(Extension)" />
     <EmbeddedResource Include="Data/nation_names_fm26.csv" LogicalName="Data.nation_names_fm26.csv" />
   </ItemGroup>
