@@ -1,85 +1,132 @@
 # A2G-SAV-Converter
 
-WPF application (.NET Framework 4.8) that converts Football Manager 26 data into Anstoss 2 `.sav` data sets.
+Turn a Football Manager 26/27 save into a complete Anstoss 2 data set.
 
-## Layout
+<p align="center">
+  <img src="docs/User/images/04-teams.png" alt="A2G-SAV-Converter: the Teams tab" width="900">
+</p>
 
-| Path | Purpose |
-|------|---------|
-| `A2G-SAV-Converter.sln` | Visual Studio solution |
-| `src/A2G.SavConverter/` | The WPF app. `Services/FmSaveExporter.cs` is the only code that knows about FM. |
-| `src/A2G.Sav/` | Library: typed readers/writers for the Anstoss 2 `.sav` files (byte-exact round trip) |
-| `src/A2G.Convert/` | Engine: loads the FM CSV exports, detects leagues from fixtures, builds the editable `ConversionPlan` (reputation cascade, squads, Avereine clubs) and maps players using `ConversionSettings` |
-| `tests/A2G.Convert.Cli/` | Console: builds a plan from an `fm_export` folder and prints a report (`A2G.Convert.Cli.exe <fm_export> <Anstoss 2 folder>`; the folder can also come from the environment variable `A2G_ANSTOSS2`), and the self tests used by `run-checks.ps1` |
-| `tests/A2G.Sav.RoundTrip/` | Console test: parses every file of an install and requires identical bytes (`A2G.Sav.RoundTrip.exe <install path>` or `A2G_ANSTOSS2`) |
-| `docs/User/` | The user guide (Markdown, written for publishing online): start with `docs/User/README.md` |
-| `docs/Dev/` | Developer documentation: file formats (`sav-format-verified.md`), conversion rules, profiles, projects, patches |
-| `third_party/fmsave/` | Vendored [fmsave](https://github.com/rhiever/fmsave) 0.10.0 source (MIT, (c) Randal S. Olson) |
-| `tools/build-fmsave.ps1` | Builds `tools/fmsave/fmsave.exe` from the vendored source (private venv in `tools/_build`) |
-| `tools/fmsave/` | The built `fmsave.exe` (not committed); the build embeds it into the app's exe, which unpacks it on first use |
-| `tools/publish.ps1` | Builds the single-file release `dist\A2G-SAV-Converter.exe` (see `docs/Dev/patches.md`) |
+Real clubs, leagues, players, staff, name pools, stadiums, kits and crests from Football Manager, playable in Anstoss 2. Review and
+fine-tune everything inside the program, install it safely with a way back to the original data, and pack your work into **one `.exe`
+patch file** that anyone can install with a few clicks.
 
-## Build
+**Built on .NET Framework 4.8**, A2G-SAV-Converter is a single file that runs on Windows 10 and 11 out of the box. There is no installer
+and nothing else to download. It works offline and comes in English and German.
 
-1. `powershell -ExecutionPolicy Bypass -File tools\build-fmsave.ps1` (needs Python 3.12+; only for this step; `tools\publish.ps1` runs it when fmsave.exe is missing or outdated)
-2. Open `A2G-SAV-Converter.sln` in Visual Studio, or `dotnet build`.
+---
 
-## The app
+## 🚀 How to Use
 
-`A2G-SAV-Converter.exe [project folder] [--autoplan]` (`--autoplan` loads the project's export and builds the plan on start; without a
-folder the last open project is opened). The tabs are numbered steps of one linear workflow: **1 Project & Export** (the project list, the FM
-save, picked with Browse or dropped onto the window, with a line showing its game version, build and compatibility; the Anstoss 2 folder is
-found automatically where possible; the game does not have to be installed), **2 Options** (squad rules, strength bands, ability rules; saved in
-the project), **3 Plan** (build the plan; needs the export), **4 Teams** (swap teams between leagues or with unused FM clubs, edit squads,
-club information, kits and the results of the last season; edits are saved and re-applied after a rebuild), **5 Players** (FM profile -> arrow ->
-Anstoss 2 "Spielerinfo" preview using the current settings; skin and hair), **6 Crests** (own and painted crests), **7 Write & Install** (write
-the `.sav` files including all edits and validate them, then install them as a profile, switch/rename/delete profiles, partial installs, and
-generate a patch file). Steps 4 to 6 stay greyed out until a plan exists, and step 3 until an export exists.
+1. **Download** the latest `A2G-SAV-Converter.exe` from the [Releases](https://github.com/strajk-/A2G-SAV-Converter/releases) page and
+   start it from any folder.
+2. On tab **1 Project & Export**, choose your Football Manager save (**Browse**, or drop the `.fm` file onto the window). Your
+   **Anstoss 2 folder** is found automatically in most cases. Press **Export from FM save**.
+3. On tab **3 Plan**, press **Build plan from export**. Then, if you like, review the **Teams**, **Players** and **Crests** tabs: swap
+   clubs between leagues, edit squads, club names, stadiums, kits and the results of the last season.
+4. On tab **7 Write & Install**, press **Write .sav files to project**, close Anstoss 2 and press **Install**. Your conversion becomes a
+   new data set and the original data stays safe as **Original**.
+5. To go back at any time, select **Original** in the list of data sets and press **Activate selected**.
 
-Automated checks (nothing touches the real install): `powershell -File tests\run-checks.ps1 -Anstoss2 "<A2 folder>" -FmExport <fm_export folder>`.
-Images (ability icons, flags) were extracted once with `tools/extract-assets.ps1`; the game's DLL is not used at runtime.
+> ⚠️ **Note:** Use a **fresh career save** (the start of a new career with all the leagues you want loaded). A save from a long career
+> contains generated future players instead of the real ones. Football Manager does not have to be installed.
 
-## Project folder
+Want to share your work? Press **Generate patch file...** on the same tab. The result is a single `A2G-Patch_<name>.exe` that installs your
+data set into any Anstoss 2 and can switch back to the original data. See [Patch files and the patcher](docs/User/10-patches.md).
 
-Everything the tool produces lives in one project folder. Projects are named: each is a folder below `%APPDATA%\A2G-SAV-Converter\Projects` (see docs\Dev\projects.md); the project list is at the top of the first tab, and any other folder can be opened too:
+---
 
-```
-<Project>\
-  fm_export\   CSVs exported from the FM save
-  mapping\     settings and manual edits
-  Crests\      own crest images (named by FM club id)
-  Anstoss2\    the deliverable; copy its contents over the Anstoss 2 install folder
-    DATA.DEF\*.sav, WAPPEN\*.BMP
-    DATA.VER\*.sav, WAPPEN\*.BMP
-```
+## ✨ Features
 
-Only `.sav` files and the crest `.bmp` files in `WAPPEN` are written; no binaries are edited and no nation records are renamed.
+- **Football Manager to Anstoss 2:** clubs, leagues, squads, strength, positions, abilities, traits, characters, staff and name pools
+  from an FM26 or FM27 save, with all the game's limits respected and checked.
+- **Everything editable:** swap teams between leagues, fill squads by position, change city, nickname, stadium name and capacity,
+  design kits, set the results of the last season, pick skin and hair, all with live previews.
+- **Excel round trip:** export the club information of every club to a formatted workbook and import it again.
+- **Your own crests:** import images or paint 32x32 crests pixel by pixel; the rest are generated in the club's colours.
+- **Safe installs:** every install is a data set of its own; switch back to the original data with one click.
+- **Projects and a shared library:** named projects you can reopen for minor edits, and club texts, kits and crests that carry over to new
+  projects.
+- **Patch files:** one `.exe` with your data set and a small installer window, plus a quiet install mode (`-q`, `-F`) for installers.
+- **Light and dark theme, English and German.**
 
-## Export from an FM save
+---
 
-The app runs `fmsave export <save> <table> --all --format csv` for `players`, `clubs`, `nations`, `fixtures` and `staff`, and adds the nation
-names (from the installed FM database, or from a bundled table when FM is not installed), into the project's `fm_export` folder.
+## 📸 Screenshots
 
-Supported FM26 builds (fmsave 0.10.0): 26.1.0, 26.3.1, 26.3.2.
+<table>
+  <tr>
+    <td width="50%"><img src="docs/User/images/05-team-information.png" alt="Team information with kits and squad by position"></td>
+    <td width="50%"><img src="docs/User/images/06-players.png" alt="Player preview: Football Manager profile and Anstoss 2 player info"></td>
+  </tr>
+  <tr>
+    <td align="center"><sub>Team information: club texts, kits, squad by position</sub></td>
+    <td align="center"><sub>Players: the FM profile and the Anstoss 2 "Spielerinfo"</sub></td>
+  </tr>
+  <tr>
+    <td width="50%"><img src="docs/User/images/05-season-results.png" alt="Results of the last season"></td>
+    <td width="50%"><img src="docs/User/images/10-patcher.png" alt="The patcher window"></td>
+  </tr>
+  <tr>
+    <td align="center"><sub>Results of the last season: pick a club for every slot</sub></td>
+    <td align="center"><sub>The patcher: install a patch file and switch data sets</sub></td>
+  </tr>
+</table>
 
-Notes:
-- Use a **fresh** save (start of a new career, all wanted leagues loaded). A save from a long career holds generated future players, not real ones.
-- `nations.csv` only maps save nation ids to database ids; the names are in `nation_names.csv`.
-- The FM-reading part is isolated so it can later be replaced by a native C# reader.
+---
 
-## Look and language
+## 📚 Documentation
 
-The app follows the Windows light/dark setting and display language by default (German or English; any other language
-falls back to English). The header has a **Language** and a **Theme** drop-down to override both (remembered per user in
-`%APPDATA%\A2G-SAV-Converter`). Texts live in `src/A2G.SavConverter/Localization/<code>.txt` (tab separated `key TAB text`,
-key `0` = the language's own name); adding a file adds a language to the drop-down. In XAML use
-`{loc:LocalizedText 10001}`, in code `Loc.T(10001, args)`.
+The complete **[user guide](docs/User/README.md)** covers every tab and feature:
 
-## Patches and release
-One single exe (tools\publish.ps1) and patch files for passing a data set on: see docs\Dev\patches.md.
+| | |
+|---|---|
+| [Getting started](docs/User/01-getting-started.md) | Requirements, first start, the seven steps |
+| [Project and export](docs/User/02-project-and-export.md) | Projects, the FM save, the export |
+| [Options](docs/User/03-options.md) | Squad rules, strength bands, abilities, traits |
+| [Teams](docs/User/05-teams.md) | Swapping, squads, kits, club information, season results |
+| [Players](docs/User/06-players.md) · [Crests](docs/User/07-crests.md) | Previews, skin and hair, your own crests |
+| [Write and install](docs/User/08-write-and-install.md) · [Data sets and rollback](docs/User/09-profiles.md) | Installing and going back |
+| [Patch files and the patcher](docs/User/10-patches.md) · [Command line](docs/User/14-command-line.md) | Sharing your work, quiet install for installers |
+| [How the conversion works](docs/User/11-how-conversion-works.md) · [Troubleshooting](docs/User/13-troubleshooting.md) | The rules behind the result, problems and FAQ |
 
-## License
+Developers: [architecture and repository layout](docs/Dev/architecture.md), file formats and conversion rules are in
+[`docs/Dev`](docs/Dev/).
+
+---
+
+## 📦 Embedded Dependencies
+
+The release is one file: the program's libraries and the Football Manager reader are built into it.
+
+- **[fmsave](https://github.com/rhiever/fmsave)** (0.10.0, Randal S. Olson, MIT) reads the Football Manager save. It is embedded in the
+  `.exe` and unpacked once into `%LOCALAPPDATA%\A2G-SAV-Converter\fmsave` the first time it is needed.
+- **A2G.Sav** and **A2G.Convert**, this project's own libraries, are embedded as well.
+
+Python is only needed to build the reader from source, never to run the program.
+
+---
+
+## 🛠️ Building from Source
+
+1. `powershell -ExecutionPolicy Bypass -File tools\build-fmsave.ps1` builds the embedded reader (needs Python 3.12+; only for this step).
+2. Open `A2G-SAV-Converter.sln` in Visual Studio, or run `dotnet build`.
+3. `powershell -File tools\publish.ps1` builds the single-file release into `dist\` and checks it.
+4. `powershell -File tests\run-checks.ps1 -Anstoss2 "<Anstoss 2 folder>" -FmExport "<fm_export folder>"` runs all automated checks on
+   scratch copies; nothing touches a real install.
+
+See [`docs/Dev/architecture.md`](docs/Dev/architecture.md) for the layout of the code.
+
+---
+
+## ⚖️ Licensing & Third-Party Notices
 
 The source code of A2G-SAV-Converter is licensed under the **GNU General Public License, version 3** (GPL-3.0): see [LICENSE](LICENSE).
-The vendored [fmsave](https://github.com/rhiever/fmsave) (MIT, (c) Randal S. Olson) keeps its own license in `third_party/fmsave`.
-This is an unofficial tool, not affiliated with Ascaron, Sports Interactive or SEGA; game names and data belong to their owners.
+
+This tool embeds or contains third-party material, which keeps its own rights and licenses:
+
+- **fmsave:** MIT License, Copyright (c) Randal S. Olson. Its license is kept in [`third_party/fmsave`](third_party/fmsave).
+- **Anstoss 2:** the national flags and ability icons shown in the program are taken from the game and remain the property of their
+  owners. The program reads and writes the game's data files; it does not contain the game.
+
+This is an unofficial community tool. It is not affiliated with, authorised or endorsed by Ascaron, Sports Interactive or SEGA. "Anstoss",
+"Football Manager" and all related names and game data belong to their respective owners.
