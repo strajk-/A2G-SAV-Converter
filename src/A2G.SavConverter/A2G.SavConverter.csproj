@@ -1,0 +1,50 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net48</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms> <!-- FolderBrowserDialog only -->
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+    <LangVersion>latest</LangVersion>
+    <Nullable>disable</Nullable>
+    <RootNamespace>A2G.SavConverter</RootNamespace>
+    <AssemblyName>A2G-SAV-Converter</AssemblyName>
+    <ApplicationIcon />
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\**\*.png" />
+    <EmbeddedResource Include="Localization/*.txt" LogicalName="Localization.%(Filename)%(Extension)" />
+    <EmbeddedResource Include="Data/nation_names_fm26.csv" LogicalName="Data.nation_names_fm26.csv" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Drawing" />
+    <ProjectReference Include="..\A2G.Convert\A2G.Convert.csproj" />
+    <ProjectReference Include="..\A2G.Sav\A2G.Sav.csproj" />
+  </ItemGroup>
+
+  <!-- The bundled fmsave.exe (built by tools\build-fmsave.ps1) ships next to the app in .\fmsave\ -->
+  <ItemGroup>
+    <None Include="..\..\tools\fmsave\**\*"
+          Exclude="..\..\tools\fmsave\.gitkeep"
+          Link="fmsave\%(RecursiveDir)%(Filename)%(Extension)"
+          CopyToOutputDirectory="PreserveNewest" />
+    <None Include="..\..\third_party\fmsave\fmsave-0.10.0\LICENSE"
+          Link="fmsave\LICENSE-fmsave.txt"
+          CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <!-- One single .exe: the libraries and the fmsave reader become resources of the program (see Services\EmbeddedAssets.cs). -->
+  <Target Name="EmbedLibraries" BeforeTargets="AssignTargetPaths" DependsOnTargets="ResolveReferences">
+    <ItemGroup>
+      <EmbeddedResource Include="@(ReferenceCopyLocalPaths)" Condition="'%(Extension)' == '.dll'" LogicalName="Embedded.%(Filename).dll" />
+      <EmbeddedResource Include="..\..\tools\fmsave\fmsave.exe" LogicalName="Embedded.fmsave.exe" Condition="Exists('..\..\tools\fmsave\fmsave.exe')" />
+      <EmbeddedResource Include="..\..\third_party\fmsave\fmsave-0.10.0\LICENSE" LogicalName="Embedded.LICENSE-fmsave.txt" />
+    </ItemGroup>
+  </Target>
+
+</Project>

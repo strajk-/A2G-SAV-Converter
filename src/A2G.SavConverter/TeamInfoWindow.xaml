@@ -1,0 +1,99 @@
+<Window x:Class="A2G.SavConverter.TeamInfoWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:loc="clr-namespace:A2G.SavConverter.Localization"
+        Width="1560" Height="760" MinWidth="1340" MinHeight="600"
+        WindowStartupLocation="CenterOwner" ShowInTaskbar="False"
+        Background="{DynamicResource BgBrush}" Foreground="{DynamicResource TextBrush}">
+    <Grid Margin="16">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="340" />
+            <ColumnDefinition Width="560" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Border Style="{StaticResource Card}" Margin="0,0,12,0">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <StackPanel Margin="0,0,6,0">
+                    <TextBlock x:Name="TitleText" FontSize="20" FontWeight="SemiBold" TextWrapping="Wrap" />
+                    <TextBlock x:Name="NoteText" Style="{StaticResource Muted}" TextWrapping="Wrap" Margin="0,4,0,12" />
+                    <StackPanel x:Name="Facts" />
+                    <TextBlock x:Name="EditHint" Text="{loc:LocalizedText 22107}" Style="{StaticResource Muted}" TextWrapping="Wrap" FontSize="12" Margin="0,2,0,0" />
+                    <!-- home and away kit: drawn from the game's colours and patterns, every part can be changed -->
+                    <StackPanel x:Name="KitPanel" Margin="0,16,0,0" />
+                    <TextBlock x:Name="ProblemText" TextWrapping="Wrap" Margin="0,14,0,0" />
+                </StackPanel>
+            </ScrollViewer>
+        </Border>
+
+        <Border Grid.Column="1" Style="{StaticResource Card}" Margin="0,0,12,0">
+            <Grid>
+                <!-- the squad by position -->
+                <StackPanel x:Name="PitchPanel">
+                    <TextBlock Text="{loc:LocalizedText 22100}" Style="{StaticResource SectionTitle}" />
+                    <StackPanel x:Name="Composition" HorizontalAlignment="Center" />
+                    <TextBlock Text="{loc:LocalizedText 22114}" Style="{StaticResource Muted}" TextWrapping="Wrap" FontSize="12" Margin="0,8,0,0" />
+                </StackPanel>
+                <!-- the reserves: the other FM players of the club, to swap into the squad -->
+                <DockPanel x:Name="ReservePanel" Visibility="Collapsed">
+                    <TextBlock x:Name="ReserveTitle" DockPanel.Dock="Top" Style="{StaticResource SectionTitle}" TextWrapping="Wrap" />
+                    <TextBlock DockPanel.Dock="Bottom" Text="{loc:LocalizedText 22194}" Style="{StaticResource Muted}" TextWrapping="Wrap" FontSize="12" Margin="0,8,0,0" />
+                    <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" Margin="0,10,0,0">
+                        <Button x:Name="AddReserveButton" Content="{loc:LocalizedText 22193}" Style="{StaticResource PrimaryButton}" Margin="0,0,8,0" Click="AddReserve_Click" />
+                        <Button Content="{loc:LocalizedText 22199}" ToolTip="{loc:LocalizedText 22200}" Click="FindPlayers_Click" />
+                    </StackPanel>
+                    <ListView x:Name="ReserveList" SelectionMode="Single" MouseDoubleClick="ReserveList_DoubleClick">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="{loc:LocalizedText 22066}" Width="122" DisplayMemberBinding="{Binding Name}" />
+                                <GridViewColumn Header="{loc:LocalizedText 22067}" Width="44" DisplayMemberBinding="{Binding Age}" />
+                                <GridViewColumn Header="{loc:LocalizedText 22069}" Width="196" DisplayMemberBinding="{Binding PositionText}" />
+                                <GridViewColumn Header="CA" Width="40" DisplayMemberBinding="{Binding CA}" />
+                                <GridViewColumn Header="PA" Width="40" DisplayMemberBinding="{Binding PA}" />
+                                <GridViewColumn Width="34">
+                                    <GridViewColumn.CellTemplate><DataTemplate>
+                                        <Button Style="{StaticResource IconButton}" Content="&#xE721;" Width="26" Height="26" ToolTip="{loc:LocalizedText 22115}" Click="MagnifyRow_Click" />
+                                    </DataTemplate></GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </DockPanel>
+            </Grid>
+        </Border>
+
+        <Border Grid.Column="2" Style="{StaticResource Card}">
+            <Grid>
+                <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="*" /><RowDefinition Height="Auto" /></Grid.RowDefinitions>
+                <DockPanel>
+                    <ToggleButton x:Name="ReserveToggle" DockPanel.Dock="Right" Content="{loc:LocalizedText 22192}" Padding="12,4" Margin="8,0,0,6" Visibility="Collapsed"
+                                  ToolTip="{loc:LocalizedText 22194}" Checked="ReserveToggle_Changed" Unchecked="ReserveToggle_Changed" />
+                    <TextBlock x:Name="SquadTitle" Style="{StaticResource SectionTitle}" VerticalAlignment="Center" />
+                </DockPanel>
+                <ListView x:Name="SquadList" Grid.Row="1" SelectionMode="Single" MouseDoubleClick="SquadList_DoubleClick">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="{loc:LocalizedText 22066}" Width="170" DisplayMemberBinding="{Binding Name}" />
+                            <GridViewColumn Header="{loc:LocalizedText 22067}" Width="46" DisplayMemberBinding="{Binding Age}" />
+                            <GridViewColumn Header="{loc:LocalizedText 22069}" Width="200" DisplayMemberBinding="{Binding PositionText}" />
+                            <GridViewColumn Header="CA" Width="42" DisplayMemberBinding="{Binding CA}" />
+                            <GridViewColumn Header="PA" Width="42" DisplayMemberBinding="{Binding PA}" />
+                            <GridViewColumn Width="40">
+                                <GridViewColumn.CellTemplate><DataTemplate>
+                                    <Button Style="{StaticResource IconButton}" Content="&#xE721;" Width="26" Height="26" ToolTip="{loc:LocalizedText 22115}" Click="MagnifyRow_Click" />
+                                </DataTemplate></GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                <DockPanel Grid.Row="2" Margin="0,12,0,0">
+                    <Button DockPanel.Dock="Right" Content="{loc:LocalizedText 22064}" Width="100" IsCancel="True" />
+                    <Button DockPanel.Dock="Right" x:Name="SaveButton" Content="{loc:LocalizedText 22108}" Style="{StaticResource PrimaryButton}" Width="100" Margin="0,0,8,0" Click="Save_Click" />
+                    <Button DockPanel.Dock="Right" Content="{loc:LocalizedText 22109}" Margin="0,0,8,0" Click="Defaults_Click" />
+                    <Button DockPanel.Dock="Left" x:Name="RemoveButton" Content="{loc:LocalizedText 22195}" Margin="0,0,12,0" Visibility="Collapsed" Click="RemoveSquad_Click" />
+                    <TextBlock x:Name="StatusText" VerticalAlignment="Center" TextWrapping="Wrap" Margin="0,0,12,0" />
+                </DockPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

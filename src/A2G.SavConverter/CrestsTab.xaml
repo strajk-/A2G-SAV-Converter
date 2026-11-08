@@ -1,0 +1,42 @@
+<UserControl x:Class="A2G.SavConverter.CrestsTab"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:loc="clr-namespace:A2G.SavConverter.Localization">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="380" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- nation and clubs -->
+        <Border Style="{StaticResource Card}" Margin="0,0,12,0">
+            <Grid>
+                <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="Auto" /><RowDefinition Height="Auto" /><RowDefinition Height="*" /></Grid.RowDefinitions>
+                <TextBlock Text="{loc:LocalizedText 22149}" Style="{StaticResource SectionTitle}" />
+                <ComboBox x:Name="NationBox" Grid.Row="1" Margin="0,0,0,8" SelectionChanged="NationBox_Changed" />
+                <TextBox x:Name="SearchBox" Grid.Row="2" Tag="{loc:LocalizedText 22150}" Margin="0,0,0,8" TextChanged="SearchBox_Changed" />
+                <ListBox x:Name="ClubList" Grid.Row="3" ItemTemplate="{StaticResource TextRow}" SelectionChanged="ClubList_Changed" />
+            </Grid>
+        </Border>
+
+        <!-- crest of the selected club -->
+        <Border Grid.Column="1" Style="{StaticResource Card}">
+            <Grid>
+                <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="Auto" /><RowDefinition Height="Auto" /><RowDefinition Height="Auto" /><RowDefinition Height="*" /><RowDefinition Height="Auto" /></Grid.RowDefinitions>
+                <TextBlock x:Name="ClubTitle" Style="{StaticResource SectionTitle}" TextWrapping="Wrap" />
+                <Border Grid.Row="1" Width="256" Height="256" HorizontalAlignment="Left" Margin="0,4,0,10" BorderBrush="{DynamicResource LineBrush}" BorderThickness="1" Background="#FBFAF9">
+                    <Image x:Name="CrestImage" RenderOptions.BitmapScalingMode="NearestNeighbor" Stretch="Uniform" />
+                </Border>
+                <TextBlock x:Name="SourceText" Grid.Row="2" Style="{StaticResource Muted}" TextWrapping="Wrap" Margin="0,0,0,10" />
+                <StackPanel Grid.Row="3" Orientation="Horizontal">
+                    <Button x:Name="ImportButton" Content="{loc:LocalizedText 22153}" Style="{StaticResource PrimaryButton}" Margin="0,0,8,0" Click="Import_Click" />
+                    <Button x:Name="PaintButton" Content="{loc:LocalizedText 22154}" Margin="0,0,8,0" Click="Paint_Click" />
+                    <Button x:Name="RemoveButton" Content="{loc:LocalizedText 22155}" Margin="0,0,8,0" Click="Remove_Click" />
+                    <Button Content="{loc:LocalizedText 22145}" ToolTip="{loc:LocalizedText 22146}" Click="OpenFolder_Click" />
+                </StackPanel>
+                <TextBlock x:Name="StatusText" Grid.Row="4" Margin="0,10,0,0" TextWrapping="Wrap" />
+                <TextBlock Grid.Row="5" Text="{loc:LocalizedText 22178}" Style="{StaticResource Muted}" TextWrapping="Wrap" FontSize="12" />
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

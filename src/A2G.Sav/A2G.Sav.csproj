@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <RootNamespace>A2G.Sav</RootNamespace>
+    <AssemblyName>A2G.Sav</AssemblyName>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+
+</Project>

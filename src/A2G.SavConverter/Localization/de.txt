@@ -1,0 +1,534 @@
+0	Deutsch
+10000	Anstoss 2 Datenkonverter
+10001	Verwandelt einen Football-Manager-Spielstand in einen vollständigen Anstoss-2-Datensatz
+10002	Design
+10003	„System“ folgt der Windows-Einstellung
+10004	1  Projekt & Export
+10005	Projekt
+10006	Durchsuchen / öffnen
+10007	FM-Spielstand (.fm)
+10008	Durchsuchen
+10009	FM-Installationsordner (optional)
+10010	Anstoss-2-Ordner
+10011	Aus FM-Spielstand exportieren
+10012	Spielstand-Infos anzeigen
+10013	Verwenden Sie einen frischen Karrierespielstand (Beginn eines neuen Spiels, alle gewünschten Ligen geladen). Wählen Sie ihn mit „Durchsuchen“ oder ziehen Sie die .fm-Datei auf dieses Fenster; das Spiel muss nicht installiert sein. Der Export liest Spieler, Vereine, Nationen und Spielpläne aus dem Spielstand und ändert nichts.
+10014	2  Optionen
+10015	3  Plan
+10016	Plan aus Export erstellen
+10017	.sav-Dateien ins Projekt schreiben
+10018	Ausgabeordner öffnen
+10019	4  Teams
+10020	5  Spieler
+10021	7  Schreiben & Installieren
+10022	Profil
+10023	Aktiv
+10024	Erstellt (UTC)
+10025	Dateien
+10026	Quelle
+10027	Die Projektdaten als neues Profil installieren
+10028	Installieren
+10029	Nur diese Teile:
+10030	Namenslisten
+10031	Vereine (Avereine)
+10032	Deutschland
+10033	England
+10034	Frankreich
+10035	Italien
+10036	Spanien
+10037	Auswahl aktivieren
+10038	Umbenennen
+10039	Löschen
+10040	Aktualisieren
+10041	Laufende Aufgabe abbrechen
+10042	Kader
+10043	Spieler pro Team (16-30)
+10044	Torhüter pro Team (mindestens)
+10045	Echte FM-Spieler, die ein Verein zum Qualifizieren braucht
+10046	Kleinere Kader auffüllen bis (aus dem freien Pool)
+10047	Vereine außerhalb der Ligen (Avereine)
+10048	Höchstens so viele Vereine pro Nation
+10049	Stärke (1-7) aus der Current Ability
+10050	Ein Spieler erhält Stärke 2 ab der ersten Grenze bis Stärke 7 ab der sechsten. Stärke 8 ist ein Zufallsereignis im Spiel und wird nie vergeben.
+10051	2 ab CA
+10052	3 ab CA
+10053	4 ab CA
+10054	5 ab CA
+10055	6 ab CA
+10056	7 ab CA
+10057	Positionen und Fähigkeiten
+10058	FM-Positionswertung für eine Nebenposition
+10059	Höchstens positive Fähigkeiten (1-2)
+10060	Höchstens negative Fähigkeiten (0-2)
+10061	Fähigkeitsregeln
+10062	Ein Spieler erhält eine Fähigkeit, wenn die kombinierten FM-Attribute (1-20) den „Mindestens“-Wert erreichen; die stärksten Treffer gewinnen, bis zu den Grenzen links. „Höchstens“ vergibt die schwache (rote) Variante; 0 schaltet sie ab. Mit der Schaltfläche „Bearbeiten“ einer Zeile werden FM-Attribute hinzugefügt oder entfernt.
+10063	An
+10064	Fähigkeit
+10065	FM-Attribute
+10066	Bearbeiten…
+10067	Kombination
+10068	Mindestens
+10069	Höchstens (0 = aus)
+10070	Auf Vorschau anwenden
+10071	Im Projekt speichern
+10072	Standardwerte
+10073	Spieler
+10074	Suche nach Spieler- oder Vereinsname
+10075	Auch Spieler außerhalb des Plans
+10076	konvertiert
+10077	Alle Änderungen verwerfen
+10078	Land
+10079	⇄  Tauschen
+10080	Die beiden gewählten Teams tauschen (oder das linke Team durch den gewählten Pool-Verein ersetzen)
+10081	Wählen Sie auf jeder Seite ein Team. Mit dem Pool rechts ersetzen Sie ein Team durch einen ungenutzten FM-Verein.
+10082	Nach Vereinsname suchen
+10083	Kader
+10084	Entfernen →
+10085	← Hinzufügen
+10086	FM-Spieler zum Hinzufügen suchen (ein Spieler kommt nur zu einem Team)
+20000	WARNUNG: {0} fehlt. tools\build-fmsave.ps1 ausführen und neu kompilieren.
+20001	Projekt: {0}
+20002	FEHLER: {0}
+20003	Projektordner (Exporte, Zuordnungen und die Anstoss-2-Daten werden darin gespeichert)
+20004	Football-Manager-Spielstand auswählen
+20005	FM-Spielstände (*.fm)|*.fm|Alle Dateien (*.*)|*.*
+20006	Football-Manager-Installationsordner
+20007	Anstoss-2-Installationsordner (enthält DATA.DEF)
+20008	Lese Spielstand-Infos ...
+20009	Wählen Sie zuerst den Football-Manager-Installationsordner (für die Nationennamen nötig).
+20010	Export abgeschlossen: {0}
+20011	Export mit Fehlern beendet in: {0}
+20012	Wählen Sie zuerst eine Spielstanddatei (.fm).
+20013	fmsave.exe fehlt neben der Anwendung.\nFühren Sie tools\build-fmsave.ps1 aus und kompilieren Sie neu.
+20014	Führen Sie zuerst den Export aus (Reiter 1).
+20015	Lade den FM-Export und erstelle den Plan ...
+20016	Plan erstellt: {0} Spieler, {1} Vereine geladen.
+20017	{0} von {1} gespeicherten manuellen Änderungen erneut angewendet.
+20018	Erstellen Sie zuerst den Plan.
+20019	Wählen Sie auf Reiter 1 den Anstoss-2-Ordner (er muss DATA.DEF enthalten).
+20020	Schreibe .sav-Dateien ...
+20021	Geschriebene Dateien: {0}
+20022	WARNUNG: {0}
+20023	HINWEIS: {0}
+20024	Prüfung: keine Probleme.
+20025	Prüfungsprobleme ({0}):
+20026	Nach {0} geschrieben (geprüft).
+20027	Geschrieben, aber die Prüfung fand {0} Problem(e).
+20028	Wählen Sie auf Reiter 1 den Anstoss-2-Ordner, um Profile zu verwalten.
+20029	Diese Installation wurde noch nicht verwaltet. Die erste Installation sichert die mitgelieferten Daten als Profil „Original“.
+20030	Aktives Profil: {0}
+20031	(aktive Dateien wurden geändert: {0} Datei(en) weichen ab)
+20032	ja
+20033	Profile konnten nicht gelesen werden: {0}
+20034	Die aktiven Datendateien weichen vom Profil „{0}“ ab:\n\n  {1}\n\nJa = Änderungen zuerst in „{0}“ speichern\nNein = verwerfen\nAbbrechen = nichts tun
+20035	Das Projekt enthält noch keine geschriebenen Daten. Verwenden Sie zuerst „.sav-Dateien ins Projekt schreiben“ auf Reiter 3.
+20036	Profil „{0}“ installiert und aktiviert.
+20037	Wählen Sie zuerst ein Profil.
+20038	Profil „{0}“ ist jetzt aktiv.
+20039	Profil umbenennen
+20040	Neuer Name für „{0}“:
+20041	„{0}“ in „{1}“ umbenannt.
+20042	Profil „{0}“ löschen? Die gespeicherten Dateien werden entfernt.
+20043	Profil „{0}“ gelöscht.
+20044	Abgebrochen.
+20050	System
+20051	Hell
+20052	Dunkel
+20053	Sprache
+20054	Sprache der Benutzeroberfläche
+21000	Geändert - „Auf Vorschau anwenden“ drücken.
+21001	Spieler pro Team: 16 bis 30.
+21002	Torhüter pro Team: 1 bis 4.
+21003	Die nötige Zahl echter Spieler muss zwischen 1 und 30 liegen.
+21004	Auffüllgrenze: 16 bis 30.
+21005	Vereine pro Nation: 1 bis 40.
+21006	Wertung für Nebenposition: 1 bis 20.
+21007	Positive Fähigkeiten: 1 oder 2.
+21008	Negative Fähigkeiten: 0 bis 2.
+21009	Stärkegrenzen müssen Zahlen von 1 bis 200 sein.
+21010	Stärkegrenzen müssen von links nach rechts steigen.
+21011	Auf die Vorschau angewendet. Für Kaderänderungen den Plan in Schritt 3 neu erstellen.
+21012	Gespeichert in {0}
+21013	Standardwerte wiederhergestellt (noch nicht gespeichert).
+21014	Torwart: {0}
+22000	Pool: ungenutzte FM-Vereine
+22001	Keine manuellen Änderungen.
+22002	{0} manuelle Änderung(en) erfasst; sie werden mit dem Projekt gespeichert und beim Neuaufbau des Plans erneut angewendet.
+22003	Ruf {0}  ·  {1} Spieler
+22004	Ruf {0}  ·  {1} Spieler in FM
+22005	Kader von {0} ({1} Spieler)
+22006	ohne Verein
+22007	Wählen Sie zuerst links ein Team.
+22008	Wählen Sie rechts ein Team oder einen Pool-Verein.
+22009	Wählen Sie ein Team und einen seiner Spieler.
+22010	Wählen Sie ein Team und einen Spieler aus den Suchergebnissen.
+22011	Es gibt keine manuellen Änderungen.
+22012	Alle {0} manuellen Änderungen verwerfen und den Plan neu erstellen?
+22013	Teams
+22020	Deutschland
+22021	England
+22022	Frankreich
+22023	Italien
+22024	Spanien
+22025	Vereine außerhalb der Ligen (Avereine)
+22030	{0} J.
+23000	{0}: {1} von {2} Teams
+23001	Ersatzteams
+23002	Ersatz-Vereinsnamen
+23003	Vereine außerhalb der Ligen (Avereine): {0} Vereine aus {1} Nationen, {2} Ersatzvereine
+23004	Warnungen:
+24000	FM-Attribute für {0}
+24001	+ Hinzufügen
+24002	Entfernen
+24003	Kein Attribut gewählt: die Regel trifft nie zu.
+24004	Abbrechen
+24005	Wählen Sie ein Attribut und drücken Sie + Hinzufügen; mit − entfernen Sie eines.
+24006	OK
+25001	die ersten 300 Treffer angezeigt
+25002	{0} Spieler
+25003	Erstellen Sie den Plan in Schritt 3 und wählen Sie dann einen Spieler.
+25004	{0}: {1} (benötigt {2})
+25005	Stärke {0} stammt aus CA {1}.
+25006	Marktwert, Gehalt, Form und Statistiken berechnet das Spiel beim Start eines neuen Spiels.
+22014	Kader
+26000	fmsave.exe wurde nicht gefunden. tools\build-fmsave.ps1 ausführen und neu kompilieren.
+26001	Lese Nationennamen aus der FM-Installation ...
+26002	Das Lesen der Nationennamen ist fehlgeschlagen (Exitcode {0}).
+26003	fmsave info ist fehlgeschlagen.
+26004	Spielstanddatei nicht gefunden.
+26005	Exportiere {0} ...
+26006	FEHLGESCHLAGEN: {0}
+26007	fmsave.exe konnte nicht gestartet werden.
+26008	Projektordner ist leer.
+27000	Zum Suchen tippen ...
+10090	FM-Version
+10091	Auf diesem PC gefundene Football-Manager-Versionen. Die Auswahl trägt deren Spielstand- und Installationsordner ein.
+10092	Kein Football Manager gefunden. Spielstand direkt wählen (oder auf dieses Fenster ziehen); der Installationsordner ist optional.
+10093	Die .sav-Dateien schreiben
+10094	In Anstoss 2 installieren
+10095	Erstellt den Umwandlungsplan aus dem Export und Ihren Optionen. Danach: Teams (Schritt 4) und Spieler (Schritt 5) prüfen, optional Wappen festlegen (Schritt 6), dann in Schritt 7 die Dateien schreiben.
+20070	Zuerst den Plan erstellen (Schritt 3).
+20071	Enthält {0} manuelle Änderungen aus Schritt 4 und 5.
+20072	Zuerst in Schritt 3 den Plan erstellen.
+20073	Zuerst in Schritt 1 aus dem FM-Spielstand exportieren.
+22040	Rechts eine andere Liga wählen - Mannschaften innerhalb einer Liga zu tauschen ändert nichts.
+21036	Höchstens
+21035	Wachstumsraum (PA - CA)
+21034	Potenzial (PA)
+21033	Aktuelle Stärke (CA)
+21032	Alter
+21030	Einen Wert wählen und + Hinzufügen drücken. Ein Spieler muss bei jeder Bedingung zwischen „Mindestens“ und „Höchstens“ liegen; 0 bedeutet keine Grenze.
+21029	Keine Bedingung: Die Regel trifft nie zu.
+21028	Bedingungen für {0}
+21027	Spieler des FM-Spielstands, die die Bedingungen dieser Regel erfüllen (vor Grenzen und Konflikten)
+21026	Spieler
+21025	FM-Bedingungen
+21024	Name
+21023	Talent-Kennzeichen
+21022	Gesundheit
+21021	Charakter
+21020	Eigenschaft
+21019	Art
+21018	Höchstens so viele Eigenschaften pro Spieler (Talent kommt dazu)
+21017	Welche FM-Werte eine Anstoss-2-Eigenschaft, einen Charakter oder einen Gesundheitszustand ergeben. Ein Spieler muss alle Bedingungen einer Regel erfüllen; der beste Treffer gewinnt, bis zu den angezeigten Grenzen. Die Zahl nennt, wie viele Spieler des geladenen FM-Spielstands die Regel erfüllen (Plan erstellen, um sie zu sehen).
+21016	Eigenschaften & Charakter
+21015	Fähigkeiten
+25007	{0}: {1}
+20074	Nationennamen: Es wird die eingebaute FM26-Liste verwendet.
+20075	Spielstand gewählt: {0}
+20076	Nationennamen: aus dem installierten Football Manager {0} gelesen.
+20085	✗ Football-Manager-{0}-Spielstände werden nicht unterstützt (FM26 oder FM27 nötig)
+20082	✗ Kein verwendbarer Football-Manager-Spielstand: {0}
+20081	⚠ Football-Manager-{0}-Spielstand · mit diesem Konverter nicht getestet (FM26 und FM27 werden unterstützt)
+20080	✓ Football-Manager-{0}-Spielstand · Build {1} · Spieldatum {2} · kompatibel
+20079	Spielstand wird geprüft ...
+20078	Spielstand (.fm) mit „Durchsuchen“ wählen oder auf dieses Fenster ziehen.
+20077	Nationennamen: Dieser Spielstand stammt aus FM{0}, es gibt aber nur die eingebaute FM26-Liste; einige Nationennamen können abweichen.
+21044	Manndecker
+21043	Liberos (0, wenn der Verein keinen hat)
+21042	Torhüter
+21041	Spieler pro Position für jedes Team der spielbaren Ligen. Fehlen einem Verein Spieler für eine Position, springen die am besten passenden anderen ein (kein Stürmer: offensive, rechte und linke Mittelfeldspieler). Ein Verein ohne Libero gibt diesen Platz an einen offensiven Mittelfeldspieler. Eine größere Kadergröße als die Summe fügt die besten übrigen Spieler hinzu; eine kleinere entfernt die schwächsten Spieler überbesetzter Positionen.
+21040	Kaderzusammensetzung (spielbare Ligen)
+21052	Summe: {0} Spieler
+21051	Stürmer
+21050	Offensive Mittelfeldspieler (zentral)
+21049	Rechte Mittelfeldspieler
+21048	Linke Mittelfeldspieler
+21047	Defensive Mittelfeldspieler
+21046	Rechte Verteidiger
+21045	Linke Verteidiger
+22041	Anstoss-2-Spieler sind mindestens {0} Jahre alt: Dieser Spieler ist zu jung, um hinzugefügt zu werden.
+21053	Was bei der Spielerauswahl Vorrang hat
+21059	Benutzerdefiniert
+21058	Ein Spieler wird nach aktueller Stärke plus diesem Anteil seines Wachstumsraums (PA - CA) eingestuft; der Anteil schwindet bei Spielern von 21 bis 27 Jahren und ist danach 0. Bei 50 % zählt ein Talent mit 100/170 wie ein Spieler mit 135 und schlägt einen etablierten mit 130. Spieler unter 17 werden nie gewählt.
+21057	Gewicht des Potenzials (%)
+21056	Potenzial zuerst: junge Talente gewinnen
+21055	Ausgewogen: Potenzial zählt bei jungen Spielern
+21054	Nur aktuelle Stärke
+22051	Spieler zu {0} hinzufügen
+22050	Nach Position wählen…
+22059	Filter zurücksetzen
+22070	Keine Position gewählt
+22069	Position
+22068	Verein
+22067	Alter
+22066	Spieler
+22065	{0} zu {1} hinzugefügt.
+22064	Schließen
+22063	Zum Team hinzufügen
+22062	Die ersten {0} von {1} Spielern - Filter einengen.
+22061	{0} Spieler
+22060	Eine Position wählen, einen CA- oder PA-Bereich einstellen oder einen Namen eingeben, um Spieler aufzulisten.
+21060	Kader jedes Vereins außerhalb der Ligen: genau so viele Spieler, nach Positionen gewählt wie bei den Ligamannschaften.
+22058	Nach Spielername suchen
+22057	Nur Spieler ohne Verein
+22056	Potenzial (PA)
+22055	Aktuelle Stärke (CA)
+22054	Mindestbewertung der Position
+22053	Eine Position auf dem Spielfeld anklicken, um danach zu filtern (erneut klicken entfernt sie). Ein Spieler passt, wenn er auf einer gewählten Position mindestens die untenstehende Bewertung hat.
+22052	Position
+22076	{0} ersetzt {1} bei {2}.
+22074	Im Plan
+22073	{0} würde unter die Mindestzahl von {1} Spielern fallen.
+22072	{0} hat bereits die Höchstzahl von {1} Spielern. Zuerst einen Kaderspieler auswählen, der ersetzt werden soll.
+22071	{0} von {1} zu {2} gewechselt.
+22077	Umwandlungsvorschau: {0}
+22078	Team: {0}
+22080	Torwart
+22081	Libero
+22082	Manndecker
+22083	Linker Verteidiger
+22084	Rechter Verteidiger
+22085	Defensiver Mittelfeldspieler
+22086	Linker Mittelfeldspieler
+22087	Rechter Mittelfeldspieler
+22088	Offensiver Mittelfeldspieler (zentral)
+22089	Stürmer
+22090	Nation
+22091	Liga
+22092	FM-Ansehen
+22093	Spieler
+22094	Durchschnitt CA
+22095	Durchschnitt PA
+22096	Durchschnittsalter
+22097	Stadt
+22098	Spitzname
+22099	Stadionname
+22100	Kader nach Positionen
+22101	Gewünscht
+22102	Noch nicht im Plan: Das ist der Kader, den der Konverter wählen würde.
+22103	Probleme
+22104	Geschrieben als
+22105	Kader ({0} Spieler)
+22106	Doppelklick auf einen Spieler für die Umwandlungsvorschau.
+22107	FM-Spielstände enthalten weder Stadt, Spitzname, Stadionname noch Stadiongröße, daher werden sie aus dem Vereinsnamen erzeugt. Hier änderbar; die hervorgehobenen Felder zeigt das Spiel an.
+22108	Speichern
+22109	Standard verwenden
+22110	Gespeichert.
+22111	Standardwerte wiederhergestellt.
+22112	Pool unbenutzter FM-Vereine
+22113	Vorschau
+22114	Die Zahl nennt, wie viele Spieler des Kaders diese Position als Hauptposition haben. Grün: Soll erreicht, rot: es fehlen Spieler, blau: mehr als gewünscht.
+22115	Details anzeigen (Doppelklick funktioniert auch)
+22125	Die Datei konnte nicht verarbeitet werden: {0}
+22124	{0} Vereine gelesen: {1} geändert, {2} unverändert, {3} in diesem Spielstand nicht gefunden.
+22123	{0} Vereine nach {1} exportiert.
+22122	Vereinsinfos importieren
+22121	Vereinsinfos exportieren
+22120	Excel-Arbeitsmappe (*.xlsx)|*.xlsx|CSV-Dateien (*.csv)|*.csv|Alle Dateien (*.*)|*.*
+22119	Liest eine solche Datei (.xlsx oder .csv) wieder ein: Nur die Spalten City, Nickname, Stadium und Capacity werden verwendet (die Spalte ClubId bestimmt den Verein); eine leere Zelle bedeutet den Standardwert.
+22118	Schreibt Stadt, Spitzname, Stadionname und Stadiongröße aller Vereine im Plan (alle Nationen) in eine formatierte Excel-Datei (oder CSV), die sich direkt bearbeiten lässt.
+22117	Vereinsinfos importieren…
+22116	Vereinsinfos exportieren…
+22128	Spieler {0} von {1} - {2}
+22127	Nächster Spieler (Pfeiltaste rechts)
+22126	Vorheriger Spieler (Pfeiltaste links)
+22133	Die Spalte ClubId nicht ändern und die Kopfzeile behalten. Zeilen von Vereinen, die nicht geändert werden sollen, dürfen sortiert, gefiltert oder gelöscht werden.
+22132	Grenzen des Spiels: Stadt 16, Spitzname 18, Stadionname 26 Zeichen; Stadiongröße 3000 bis 110000 (Standard aus dem Ansehen des Vereins). Excel lehnt ungültige Eingaben in den gelben Zellen ab.
+22131	Eine leere Zelle bedeutet den erzeugten Standardwert. Wird nur die Stadt geändert, folgen ihr Spitzname und Stadionname, solange sie noch dem Standard entsprechen.
+22130	Nur die gelben Spalten City, Nickname, Stadium und Capacity bearbeiten. Die grauen Spalten bestimmen nur den Verein und werden beim Import ignoriert.
+22129	Vereinsinformationen
+22137	Höchstens {0} Zeichen.
+22136	Text zu lang
+22134	Datei speichern (im Format .xlsx lassen; CSV geht auch) und im Reiter Teams des Konverters „Vereinsinfos importieren…“ wählen.
+22135	In Excel lässt sich die Datei ohne Import oder Einstellungen öffnen; die erste Zeile bleibt beim Scrollen sichtbar.
+22138	Stadiongröße (Zuschauer)
+22139	Ungültige Stadiongröße
+22140	Eine ganze Zahl von {0} bis {1}.
+22141	Nach Position suchen...
+22142	Spieler mit Positionsauswahl und CA-/PA-Filtern finden und hier anzeigen.
+22143	Spieler suchen
+22144	In Liste zeigen
+22145	Wappen-Ordner
+22146	Öffnet den Ordner für eigene Wappen: ein Bild pro FM-Verein, benannt nach der Vereins-ID (siehe README.txt darin). Der Export verwendet sie statt der erzeugten Wappen.
+22147	Wappen-Manager...
+22148	Wappen-Manager
+22149	Teams
+22150	Verein suchen
+22151	Erzeugtes Wappen (kein eigenes Wappen für diesen Verein)
+22152	Eigenes Wappen: {0}
+22153	Bild importieren...
+22154	Malen...
+22155	Mein Wappen entfernen
+22156	Zuerst einen Verein wählen.
+22157	Bilder (*.png;*.bmp;*.jpg;*.jpeg;*.gif)|*.png;*.bmp;*.jpg;*.jpeg;*.gif|Alle Dateien (*.*)|*.*
+22158	Wappen von {0} gespeichert.
+22159	Wappen von {0} entfernt; das erzeugte Wappen wird wieder verwendet.
+22160	Das Bild konnte nicht verwendet werden: {0}
+22161	Wappen malen: {0}
+22162	Stift
+22163	Radierer
+22164	Füllen
+22165	Pipette
+22166	Rückgängig
+22167	Leeren
+22168	Wappen speichern
+22170	Farben
+22172	Im Plan
+22174	Eigenes Wappen
+22175	Klicken oder ziehen, um Pixel zu malen. Das Spiel nutzt 32 x 32 Pixel und 256 Farben; nur die Vereine der fünf Hauptnationen haben im Spiel ein Wappen.
+22176	Zuerst den Plan erstellen (Schritt 3): Der Wappen-Manager braucht die FM-Daten.
+22177	6  Wappen
+22178	Optional. Die Listen zeigen die Teams, die im Spiel ein Wappen verwenden: die spielbaren Ligen und die Restlichen Vereine der fünf Hauptnationen. Einen Verein wählen, dann ein Bild importieren oder das Wappen malen; Vereine ohne eigenes Wappen behalten das erzeugte. Wappen werden mit der FM-Vereins-ID gespeichert, daher lassen sich unter "Alle Vereine: ..." auch Vereine vorbereiten, die noch nicht im Plan sind. Die Vereine ohne Liga verwenden die Flagge ihrer Nation.
+22179	Raster anzeigen
+22180	Alle Vereine: {0}
+22181	Aussehen
+22182	Hautfarbe
+22183	Haare
+22184	Hautfarbe: 0 hell, 1 mittel, 2 dunkel. Der FM-Spielstand enthält keine Hautfarbe: Der Standard richtet sich grob nach der Nationalität des Spielers.
+22185	Haare: 0 sehr hellblond, 1 goldblond, 2 braun, 3 rot, 4 schwarz, 5 kahl. Der FM-Spielstand enthält keine Haarfarbe: Der Standard ist eine grobe Regel nach Hautfarbe und Alter.
+22186	Standard
+22187	Änderungen an Haut- und Haarfarbe dieses Spielers zurücknehmen
+
+24007	Ja
+24008	Nein
+22188	Dieser Spieler ist in einem Avereine-Verein (ein Verein ohne Liga). Beim Laden solcher Spieler kann das Spiel Werte wie die Stärke verändern (es gibt einen Zufallsfaktor); die Werte im Spiel können daher von dieser Vorschau und vom Export abweichen.
+22189	Reserve von {0}: {1} weitere FM-Spieler des Vereins (nicht im Kader)
+22190	Keine weiteren Spieler dieses Vereins in den FM-Daten.
+22191	bei {0}
+22192	Reserve
+22193	In den Kader
+22194	Die weiteren FM-Spieler dieses Vereins, die nicht im Kader sind. Einen wählen und auf „In den Kader“ drücken; ist der Kader voll, wird der in der Kaderliste gewählte Spieler ersetzt.
+22195	Aus dem Kader entfernen
+22196	Reserve: {0} weitere FM-Spieler des Vereins
+22197	{0} aus dem Kader von {1} entfernt.
+22198	Team nach Name suchen
+22199	Weitere Spieler suchen...
+22200	Öffnet die Spielersuche (Positionen, CA / PA, Name): Spieler jedes Vereins können in dieses Team wechseln.
+22201	Spiel im Jahr des FM-Spielstands starten ({0})
+22202	Das Jahr, in dem das Spiel beginnt. Tag und Monat sind im Spiel fest (6. Juli); es kennt die Jahre 1998 bis 2098. Ohne Haken gilt die gewählte Zahl.
+22203	unbekannt: zuerst exportieren
+22210	Trikots
+22211	Muster
+22212	Hemd
+22213	Hose
+22214	Stutzen
+22215	Heim
+22216	Auswärts
+22217	Farben und Muster sind die des Editors im Spiel. Ein gestreiftes Hemd verwendet die Hosenfarbe für die Streifen. Heim- und Auswärtshemd sollten verschiedene Farben haben.
+22220	neutral
+22221	längs
+22222	quer
+22223	Halb/Halb
+22224	Schulter
+22225	Brustring
+22226	Ärmel w. H.
+22230	Weiß
+22231	Rot
+22232	Gelb
+22233	Blau
+22234	Hellgrün
+22235	Dunkelgrün
+22236	Türkis
+22237	Hellblau
+22238	Braun
+22239	Lila
+22240	Orange
+22241	Dunkelgrau
+22242	Dunkelrot
+22243	Nr.
+22244	Name
+22245	Farbe
+22246	Farben
+22247	Streifenmuster
+22248	Trikotspalten (Heim / Auswärts: Muster, Hemd, Hose, Stutzen): Die Zahlen stehen auf dem Blatt Trikots, die Zellen zeigen die Farbe ihrer Zahl. Ein gestreiftes Hemd verwendet die Hosenfarbe für die Streifen. Alle acht Zellen eines Vereins leer lassen, um sein Trikot zu behalten.
+22249	Ungültiger Trikotwert
+22250	Eine ganze Zahl von 0 bis 6 (siehe Blatt Trikots).
+22251	Eine ganze Zahl von 0 bis 12 (siehe Blatt Trikots).
+22260	Saisonergebnisse…
+22261	Wer letzte Saison Meister, Vizemeister, UEFA-Pokal-Platz, Pokalsieger, Aufsteiger oder Absteiger war: Das Spiel zeigt es als Markierung an den Mannschaften.
+22262	Ergebnisse der letzten Saison - {0}
+22263	Wählen Sie den Verein für jeden Platz. Standard (FM hat keine Pokaldaten): Die beste letzte Tabellenposition ist Meister und Pokalsieger, die zweitbeste Vizemeister und Pokalfinalist, die nächsten Vereine bekommen die UEFA-Pokal-Plätze, die Vereine mit dem geringsten Ansehen sind die Aufsteiger.
+22264	Wählen Sie den Verein für jeden Platz. Standard: Die Vereine mit dem höchsten Ansehen sind die Absteiger, die Vereine mit dem geringsten Ansehen die Aufsteiger.
+22265	Das Spiel speichert pro Nation einen Meister und einen Pokalsieger. Standard: Die beste letzte Tabellenposition ist Meister, die zweitbeste Pokalsieger.
+22266	Verein
+22267	Ansehen
+22268	Letzte Position
+22269	Ligaergebnis
+22270	Pokal
+22271	Nation
+22272	Zurück zu den Regeln
+22273	Schließen
+22274	Keins
+22275	Meister
+22276	Vizemeister
+22277	UEFA-Pokal-Platz
+22278	Aufsteiger
+22279	Absteiger
+22280	Pokalsieger
+22281	Pokalfinalist
+22282	Diese Liste hat keine Ergebnisse der letzten Saison (Reserveteams sind in keiner Liga).
+22283	Zurück zur Regel für diesen Verein
+22284	Fette Zeilen sind Ihre Wahl, die anderen folgen den Regeln.
+
+22285	Platz
+22286	(die Originalvereine des Spiels bleiben)
+28000	Anstoss-2-Patch: {0}
+28001	Anstoss-2-Ordner
+28002	Durchsuchen…
+28003	Wählen Sie Ihren Anstoss-2-Ordner (den mit DATA.DEF)
+28004	Diesen Patch installieren
+28005	Zum gewählten Datensatz wechseln
+28006	Datensätze in dieser Installation
+28007	Sie können jederzeit zurück: Wählen Sie den Originaldatensatz (oder einen anderen) und drücken Sie den Knopf oben. Beim Installieren eines Patches bleibt das Vorherige als eigener Datensatz erhalten.
+28008	Name in der Liste:
+28009	Dieser Patch ersetzt {0} Spieldateien eines Teils der Daten; alles andere bleibt wie es ist.
+28010	Dieser Patch ersetzt die kompletten Spieldaten ({0} Dateien).
+28011	Erstellt {0}
+28012	Das ist kein Anstoss-2-Ordner: Er muss die Ordner DATA.DEF und DATA.VER enthalten (neben anstoss2.exe).
+28013	Der Patch '{0}' ist installiert und aktiv.
+28014	Bitte warten…
+28015	Kein Anstoss-2-Ordner gefunden: Wählen Sie ihn mit Durchsuchen.
+28016	Patch-Datei erzeugen…
+28017	Erstellt eine einzelne .exe-Datei aus dem Datensatz, den Installieren ins Spiel bringen würde: den erzeugten Dateien dieses Projekts, unter dem Namen im Feld und nur den hier gewählten Teilen. Jeder kann sie starten, um Ihre Arbeit in sein Anstoss 2 zu installieren und zu den Originaldaten zurückzuwechseln. Die aktuellen Spieldaten werden nicht verändert.
+28018	Name des Patches
+28019	Name im Patcher und in der Liste der Datensätze:
+28020	Kurze Beschreibung, die im Patcher angezeigt wird (optional):
+28021	Patch-Programm (*.exe)|*.exe
+28022	Der Patch wurde erstellt:\n{0}\n\n{1} MB. Geben Sie diese eine Datei weiter; sie installiert den Datensatz und kann zu den Originaldaten zurückwechseln.
+28023	Der Patch konnte nicht erstellt werden: {0}
+28024	Der Patch ist beschädigt und kann nicht installiert werden ({0}).
+28025	Patch speichern unter
+28026	Der gewählte Ordner sieht nicht wie der Anstoss-2-Ordner aus: {0} nicht gefunden.\n\nBitte prüfen Sie noch einmal, ob es der richtige Ordner ist. Es muss der Ordner sein, in dem sich anstoss2.exe befindet; er enthält die beiden Ordner DATA.DEF und DATA.VER.
+28027	Anstoss 2 wurde auf diesem PC nicht automatisch gefunden.\n\nBitte wählen Sie den Ordner selbst mit „Durchsuchen…“ aus: Es ist der Ordner, in dem sich anstoss2.exe befindet (er enthält auch DATA.DEF und DATA.VER).
+28028	Patch-Datei erzeugen
+28029	Geben Sie zuerst einen Namen für den Datensatz ein (das Feld neben Installieren).
+28030	Die Patch-Datei heißt: {0}
+28040	Neues Projekt…
+28041	Umbenennen…
+28042	Löschen…
+28043	Anderer Ordner…
+28044	Neues Projekt
+28045	Name des Projekts. Er ist auch der Standardname des Datensatzes (Profils) und der Patch-Datei:
+28046	Neuer Name für das Projekt '{0}':
+28047	Das Projekt '{0}' und alles darin löschen (exportierte FM-Daten, Einstellungen, geschriebene Dateien)?\n\nDatensätze, die schon in Anstoss 2 installiert sind, bleiben unberührt.
+28048	Dieser Name ist nicht erlaubt oder ein Projekt mit diesem Namen existiert schon.
+28049	Projekt {0}
+28050	Projekt '{0}' angelegt.
+28051	Projekt '{0}' gelöscht.
+28052	Projekt '{0}' in '{1}' umbenannt.
+28053	Nur Projekte im Projektordner können umbenannt oder gelöscht werden; dieses wurde aus einem anderen Ordner geöffnet.
+28060	Ein Datensatz namens '{0}' existiert bereits.\n\nMit den neuen Daten ersetzen? Die alten Daten dieses Namens gehen verloren; die Originaldaten und Ihre anderen Datensätze bleiben unverändert.
+28061	Der Originaldatensatz kann nicht ersetzt werden. Bitte verwenden Sie einen anderen Namen.
+28070	Startjahr
+28071	KLEINIG.SAV: das Jahr, in dem das Spiel beginnt. Die Wappen eines Landes gehören zu den Dateien des Landes.

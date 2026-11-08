@@ -1,0 +1,533 @@
+0	English
+10000	Anstoss 2 Data Converter
+10001	Turn a Football Manager save into a complete Anstoss 2 data set
+10002	Theme
+10003	System follows the Windows setting
+10004	1  Project & Export
+10005	Project
+10006	Browse / open
+10007	FM save (.fm)
+10008	Browse
+10009	FM install folder (optional)
+10010	Anstoss 2 folder
+10011	Export from FM save
+10012	Show save info
+10013	Use a fresh career save (start of a new game, all wanted leagues loaded). Choose the save with Browse or drop the .fm file onto this window; the game does not have to be installed. The export reads players, clubs, nations and fixtures from the save and changes nothing.
+10014	2  Options
+10015	3  Plan
+10016	Build plan from export
+10017	Write .sav files to project
+10018	Open output folder
+10019	4  Teams
+10020	5  Players
+10021	7  Write & Install
+10022	Profile
+10023	Live
+10024	Created (UTC)
+10025	Files
+10026	Source
+10027	Install the project's data as a new profile
+10028	Install
+10029	Only these parts:
+10030	Name pools
+10031	Avereine
+10032	Germany
+10033	England
+10034	France
+10035	Italy
+10036	Spain
+10037	Activate selected
+10038	Rename
+10039	Delete
+10040	Refresh
+10041	Cancel running task
+10042	Squads
+10043	Players per team (16-30)
+10044	Goalkeepers per team (at least)
+10045	Real FM players a club needs to qualify
+10046	Pad smaller squads up to (from the free pool)
+10047	Non-league clubs (Avereine)
+10048	At most this many clubs per nation
+10049	Strength (1-7) from Current Ability
+10050	A player gets strength 2 from the first limit up to 7 from the sixth. Strength 8 is a random in-game event and is never used.
+10051	2 from CA
+10052	3 from CA
+10053	4 from CA
+10054	5 from CA
+10055	6 from CA
+10056	7 from CA
+10057	Positions and abilities
+10058	FM position rating for a secondary position
+10059	Most positive abilities (1-2)
+10060	Most negative abilities (0-2)
+10061	Ability rules
+10062	A player gets an ability when the combined FM attributes (1-20) reach the 'at least' value; the strongest matches win, up to the limits on the left. 'At most' gives the weak (red) variant; 0 switches it off. Use the Edit button of a row to add or remove FM attributes.
+10063	On
+10064	Ability
+10065	FM attributes
+10066	Edit…
+10067	Combine
+10068	At least
+10069	At most (0 = off)
+10070	Apply to preview
+10071	Save to project
+10072	Reset to defaults
+10073	Players
+10074	Search by player or club name
+10075	Include players not in the plan
+10076	converted
+10077	Undo all edits
+10078	Country
+10079	⇄  Swap
+10080	Swap the two selected teams (or replace the left team by the selected pool club)
+10081	Select a team on each side. Choose the pool on the right to replace a team by an unused FM club.
+10082	Search by club name
+10083	Squad
+10084	Remove →
+10085	← Add
+10086	Find FM players to add (a player joins one team only)
+20000	WARNING: {0} is missing. Run tools\build-fmsave.ps1 and rebuild.
+20001	Project: {0}
+20002	ERROR: {0}
+20003	Project folder (exports, mappings and the Anstoss 2 data are stored inside it)
+20004	Select a Football Manager save
+20005	FM saves (*.fm)|*.fm|All files (*.*)|*.*
+20006	Football Manager install folder
+20007	Anstoss 2 install folder (contains DATA.DEF)
+20008	Reading save info ...
+20009	Select the Football Manager install folder first (needed for the nation names).
+20010	Export complete: {0}
+20011	Export finished with errors in: {0}
+20012	Select a save file (.fm) first.
+20013	fmsave.exe is missing next to the application.\nRun tools\build-fmsave.ps1 and rebuild.
+20014	Run the export first (tab 1).
+20015	Loading the FM export and building the plan ...
+20016	Plan built: {0} players, {1} clubs loaded.
+20017	Re-applied {0} of {1} saved manual edits.
+20018	Build the plan first.
+20019	Select the Anstoss 2 folder (it must contain DATA.DEF) on tab 1.
+20020	Writing .sav files ...
+20021	Written files: {0}
+20022	WARNING: {0}
+20023	NOTE: {0}
+20024	Validation: no problems.
+20025	Validation problems ({0}):
+20026	Written to {0} (validated).
+20027	Written, but validation found {0} problem(s).
+20028	Select the Anstoss 2 folder on tab 1 to manage profiles.
+20029	This install has not been managed yet. The first install stores the shipped data as the 'Original' profile.
+20030	Live profile: {0}
+20031	(live files were changed: {0} file(s) differ)
+20032	yes
+20033	Profiles could not be read: {0}
+20034	The live data files differ from profile '{0}':\n\n  {1}\n\nYes = save these changes into '{0}' first\nNo = discard them\nCancel = do nothing
+20035	The project has no written data yet. Use 'Write .sav files to project' on tab 3 first.
+20036	Installed profile '{0}' and made it live.
+20037	Select a profile first.
+20038	Profile '{0}' is now live.
+20039	Rename profile
+20040	New name for '{0}':
+20041	Renamed '{0}' to '{1}'.
+20042	Delete profile '{0}'? Its stored files are removed.
+20043	Deleted profile '{0}'.
+20044	Cancelled.
+20050	System
+20051	Light
+20052	Dark
+20053	Language
+20054	Language of the user interface
+21000	Edited - press 'Apply to preview'.
+21001	Players per team must be 16 to 30.
+21002	Goalkeepers per team must be 1 to 4.
+21003	Real players needed must be 1 to 30.
+21004	Padding limit must be 16 to 30.
+21005	Clubs per nation must be 1 to 40.
+21006	Secondary position rating must be 1 to 20.
+21007	Positive abilities must be 1 or 2.
+21008	Negative abilities must be 0 to 2.
+21009	Strength limits must be numbers from 1 to 200.
+21010	Strength limits must increase from left to right.
+21011	Applied to the preview. Rebuild the plan in step 3 for squad changes.
+21012	Saved to {0}
+21013	Defaults restored (not saved yet).
+21014	Goalkeeper: {0}
+22000	Pool: unused FM clubs
+22001	No manual edits.
+22002	{0} manual edit(s) recorded; they are saved with the project and re-applied when the plan is rebuilt.
+22003	reputation {0}  ·  {1} players
+22004	reputation {0}  ·  {1} players in FM
+22005	Squad of {0} ({1} players)
+22006	no club
+22007	Select a team on the left first.
+22008	Select a team or a pool club on the right.
+22009	Select a team and one of its players.
+22010	Select a team and a player from the search results.
+22011	There are no manual edits.
+22012	Discard all {0} manual edits and rebuild the plan?
+22013	Teams
+22020	Germany
+22021	England
+22022	France
+22023	Italy
+22024	Spain
+22025	Non-league clubs (Avereine)
+22030	{0} y
+23000	{0}: {1} of {2} teams
+23001	Spare teams
+23002	Spare club names
+23003	Non-league clubs (Avereine): {0} clubs from {1} nations, {2} spare clubs
+23004	Warnings:
+24000	FM attributes for {0}
+24001	+ Add
+24002	Remove
+24003	No attribute selected: the rule never matches.
+24004	Cancel
+24005	Pick an attribute and press + Add; use − to remove one.
+24006	OK
+25001	first 300 matches shown
+25002	{0} players
+25003	Build the plan in step 3, then pick a player.
+25004	{0}: {1} (needs {2})
+25005	Strength {0} comes from CA {1}.
+25006	Market value, salary, form and statistics are calculated by the game when a new game starts.
+22014	Squad
+26000	fmsave.exe was not found. Run tools\build-fmsave.ps1 and rebuild.
+26001	Reading nation names from the FM install ...
+26002	reading the nation names failed (exit code {0}).
+26003	fmsave info failed.
+26004	Save file not found.
+26005	Exporting {0} ...
+26006	FAILED: {0}
+26007	Could not start fmsave.exe.
+26008	Project folder is empty.
+27000	Type to search ...
+10090	FM version
+10091	Football Manager versions found on this PC. Choosing one fills in its save and install folders.
+10092	No Football Manager found. Pick a save file directly (or drop it on this window); the install folder is optional.
+10093	Write the .sav files
+10094	Install into Anstoss 2
+10095	Builds the conversion plan from the export and your options. Next: review the teams (step 4) and players (step 5), optionally set crests (step 6), then write the files in step 7.
+20070	Build the plan first (step 3).
+20071	Includes {0} manual edits from steps 4 and 5.
+20072	Build the plan in step 3 first.
+20073	Export from the FM save in step 1 first.
+22040	Pick a different league on the right - swapping teams inside one league changes nothing.
+21036	At most
+21035	Growth room (PA - CA)
+21034	Potential ability (PA)
+21033	Current ability (CA)
+21032	Age
+21030	Pick a value and press + Add. A player must be between 'At least' and 'At most' for every condition; 0 means no limit.
+21029	No condition: the rule never matches.
+21028	Conditions for {0}
+21027	Players of the FM save that meet this rule's conditions (before limits and conflicts)
+21026	Players
+21025	FM conditions
+21024	Name
+21023	Talent flag
+21022	Health
+21021	Character
+21020	Trait
+21019	Type
+21018	Most traits per player (Talent comes on top)
+21017	Which FM values earn an Anstoss 2 trait, character or health state. A player must meet every condition of a rule; the best match wins, up to the limits shown. The count is how many players of the loaded FM save meet the rule (build the plan to see it).
+21016	Traits & character
+21015	Abilities
+25007	{0}: {1}
+20074	Nation names: using the built-in FM26 list.
+20075	Save selected: {0}
+20076	Nation names: read from the installed Football Manager {0}.
+20085	✗ Football Manager {0} saves are not supported (FM26 or FM27 needed)
+20082	✗ Not a usable Football Manager save: {0}
+20081	⚠ Football Manager {0} save · not tested with this converter (FM26 and FM27 are supported)
+20080	✓ Football Manager {0} save · build {1} · in-game date {2} · compatible
+20079	Checking the save ...
+20078	Pick a save file (.fm) with Browse, or drop it onto this window.
+20077	Nation names: this save is from FM{0}, but only the built-in FM26 list is available, so a few nation names may differ.
+21044	Central defenders
+21043	Liberos (0 if the club has none)
+21042	Goalkeepers
+21041	Players per position for every team of the playable leagues. When a club lacks players for a position, the best fitting others fill in (no striker: offensive, right and left midfielders). A club without a libero gives that place to an offensive midfielder. A squad size above the total adds the best remaining players; below it drops the weakest of crowded positions.
+21040	Squad composition (playable leagues)
+21052	Total: {0} players
+21051	Strikers
+21050	Offensive midfielders (centre)
+21049	Right midfielders
+21048	Left midfielders
+21047	Defensive midfielders
+21046	Right backs
+21045	Left backs
+22041	Anstoss 2 players are at least {0} years old: this player is too young to add.
+21053	What to prioritize when picking players
+21059	Custom
+21058	A player is ranked by current ability plus this share of his growth room (PA - CA); the share fades out for players from 21 to 27 years and is 0 afterwards. At 50 %, a 100/170 talent ranks like a 135 player and beats an established 130. Players under 17 are never picked.
+21057	Weight of potential (%)
+21056	Potential first: young talents win
+21055	Balanced: potential counts for young players
+21054	Current ability only
+22051	Add players to {0}
+22050	Pick by position…
+22059	Clear filters
+22070	No position picked
+22069	Position
+22068	Club
+22067	Age
+22066	Player
+22065	Added {0} to {1}.
+22064	Close
+22063	Add to team
+22062	First {0} of {1} players shown - narrow the filter.
+22061	{0} players
+22060	Pick a position, set a CA or PA range, or type a name to list players.
+21060	Squad of every non-league club: exactly this many players, picked by position like the league teams.
+22058	Search by player name
+22057	Players without a club only
+22056	Potential ability (PA)
+22055	Current ability (CA)
+22054	Minimum position rating
+22053	Click a position on the pitch to filter by it (click again to remove it). A player matches when he is rated at least the minimum below for any picked position.
+22052	Position
+22076	{0} replaces {1} in {2}.
+22074	In plan
+22073	{0} would fall below the minimum of {1} players.
+22072	{0} already has the maximum of {1} players. Select one of its squad players first to replace him.
+22071	Moved {0} from {1} to {2}.
+22077	Conversion preview: {0}
+22078	Team: {0}
+22080	Goalkeeper
+22081	Libero
+22082	Central defender
+22083	Left back
+22084	Right back
+22085	Defensive midfielder
+22086	Left midfielder
+22087	Right midfielder
+22088	Offensive midfielder (centre)
+22089	Striker
+22090	Nation
+22091	League
+22092	FM reputation
+22093	Players
+22094	Average CA
+22095	Average PA
+22096	Average age
+22097	City
+22098	Nickname
+22099	Stadium name
+22100	Squad by position
+22101	Wanted
+22102	Not in the plan yet: this is the squad the converter would pick.
+22103	Problems
+22104	Written as
+22105	Squad ({0} players)
+22106	Double-click a player for the conversion preview.
+22107	FM saves do not contain city, nickname, stadium name and stadium capacity, so they are generated from the club name. Change them here; the highlighted fields are what the game will show.
+22108	Save
+22109	Use defaults
+22110	Saved.
+22111	Defaults restored.
+22112	Pool of unused FM clubs
+22113	Preview
+22114	The number is how many players of the squad have that position as their main position. Green: the wanted number is reached, red: players are missing, blue: more than wanted.
+22115	Show details (double-click works too)
+22125	The file could not be processed: {0}
+22124	Read {0} clubs: {1} changed, {2} unchanged, {3} not found in this save.
+22123	Exported {0} clubs to {1}.
+22122	Import club information
+22121	Export club information
+22120	Excel workbook (*.xlsx)|*.xlsx|CSV files (*.csv)|*.csv|All files (*.*)|*.*
+22119	Reads such a file back (.xlsx or .csv): only the City, Nickname, Stadium and Capacity columns are used (the ClubId column identifies the club); an empty cell means the default.
+22118	Writes city, nickname, stadium name and capacity of every club in the plan (all nations) to a formatted Excel file (or CSV) you can edit directly.
+22117	Import club info…
+22116	Export club info…
+22128	Player {0} of {1} - {2}
+22127	Next player (right arrow key)
+22126	Previous player (left arrow key)
+22133	Do not change the ClubId column and keep the header row. You may sort, filter and delete the rows of clubs you do not want to change.
+22132	Limits of the game: city 16, nickname 18, stadium name 26 characters; stadium capacity 3000 to 110000 (default from the club reputation). Excel refuses invalid entries in the yellow cells.
+22131	Leave a cell empty to use the generated default. If you change only the city, the nickname and the stadium name that are still the default follow it.
+22130	Edit only the yellow columns City, Nickname, Stadium and Capacity. The grey columns only identify the club and are ignored on import.
+22129	Club information
+22137	At most {0} characters.
+22136	Text too long
+22134	Save the file (keep the .xlsx format; CSV works too) and use "Import club info..." in the Teams tab of the converter.
+22135	Opened in Excel the file needs no import step or settings; the first row stays visible while you scroll.
+22138	Stadium capacity
+22139	Invalid capacity
+22140	A whole number from {0} to {1}.
+22141	Search by position...
+22142	Find a player with the position picker and CA / PA filters, then show him here.
+22143	Find player
+22144	Show in list
+22145	Crest folder
+22146	Opens the folder for your own crests: one image per FM club, named by the club id (see README.txt in it). The export uses them instead of the generated crests.
+22147	Crest manager...
+22148	Crest manager
+22149	Teams
+22150	Search club
+22151	Generated crest (no crest of yours for this club)
+22152	Your crest: {0}
+22153	Import image...
+22154	Paint...
+22155	Remove my crest
+22156	Select a club first.
+22157	Images (*.png;*.bmp;*.jpg;*.jpeg;*.gif)|*.png;*.bmp;*.jpg;*.jpeg;*.gif|All files (*.*)|*.*
+22158	Saved the crest of {0}.
+22159	Removed the crest of {0}; the generated crest is used again.
+22160	Could not use that image: {0}
+22161	Paint crest: {0}
+22162	Pencil
+22163	Eraser
+22164	Fill
+22165	Pipette
+22166	Undo
+22167	Clear
+22168	Save crest
+22170	Colours
+22172	In the plan
+22174	Own crest
+22175	Click or drag on the crest to paint a pixel. The game uses 32 x 32 pixels and 256 colours; only the clubs of the five main nations have a crest in the game.
+22176	Build the plan first (step 3): the crest manager needs the FM data.
+22177	6  Crests
+22178	Optional. The lists show the teams that use a crest in the game: the playable leagues and the spare teams of the five main countries. Pick a club, then import an image or paint its crest; clubs without a crest of yours keep the generated one. Crests are saved by FM club id, so you can also prepare clubs that are not in the plan yet under "All clubs: ...". The non-league clubs use the flag of their nation.
+22179	Show grid
+22180	All clubs: {0}
+22181	Appearance
+22182	Skin
+22183	Hair
+22184	Skin: 0 light, 1 medium, 2 dark. The FM save has no skin data: the default follows the player's nationality (a rough rule).
+22185	Hair: 0 very light blond, 1 golden blond, 2 brown, 3 red, 4 black, 5 bald. The FM save has no hair data: the default is a rough rule by skin and age.
+22186	Default
+22187	Undo the changes to this player's skin and hair
+24007	Yes
+24008	No
+22188	This player is in an Avereine club (a non-league club). When the game loads such players it may change values like strength (there is a random factor), so the values in the game can differ from this preview and from the export.
+22189	Reserves of {0}: {1} other FM players of the club (not in the squad)
+22190	No other players of this club in the FM data.
+22191	in {0}
+22192	Reserve
+22193	Add to squad
+22194	The other FM players of this club that are not in the squad. Select one and press Add; if the squad is full, the player selected in the squad list is replaced.
+22195	Remove from squad
+22196	Reserves: {0} other FM players of the club
+22197	Removed {0} from {1}.
+22198	Search team by name
+22199	Find other players...
+22200	Opens the player search (positions, CA / PA, name): players of any club can join this team.
+22201	Start the game in the year of the FM save ({0})
+22202	The year the game starts in. The day and month are fixed in the game (6 July); it knows the years 1998 to 2098. Unchecked, the number is the year you choose.
+22203	unknown: export first
+22210	Kits
+22211	Pattern
+22212	Shirt
+22213	Shorts
+22214	Socks
+22215	Home
+22216	Away
+22217	The colours and patterns are those of the game's editor. A striped shirt uses the colour of the shorts for its stripes. Home and away shirt colours should differ.
+22220	Plain
+22221	Vertical stripes
+22222	Hoops
+22223	Halves
+22224	Shoulders
+22225	Chest band
+22226	Sleeves
+22230	White
+22231	Red
+22232	Yellow
+22233	Blue
+22234	Light green
+22235	Dark green
+22236	Teal
+22237	Light blue
+22238	Brown
+22239	Purple
+22240	Orange
+22241	Dark grey
+22242	Maroon
+22243	No.
+22244	Name
+22245	Sample
+22246	Colours
+22247	Stripe patterns
+22248	Kit columns (Home / Away pattern, shirt, shorts, socks): the numbers are listed on the sheet Kits and the cells show the colour of their number. A striped shirt uses the colour of the shorts for its stripes. Leave all eight cells of a club empty to keep its current kit.
+22249	Invalid kit value
+22250	A whole number from 0 to 6 (see the sheet Kits).
+22251	A whole number from 0 to 12 (see the sheet Kits).
+22260	Season results…
+22261	Who was champion, runner-up, in a UEFA Cup place, cup winner, promoted or relegated last season: the game shows it as flags on the teams.
+22262	Last season's results - {0}
+22263	Pick the club for every slot. Defaults (FM has no trophy data): the best last league position is champion and cup winner, the second best runner-up and cup finalist, the next clubs get the UEFA Cup places, the clubs with the lowest reputation are the promoted ones.
+22264	Pick the club for every slot. Defaults: the clubs with the highest reputation are the relegated ones, the clubs with the lowest reputation the promoted ones.
+22265	The game stores one champion and one cup winner per nation. Defaults: the best last league position is the champion, the second best the cup winner.
+22266	Club
+22267	Reputation
+22268	Last position
+22269	League result
+22270	Cup
+22271	Nation
+22272	Back to the rules
+22273	Close
+22274	None
+22275	Champion
+22276	Runner-up
+22277	UEFA Cup place
+22278	Promoted
+22279	Relegated
+22280	Cup winner
+22281	Cup finalist
+22282	This list has no results of the last season (spare teams are in no league).
+22283	Back to the rule for this club
+22284	Bold slots are your choice, the others follow the rules.
+
+22285	Slot
+22286	(the original clubs of the game are kept)
+28000	Anstoss 2 patch: {0}
+28001	Anstoss 2 folder
+28002	Browse…
+28003	Select your Anstoss 2 folder (the one that contains DATA.DEF)
+28004	Install this patch
+28005	Switch to the selected data set
+28006	Data sets in this installation
+28007	You can go back at any time: select the Original data set (or any other) and press the button above. Installing a patch keeps what was there as its own data set.
+28008	Name in the list:
+28009	This patch replaces {0} game files of one part of the data; everything else stays as it is.
+28010	This patch replaces the complete game data ({0} files).
+28011	Made {0}
+28012	This is not an Anstoss 2 folder: it must contain the folders DATA.DEF and DATA.VER (next to anstoss2.exe).
+28013	The patch '{0}' is installed and live.
+28014	Working…
+28015	No Anstoss 2 folder found: choose it with Browse.
+28016	Generate patch file…
+28017	Makes one .exe file from the data set that Install would put in the game: the generated files of this project, under the name in the box and only the parts chosen here. Anyone can start it to install your work into their Anstoss 2 and switch back to the original data. The live data of your game is not touched.
+28018	Name of the patch
+28019	Name shown in the patcher and in the list of data sets:
+28020	Short description shown in the patcher (optional):
+28021	Patch program (*.exe)|*.exe
+28022	The patch was created:\n{0}\n\n{1} MB. Pass this one file on; it installs the data set and can switch back to the original.
+28023	The patch could not be created: {0}
+28024	The patch is damaged and cannot be installed ({0}).
+28025	Save the patch as
+28026	The folder you chose does not look like the Anstoss 2 folder: {0} not found in it.\n\nPlease double check that this is the right folder. It must be the folder where anstoss2.exe is located, and it contains the two folders DATA.DEF and DATA.VER.
+28027	Anstoss 2 was not found automatically on this PC.\n\nPlease select the folder yourself with "Browse…": it is the folder where anstoss2.exe is located (it also contains DATA.DEF and DATA.VER).
+28028	Generate patch file
+28029	Enter a name for the data set first (the box next to Install).
+28030	The patch file will be named: {0}
+28040	New project…
+28041	Rename…
+28042	Delete…
+28043	Other folder…
+28044	New project
+28045	Name of the project. It is also the default name of the data set (profile) and of the patch file:
+28046	New name for the project '{0}':
+28047	Delete the project '{0}' and everything in it (exported FM data, settings, written files)?\n\nData sets that are already installed in Anstoss 2 are not affected.
+28048	This name is not allowed or a project with that name exists already.
+28049	Project {0}
+28050	Project '{0}' created.
+28051	Project '{0}' deleted.
+28052	Project '{0}' renamed to '{1}'.
+28053	Only projects in the projects folder can be renamed or deleted; this one was opened from another folder.
+28060	A data set named '{0}' exists already.\n\nReplace it with the new data? The old data of that name is lost; the Original data and your other data sets stay as they are.
+28061	The Original data set cannot be replaced. Please use another name.
+28070	Start year
+28071	KLEINIG.SAV: the year the game starts in. The crests of a country are part of the country's files.

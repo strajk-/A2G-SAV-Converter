@@ -1,0 +1,252 @@
+database_id,name,short_name,code,demonym
+5,Algeria,Algeria,ALG,Algerian
+6,Angola,Angola,ANG,Angolan
+7,Benin,Benin,BEN,Beninese
+8,Botswana,Botswana,BOT,Botswanan
+9,Burkina Faso,Burkina Faso,BFA,Burkinabé
+10,Burundi,Burundi,BDI,Burundian
+11,Cameroon,Cameroon,CMR,Cameroonian
+12,Cape Verde Islands,Cape Verde,CPV,Cape Verdean
+13,Central African Republic,Central African Rep.,CTA,Central African
+14,Chad,Chad,CHA,Chadian
+15,Djibouti,Djibouti,DJI,Djiboutian
+16,Egypt,Egypt,EGY,Egyptian
+17,Equatorial Guinea,Eq. Guinea,EQG,Equatoguinean
+18,Ethiopia,Ethiopia,ETH,Ethiopian
+19,Gabon,Gabon,GAB,Gabonese
+20,The Gambia,The Gambia,GAM,Gambian
+21,Ghana,Ghana,GHA,Ghanaian
+22,Guinea,Guinea,GUI,Guinean
+23,Guinea-Bissau,Guinea-Bissau,GNB,Bissau-Guinean
+24,Ivory Coast,Ivory Coast,CIV,Ivorian
+25,Kenya,Kenya,KEN,Kenyan
+26,Lesotho,Lesotho,LES,Lesothoan
+27,Liberia,Liberia,LBR,Liberian
+28,Libya,Libya,LBY,Libyan
+29,Madagascar,Madagascar,MAD,Malagasy
+30,Malawi,Malawi,MWI,Malawian
+31,Mali,Mali,MLI,Malian
+32,Mauritania,Mauritania,MTN,Mauritanian
+33,Mauritius,Mauritius,MRI,Mauritian
+34,Morocco,Morocco,MAR,Moroccan
+35,Mozambique,Mozambique,MOZ,Mozambican
+36,Namibia,Namibia,NAM,Namibian
+37,Niger,Niger,NIG,Nigerien
+38,Nigeria,Nigeria,NGA,Nigerian
+39,Rwanda,Rwanda,RWA,Rwandan
+40,São Tomé and Príncipe,São Tomé & Príncipe,STP,São Toméan
+41,Senegal,Senegal,SEN,Senegalese
+42,Seychelles,Seychelles,SEY,Seychellois
+43,Sierra Leone,Sierra Leone,SLE,Sierra Leonean
+44,Somalia,Somalia,SOM,Somali
+45,South Africa,South Africa,RSA,South African
+46,Sudan,Sudan,SDN,Sudanese
+47,Eswatini,Eswatini,SWZ,Swazi
+48,Tanzania,Tanzania,TAN,Tanzanian
+49,Congo,Congo,CGO,Congolese
+50,Togo,Togo,TOG,Togolese
+51,Tunisia,Tunisia,TUN,Tunisian
+52,Uganda,Uganda,UGA,Ugandan
+53,Democratic Republic of Congo,DR Congo,COD,DR Congolese
+54,Zambia,Zambia,ZAM,Zambian
+55,Zimbabwe,Zimbabwe,ZIM,Zimbabwean
+106,Afghanistan,Afghanistan,AFG,Afghan
+107,Bahrain,Bahrain,BHR,Bahraini
+108,Bangladesh,Bangladesh,BAN,Bangladeshi
+109,Brunei Darussalam,Brunei,BRU,Bruneian
+110,China PR,China,CHN,Chinese
+111,Hong Kong (China PR),Hong Kong (China PR),HKG,Hong Kong (China PR)
+112,India,India,IND,Indian
+113,Indonesia,Indonesia,IDN,Indonesian
+114,Iran,Iran,IRN,Iranian
+115,Iraq,Iraq,IRQ,Iraqi
+116,Japan,Japan,JPN,Japanese
+117,Jordan,Jordan,JOR,Jordanian
+118,Cambodia,Cambodia,CAM,Cambodian
+119,Kazakhstan,Kazakhstan,KAZ,Kazakh
+120,Kuwait,Kuwait,KUW,Kuwaiti
+121,Kyrgyzstan,Kyrgyzstan,KGZ,Kyrgyzstani
+122,Laos,Laos,LAO,Laotian
+123,Lebanon,Lebanon,LBN,Lebanese
+124,Macau (China PR),Macau (China PR),MAC,Macanese (China PR)
+125,Malaysia,Malaysia,MAS,Malaysian
+126,Maldives,Maldives,MDV,Maldivian
+127,Myanmar,Myanmar,MYA,Myanmarese
+128,Nepal,Nepal,NEP,Nepali
+129,North Korea,North Korea,PRK,North Korean
+130,Oman,Oman,OMA,Omani
+131,Pakistan,Pakistan,PAK,Pakistani
+132,Qatar,Qatar,QAT,Qatari
+133,Saudi Arabia,Saudi Arabia,KSA,Saudi
+134,Singapore,Singapore,SGP,Singaporean
+135,South Korea,South Korea,KOR,South Korean
+136,Sri Lanka,Sri Lanka,SRI,Sri Lankan
+137,Syria,Syria,SYR,Syrian
+138,Chinese Taipei (China PR),Chinese Taipei (China PR),TPE,Chinese Taipei (China PR)
+139,Tajikistan,Tajikistan,TJK,Tajikistani
+140,Thailand,Thailand,THA,Thai
+141,Philippines,Philippines,PHI,Filipino
+142,Turkmenistan,Turkmenistan,TKM,Turkmenistani
+143,United Arab Emirates,U.A.E.,UAE,Emirati
+144,Uzbekistan,Uzbekistan,UZB,Uzbek
+145,Vietnam,Vietnam,VIE,Vietnamese
+146,Yemen,Yemen,YEM,Yemeni
+359,Antigua and Barbuda,Antigua & Barbuda,ATG,Antiguan & Barbudan
+360,Aruba,Aruba,ARU,Aruban
+361,Barbados,Barbados,BRB,Barbadian
+362,Belize,Belize,BLZ,Belizean
+363,Bermuda,Bermuda,BER,Bermudian
+364,Canada,Canada,CAN,Canadian
+365,Cayman Islands,Cayman Islands,CAY,Caymanian
+366,Costa Rica,Costa Rica,CRC,Costa Rican
+367,Cuba,Cuba,CUB,Cuban
+368,Dominica,Dominica,DMA,Dominican
+370,El Salvador,El Salvador,SLV,Salvadoran
+371,Grenada,Grenada,GRN,Grenadian
+373,Guatemala,Guatemala,GUA,Guatemalan
+374,Guyana,Guyana,GUY,Guyanese
+375,Haiti,Haiti,HAI,Haitian
+376,Honduras,Honduras,HON,Honduran
+377,Jamaica,Jamaica,JAM,Jamaican
+379,Mexico,Mexico,MEX,Mexican
+380,Curaçao,Curaçao,CUW,Curaçaoan
+381,Nicaragua,Nicaragua,NCA,Nicaraguan
+382,Panama,Panama,PAN,Panamanian
+383,Puerto Rico,Puerto Rico,PUR,Puerto Rican
+384,Saint Lucia,St Lucia,LCA,Saint Lucian
+385,Saint Kitts and Nevis,St Kitts & Nevis,SKN,Kittian & Nevisian
+386,Saint Vincent and the Grenadines,St Vincent,VIN,Vincentian
+387,Suriname,Suriname,SUR,Surinamese
+388,The Bahamas,Bahamas,BAH,Bahamian
+389,Trinidad and Tobago,Trinidad & Tobago,TRI,Trinbagonian
+390,United States,U.S.A.,USA,American
+574,Commonwealth of Soviet States,C.I.S.,CIS,C.I.S.
+575,Czechoslovakia,Czechoslovakia,CSV,Czechoslovakian
+577,East Germany,E. Germany,GDR,East German
+583,Soviet Union,U.S.S.R.,URS,Soviet
+584,West Germany,W. Germany,FRG,West German
+752,Albania,Albania,ALB,Albanian
+753,Andorra,Andorra,AND,Andorran
+754,Armenia,Armenia,ARM,Armenian
+755,Austria,Austria,AUT,Austrian
+756,Azerbaijan,Azerbaijan,AZE,Azeri
+757,Belgium,Belgium,BEL,Belgian
+758,Belarus,Belarus,BLR,Belarusian
+759,Bosnia and Herzegovina,Bosnia & Herzegovina,BIH,Bosnian
+760,Bulgaria,Bulgaria,BUL,Bulgarian
+761,Croatia,Croatia,CRO,Croatian
+762,Cyprus,Cyprus,CYP,Cypriot
+763,Czechia,Czechia,CZE,Czech
+764,Denmark,Denmark,DEN,Danish
+765,England,England,ENG,English
+766,Estonia,Estonia,EST,Estonian
+767,Faroe Islands,Faroe Islands,FRO,Faroese
+768,Finland,Finland,FIN,Finnish
+769,France,France,FRA,French
+770,Georgia,Georgia,GEO,Georgian
+771,Germany,Germany,GER,German
+772,Greece,Greece,GRE,Greek
+773,Hungary,Hungary,HUN,Hungarian
+774,Iceland,Iceland,ISL,Icelandic
+775,Israel,Israel,ISR,Israeli
+776,Italy,Italy,ITA,Italian
+777,Latvia,Latvia,LVA,Latvian
+778,Liechtenstein,Liechtenstein,LIE,Liechtensteiner
+779,Lithuania,Lithuania,LTU,Lithuanian
+780,Luxembourg,Luxembourg,LUX,Luxembourger
+781,North Macedonia,North Macedonia,MKD,Macedonian
+782,Malta,Malta,MLT,Maltese
+783,Moldova,Moldova,MDA,Moldovan
+784,Netherlands,Netherlands,NED,Dutch
+785,Northern Ireland,N.Ireland,NIR,Northern Irish
+786,Norway,Norway,NOR,Norwegian
+787,Poland,Poland,POL,Polish
+788,Portugal,Portugal,POR,Portuguese
+789,Republic of Ireland,Ireland,IRL,Irish
+790,Romania,Romania,ROU,Romanian
+791,Russia,Russia,RUS,Russian
+792,San Marino,San Marino,SMR,Sammarinese
+793,Scotland,Scotland,SCO,Scottish
+794,Slovakia,Slovakia,SVK,Slovak
+795,Slovenia,Slovenia,SVN,Slovenian
+796,Spain,Spain,ESP,Spanish
+797,Sweden,Sweden,SWE,Swedish
+798,Switzerland,Switzerland,SUI,Swiss
+799,Türkiye,Türkiye,TUR,Turkish
+800,Ukraine,Ukraine,UKR,Ukrainian
+801,Wales,Wales,WAL,Welsh
+802,Serbia,Serbia,SRB,Serbian
+1435,Australia,Australia,AUS,Australian
+1436,Cook Islands,Cook Islands,COK,Cook Islands
+1437,Fiji,Fiji,FIJ,Fijian
+1438,New Zealand,New Zealand,NZL,New Zealand
+1439,Papua New Guinea,Papua New Guinea,PNG,Papua New Guinean
+1440,Solomon Islands,Solomon Islands,SOL,Solomon Islander
+1441,Tahiti,Tahiti,TAH,Tahitian
+1442,Tonga,Tonga,TGA,Tongan
+1443,Vanuatu,Vanuatu,VAN,Vanuatuan
+1444,Samoa,Samoa,SAM,Samoan
+1649,Argentina,Argentina,ARG,Argentinian
+1650,Bolivia,Bolivia,BOL,Bolivian
+1651,Brazil,Brazil,BRA,Brazilian
+1652,Chile,Chile,CHI,Chilean
+1653,Colombia,Colombia,COL,Colombian
+1654,Ecuador,Ecuador,ECU,Ecuadorian
+1655,Paraguay,Paraguay,PAR,Paraguayan
+1656,Peru,Peru,PER,Peruvian
+1657,Uruguay,Uruguay,URU,Uruguayan
+1658,Venezuela,Venezuela,VEN,Venezuelan
+1662,Palestine,Palestine,PLE,Palestinian
+100349,Tamil Indian,Tamil Indian,TI,Tamil Indian
+103277,Zaire,Zaire,ZAI,Zairian
+114502,Pays Basque,Pays Basque,BAS,Basque
+129504,American Samoa,American Samoa,ASA,American Samoan
+129505,Mongolia,Mongolia,MNG,Mongolian
+129508,Guam,Guam,GUM,Guamanian
+129511,Eritrea,Eritrea,ERI,Eritrean
+129514,Anguilla,Anguilla,AIA,Anguillian
+129517,British Virgin Islands,British Virgin Is.,VGB,British Virgin Islands
+129520,Montserrat,Montserrat,MSR,Montserratian
+129523,US Virgin Islands,US Virgin Is.,VIR,US Virgin Islands
+129526,Turks and Caicos Islands,Turks & Caicos Is.,TCA,Turks & Caicos Islander
+129532,New Caledonia,New Caledonia,NCL,New Caledonian
+131012,Bhutan,Bhutan,BHU,Bhutanese
+142527,Dominican Republic,Dominican Republic,DOM,Dominican Republic
+145174,Great Britain,Great Britain,GBR,British
+208996,South Yemen,South Yemen,SYE,South Yemeni
+209002,Kiribati,Kiribati,KIR,Kiribatian
+214394,Gibraltar,Gibraltar,GIB,Gibraltarian
+214395,Bonaire,Bonaire,BOE,Bonairean
+215446,Crimea,Crimea,CRM,Crimean
+217945,Kosovo,Kosovo,KOS,Kosovan
+219003,United Kingdom,United Kingdom,UK,British
+788980,SEA Chinese,SEA Chinese,SC,SEA Chinese
+788987,Singh Indian,Singh Indian,SI,Singh Indian
+788995,Borneo Malay,Borneo Malay,BM,Borneo Malay
+788999,West Malay,West Malay,WM,West Malay
+917496,French Guiana,French Guiana,GUF,French Guianese
+917498,Guadeloupe,Guadeloupe,GLP,Guadeloupean
+917502,Martinique,Martinique,MTQ,Martiniquais
+917506,Sint Maarten,Sint Maarten,SMA,Sint Maartener
+917508,Saint Martin,St Martin,SMN,Saint Martinier
+917510,Réunion,Réunion,REU,Reunionese
+918740,Mayotte,Mayotte,MAY,Mahorais
+918745,Wallis and Futuna Islands,Wallis & Futuna,WFI,Wallisian
+918748,Saint Pierre and Miquelon,St Pierre & Miquelon,SPM,Saint Pierran
+919586,Comoros,Comoros,COM,Comoran
+5626565,South Vietnam,South Vietnam,VSO,South Vietnamese
+5626837,East Timor,East Timor,TLS,East Timorese
+5630219,Burma,Burma,BUR,Burman
+8162661,Monaco,Monaco,MON,Monégasque
+13100103,Zanzibar,Zanzibar,ZAN,Zanzibari
+13113220,South Sudan,South Sudan,SSD,South Sudanese
+13116454,Upper Volta,Upper Volta,UPV,Upper Voltese
+15064643,Micronesia,Micronesia,FSM,Micronesian
+23008660,Northern Mariana Islands,Northern Mariana,NMI,Northern Marianas
+23088616,Tuvalu,Tuvalu,TUV,Tuvaluan
+29118470,United Arab Republic,United Arab Republic,UAR,United Arab Republican
+52024163,Ireland (Pre-1922),Ireland (Pre-1922),IRE,Irish
+62002127,Montenegro,Montenegro,MNE,Montenegrin
+62003815,Yugoslavia,Yugoslavia,YUG,Yugoslav
+82082526,Saint Barthélemy,Saint Barthélemy,BLM,Barthélemois
+82082540,Netherlands Antilles,Netherlands Antilles,ANT,Netherlands Antillean

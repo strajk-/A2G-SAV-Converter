@@ -1,0 +1,10 @@
+bin/
+obj/
+.vs/
+*.user
+/dist/
+
+# built by tools\build-fmsave.ps1 (and embedded into the single exe by the build)
+/tools/fmsave/fmsave.exe
+
+*.pdb

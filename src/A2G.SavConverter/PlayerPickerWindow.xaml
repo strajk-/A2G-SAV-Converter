@@ -1,0 +1,87 @@
+<Window x:Class="A2G.SavConverter.PlayerPickerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:loc="clr-namespace:A2G.SavConverter.Localization"
+        xmlns:svc="clr-namespace:A2G.SavConverter.Services"
+        Width="1040" Height="720" MinWidth="900" MinHeight="620"
+        WindowStartupLocation="CenterOwner" ShowInTaskbar="False"
+        Background="{DynamicResource BgBrush}" Foreground="{DynamicResource TextBrush}">
+    <Grid Margin="16">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="320" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- ============ filters ============ -->
+        <Border Style="{StaticResource Card}" Margin="0,0,12,0">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <StackPanel Margin="0,0,6,0">
+                    <TextBlock Text="{loc:LocalizedText 22052}" Style="{StaticResource SectionTitle}" />
+                    <TextBlock Text="{loc:LocalizedText 22053}" TextWrapping="Wrap" Style="{StaticResource Muted}" Margin="0,0,0,8" />
+                    <Viewbox Width="196" Height="284" HorizontalAlignment="Center" Margin="0,0,0,8">
+                        <Canvas x:Name="Pitch" Width="200" Height="290" />
+                    </Viewbox>
+                    <TextBlock x:Name="PickedText" Style="{StaticResource Muted}" TextWrapping="Wrap" HorizontalAlignment="Center" Margin="0,0,0,10" />
+
+                    <Grid Margin="0,0,0,10">
+                        <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="112" /></Grid.ColumnDefinitions>
+                        <TextBlock Text="{loc:LocalizedText 22054}" TextWrapping="Wrap" Padding="0,0,6,0" VerticalAlignment="Center" />
+                        <svc:Stepper x:Name="MinRatingBox" Min="1" Max="20" Grid.Column="1" />
+                    </Grid>
+
+                    <TextBlock Text="{loc:LocalizedText 22055}" FontWeight="SemiBold" Margin="0,0,0,4" />
+                    <Grid Margin="0,0,0,10">
+                        <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="8" /><ColumnDefinition Width="*" /></Grid.ColumnDefinitions>
+                        <StackPanel><TextBlock Text="{loc:LocalizedText 10068}" Style="{StaticResource Muted}" /><svc:Stepper x:Name="CaMinBox" Min="0" Max="200" Step="5" /></StackPanel>
+                        <StackPanel Grid.Column="2"><TextBlock Text="{loc:LocalizedText 21036}" Style="{StaticResource Muted}" /><svc:Stepper x:Name="CaMaxBox" Min="0" Max="200" Step="5" /></StackPanel>
+                    </Grid>
+
+                    <TextBlock Text="{loc:LocalizedText 22056}" FontWeight="SemiBold" Margin="0,0,0,4" />
+                    <Grid Margin="0,0,0,10">
+                        <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="8" /><ColumnDefinition Width="*" /></Grid.ColumnDefinitions>
+                        <StackPanel><TextBlock Text="{loc:LocalizedText 10068}" Style="{StaticResource Muted}" /><svc:Stepper x:Name="PaMinBox" Min="0" Max="200" Step="5" /></StackPanel>
+                        <StackPanel Grid.Column="2"><TextBlock Text="{loc:LocalizedText 21036}" Style="{StaticResource Muted}" /><svc:Stepper x:Name="PaMaxBox" Min="0" Max="200" Step="5" /></StackPanel>
+                    </Grid>
+
+                    <CheckBox x:Name="FreeOnlyCheck" Margin="0,0,0,10" Checked="Filter_Changed" Unchecked="Filter_Changed">
+                        <TextBlock Text="{loc:LocalizedText 22057}" TextWrapping="Wrap" />
+                    </CheckBox>
+                    <TextBox x:Name="NameBox" Tag="{loc:LocalizedText 22058}" Margin="0,0,0,10" TextChanged="NameBox_TextChanged" />
+                    <Button Content="{loc:LocalizedText 22059}" HorizontalAlignment="Left" Click="Clear_Click" />
+                </StackPanel>
+            </ScrollViewer>
+        </Border>
+
+        <!-- ============ results ============ -->
+        <Border Grid.Column="1" Style="{StaticResource Card}">
+            <Grid>
+                <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="*" /><RowDefinition Height="Auto" /></Grid.RowDefinitions>
+                <TextBlock x:Name="CountText" Style="{StaticResource Muted}" TextWrapping="Wrap" Margin="0,0,0,8" />
+                <ListView x:Name="ResultList" Grid.Row="1" SelectionMode="Single" MouseDoubleClick="ResultList_DoubleClick">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="{loc:LocalizedText 22066}" Width="130" DisplayMemberBinding="{Binding Name}" />
+                            <GridViewColumn Header="{loc:LocalizedText 22067}" Width="46" DisplayMemberBinding="{Binding Age}" />
+                            <GridViewColumn Header="{loc:LocalizedText 22068}" Width="108" DisplayMemberBinding="{Binding Club}" />
+                            <GridViewColumn Header="{loc:LocalizedText 22069}" Width="96" DisplayMemberBinding="{Binding PositionText}" />
+                            <GridViewColumn Header="{loc:LocalizedText 22074}" Width="108" DisplayMemberBinding="{Binding InPlan}" />
+                            <GridViewColumn Header="CA" Width="40" DisplayMemberBinding="{Binding CA}" />
+                            <GridViewColumn Header="PA" Width="40" DisplayMemberBinding="{Binding PA}" />
+                            <GridViewColumn Width="40">
+                                <GridViewColumn.CellTemplate><DataTemplate>
+                                    <Button Style="{StaticResource IconButton}" Content="&#xE721;" Width="26" Height="26" ToolTip="{loc:LocalizedText 22115}" Click="MagnifyRow_Click" />
+                                </DataTemplate></GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                <DockPanel Grid.Row="2" Margin="0,12,0,0">
+                    <Button DockPanel.Dock="Right" Content="{loc:LocalizedText 22064}" Width="100" IsCancel="True" />
+                    <Button DockPanel.Dock="Right" Content="{loc:LocalizedText 22113}" Margin="0,0,8,0" Click="Preview_Click" />
+                    <Button DockPanel.Dock="Right" x:Name="AddButton" Content="{loc:LocalizedText 22063}" Style="{StaticResource PrimaryButton}" Margin="0,0,8,0" Click="Add_Click" />
+                    <TextBlock x:Name="StatusText" VerticalAlignment="Center" TextWrapping="Wrap" Margin="0,0,12,0" />
+                </DockPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

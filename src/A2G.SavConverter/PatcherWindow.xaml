@@ -1,0 +1,63 @@
+<Window x:Class="A2G.SavConverter.PatcherWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:loc="clr-namespace:A2G.SavConverter.Localization"
+        Width="900" Height="700" MinWidth="720" MinHeight="560"
+        WindowStartupLocation="CenterScreen"
+        Background="{DynamicResource BgBrush}" Foreground="{DynamicResource TextBrush}">
+    <Grid Margin="24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Margin="0,0,0,16">
+            <TextBlock x:Name="PatchTitle" FontSize="26" FontWeight="SemiBold" TextWrapping="Wrap" />
+            <TextBlock x:Name="PatchDescription" TextWrapping="Wrap" Margin="0,6,0,0" />
+            <TextBlock x:Name="PatchDetails" Style="{StaticResource Muted}" TextWrapping="Wrap" Margin="0,6,0,0" />
+        </StackPanel>
+
+        <Border Grid.Row="1" Style="{StaticResource Card}" Margin="0,0,0,16">
+            <StackPanel>
+                <TextBlock Text="{loc:LocalizedText 28001}" Style="{StaticResource SectionTitle}" />
+                <Grid Margin="0,0,0,10">
+                    <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
+                    <TextBox x:Name="InstallBox" TextChanged="InstallBox_TextChanged" />
+                    <Button Grid.Column="1" Content="{loc:LocalizedText 28002}" Margin="8,0,0,0" Click="Browse_Click" />
+                </Grid>
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                    <TextBlock Text="{loc:LocalizedText 28008}" VerticalAlignment="Center" Margin="0,0,10,0" />
+                    <TextBox x:Name="ProfileNameBox" Width="240" Margin="0,0,16,0" />
+                    <Button x:Name="InstallButton" Content="{loc:LocalizedText 28004}" Style="{StaticResource PrimaryButton}" Click="Install_Click" />
+                </StackPanel>
+                <TextBlock x:Name="StatusText" TextWrapping="Wrap" />
+            </StackPanel>
+        </Border>
+
+        <Border Grid.Row="2" Style="{StaticResource Card}">
+            <Grid>
+                <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="Auto" /><RowDefinition Height="*" /><RowDefinition Height="Auto" /></Grid.RowDefinitions>
+                <TextBlock Text="{loc:LocalizedText 28006}" Style="{StaticResource SectionTitle}" />
+                <TextBlock x:Name="ProfileStatusText" Grid.Row="1" TextWrapping="Wrap" Margin="0,0,0,8" />
+                <ListView x:Name="ProfileList" Grid.Row="2" Margin="0,0,0,10" SelectionMode="Single">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="{loc:LocalizedText 10022}" Width="260" DisplayMemberBinding="{Binding Name}" />
+                            <GridViewColumn Header="{loc:LocalizedText 10023}" Width="80" DisplayMemberBinding="{Binding Live}" />
+                            <GridViewColumn Header="{loc:LocalizedText 10024}" Width="170" DisplayMemberBinding="{Binding Created}" />
+                            <GridViewColumn Header="{loc:LocalizedText 10025}" Width="90" DisplayMemberBinding="{Binding FileCount}" />
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                <StackPanel Grid.Row="3">
+                    <Button x:Name="ActivateButton" Content="{loc:LocalizedText 28005}" HorizontalAlignment="Left" Click="Activate_Click" />
+                    <TextBlock Text="{loc:LocalizedText 28007}" Style="{StaticResource Muted}" TextWrapping="Wrap" FontSize="12" Margin="0,8,0,0" />
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <TextBlock x:Name="ResultText" Grid.Row="3" TextWrapping="Wrap" Margin="0,12,0,0" />
+    </Grid>
+</Window>
