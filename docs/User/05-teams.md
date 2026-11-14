@@ -97,7 +97,10 @@ Home and away kit, each with four steppers: **Pattern**, **Shirt**, **Shorts**, 
   Maroon.
 - A striped shirt uses the colour of the **shorts** for its stripes. Home and away shirt colours should differ.
 
-Every club has a made-up default kit (FM saves have no kit data); **Save** stores a changed kit, **Use defaults** removes it. The
+The default kit comes from a kit database built into the program, made from the kit colours of the FM database (FM saves themselves
+have no kit data): shirt, shorts and socks colours of the home and away kit, matched to the game's 13 colours, and the kit style
+(Plain, Striped, Hooped, Bicolour, Sleeved) matched to the game's patterns (plain, vertical stripes, hoops, halves, sleeves). The
+database knows about 27,000 clubs; for any other club the program makes up a kit. **Save** stores a changed kit, which always wins; **Use defaults** removes it. The
 generated crest uses the home kit colours.
 
 ### Squad by position

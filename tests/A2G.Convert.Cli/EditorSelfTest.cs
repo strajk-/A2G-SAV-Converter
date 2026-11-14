@@ -373,6 +373,18 @@ namespace A2G.Convert.Cli
                     Check("club name: short by default, full or custom on request, back to short stores nothing",
                         okDefault && okFull && okCustom && ClubTexts.Name(c0, ns) == shortName && ns.FindClubInfo(c0.Uid) == null);
                 }
+                {
+                    var bayern = fm.Clubs.Values.FirstOrDefault(c => c.UniqueId == "915");
+                    var ks = new ConversionSettings();
+                    var known = bayern == null ? null : Kits.Default(bayern);
+                    var own = new[] { 0, 3, 3, 3, 0, 0, 0, 0 };
+                    var ownOk = false;
+                    if (bayern != null) { Kits.SetOverride(ks, bayern, ClubKit.FromArray(own)); ownOk = Kits.For(ks, bayern).ToArray().SequenceEqual(own); }
+                    Check("kit database: a known club gets its real kit, a club's own kit still wins",
+                        KitDatabase.Count > 20000 && known != null && known.Home.Shirt == 1 && known.Home.Shorts == 0 && known.Away != null && ownOk);
+                    var unknown = new FmClub { Uid = "999999", UniqueId = "999999999", Name = "Nobody FC" };
+                    Check("kit database: an unknown club gets the made-up kit", Kits.Default(unknown).ToArray().SequenceEqual(Kits.Generated(unknown).ToArray()));
+                }
                 var savedGround = c0.StadiumCapacity;
                 c0.StadiumCapacity = 48123;
                 var estimateOnly = new ConversionSettings { StadiumFromReputation = true };

@@ -78,8 +78,40 @@ namespace A2G.Convert.Engine
             }
         }
 
-        /// <summary>The made-up default kit of a club: always different shirt colours for home and away.</summary>
+        /// <summary>
+        /// The default kit of a club: the real colours of the built-in kit database when it knows the club (by its FM database id),
+        /// else a made-up kit (see <see cref="Generated"/>).
+        /// </summary>
         public static ClubKit Default(FmClub club)
+        {
+            var known = KitDatabase.Find(club);
+            if (known == null) return Generated(club);
+            // no away kit in the database, or one that looks like the home shirt once the colours are reduced to the game's 13: made up
+            if (known.Away == null || known.Away.Shirt == known.Home.Shirt)
+                known.Away = GeneratedAway(club.Uid, known.Home.Shirt, known.Home.Shorts);
+            if (known.Away.Shirt == known.Home.Shirt)
+            {
+                known.Away.Shirt = known.Home.Shirt == 0 ? 11 : 0;   // a white home shirt with white shorts: a dark away shirt
+                if (known.Away.Shorts == known.Away.Shirt) known.Away.Shorts = known.Home.Shirt;
+            }
+            return known;
+        }
+
+        private static KitSet GeneratedAway(string uid, int primary, int secondary)
+        {
+            // away: a white shirt (a coloured one when the home shirt is white); the home shirt colour is not used again for the away shirt
+            var homeWhite = primary == 0;
+            return new KitSet
+            {
+                Pattern = Hash(uid, 4) % 100 < 75 ? 0 : 2,
+                Shirt = homeWhite ? secondary : 0,
+                Shorts = homeWhite ? 0 : primary,
+                Socks = homeWhite ? secondary : 0
+            };
+        }
+
+        /// <summary>The made-up default kit of a club: always different shirt colours for home and away.</summary>
+        public static ClubKit Generated(FmClub club)
         {
             var uid = club == null ? string.Empty : club.Uid;
             var pair = Pairs[Hash(uid, 1) % Pairs.Length];
@@ -89,15 +121,8 @@ namespace A2G.Convert.Engine
             var pattern = roll < 45 ? 0 : roll < 60 ? 2 : roll < 75 ? 1 : roll < 85 ? 3 : roll < 90 ? 4 : roll < 95 ? 5 : 6;
             var kit = new ClubKit();
             kit.Home = new KitSet { Pattern = pattern, Shirt = primary, Shorts = secondary, Socks = Hash(uid, 3) % 2 == 0 ? primary : secondary };
-            // away: a white shirt (a coloured one when the home shirt is white); the home shirt colour is not used again for the away shirt
-            var homeWhite = primary == 0;
-            kit.Away = new KitSet
-            {
-                Pattern = Hash(uid, 4) % 100 < 75 ? 0 : 2,
-                Shirt = homeWhite ? secondary : 0,
-                Shorts = homeWhite ? 0 : primary,
-                Socks = homeWhite ? secondary : 0
-            };            return kit;
+            kit.Away = GeneratedAway(uid, primary, secondary);
+            return kit;
         }
 
         /// <summary>The kit written for a club: the user's choice, else the default.</summary>

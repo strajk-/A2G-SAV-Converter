@@ -9,6 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Data/club_kits.json" LogicalName="Data.club_kits.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.IO.Compression" />
     <Reference Include="System.Drawing" />

@@ -197,12 +197,13 @@ namespace A2G.Convert.Fm
         private void LoadClubs(string path)
         {
             CsvHeader h = null;
-            int iUid = 0, iName = 0, iShort = 0, iNation = 0, iTeams = 0, iParent = 0, iRep = 0, iGender = 0, iLastPos = -1;
+            int iUid = 0, iName = 0, iShort = 0, iNation = 0, iTeams = 0, iParent = 0, iRep = 0, iGender = 0, iLastPos = -1, iUnique = -1;
             foreach (var row in CsvReader.ReadRecords(path))
             {
                 if (h == null)
                 {
                     h = new CsvHeader(row);
+                    try { iUnique = h.IndexOf("unique_id"); } catch (Exception) { iUnique = -1; }
                     iUid = h.IndexOf("uid"); iName = h.IndexOf("name"); iShort = h.IndexOf("short_name");
                     iNation = h.IndexOf("nation_id"); iTeams = h.IndexOf("teams"); iParent = h.IndexOf("parent_club_uid");
                     iRep = h.IndexOf("reputation"); iGender = h.IndexOf("gender");
@@ -212,6 +213,7 @@ namespace A2G.Convert.Fm
                 var club = new FmClub
                 {
                     Uid = row[iUid],
+                    UniqueId = iUnique >= 0 ? CsvHeader.Get(row, iUnique) : null,
                     Name = row[iName],
                     ShortName = CsvHeader.Get(row, iShort),
                     NationId = CsvHeader.GetInt(row, iNation, -1),

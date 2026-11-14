@@ -14,6 +14,8 @@ namespace A2G.Convert.Fm
     public sealed class FmClub
     {
         public string Uid { get; set; }
+        /// <summary>The club's id in the FM database (column unique_id); the same in every save of that database. Empty when the export has none.</summary>
+        public string UniqueId { get; set; }
         public string Name { get; set; }
         public string ShortName { get; set; }
         public int NationId { get; set; }
