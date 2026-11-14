@@ -41,7 +41,7 @@ All of this is loaded when the game starts, regardless of which league you pick 
 5. **German Regionalligen:** the FM save has no club locations, so the 72 clubs of the third tier are chosen by reputation and dealt
    into the four groups in a snake order (1 to Nord, 2 to Ost, 3 to Sued, 4 to Suedwest, 5 to Suedwest, 6 to Sued ...). The four groups
    are equally strong; the result is always the same for the same data.
-6. Inside a league, **bigger stadium slots go to higher-reputation clubs**: the original stadium shapes are kept and paired with the
+6. Inside a league, **bigger stadium slots go to clubs with the larger capacity**: the original stadium shapes are kept and paired with the
    clubs by size.
 
 You can change any of this by hand with [swaps in the Teams tab](05-teams.md).
@@ -98,7 +98,8 @@ Market value, salary, form and statistics are calculated by the game when a new 
 FM saves have none of these, so they are generated, and you can change every one ([Teams](05-teams.md)):
 
 - **City** is the place word of the club name, **nickname** the city, **stadium name** "<city> Stadion".
-- **Stadium capacity** is derived from the club's reputation (about 3,000 for small clubs up to about 65,000 for the biggest);
+- **Stadium capacity** is the capacity of the club's home ground in the FM save; clubs without a ground there (or all clubs, if the
+  option in Options is on) get an estimate from the reputation (about 3,000 for small clubs up to about 65,000 for the biggest);
   editable from 3,000 to 110,000. The stadium's sections are rescaled to it.
 - **Kits** are made-up pairs of colours per club; home and away shirts always differ.
 - **Crests** are generated per club (round badge in the home kit colours with letters), or your own image.

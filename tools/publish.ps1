@@ -14,7 +14,7 @@ $ErrorActionPreference = 'Stop'
 $repo = Split-Path -Parent $PSScriptRoot
 # fmsave.exe is built from the vendored source (needs Python once): build it when it is missing or older than its inputs
 $fmsave = Join-Path $repo 'tools\fmsave\fmsave.exe'
-$inputs = @(Get-ChildItem (Join-Path $repo 'third_party\fmsave\fmsave-0.10.0') -Recurse -File) +
+$inputs = @(Get-ChildItem (Join-Path $repo 'third_party\fmsave\fmsave-0.12.4') -Recurse -File) +
           @(Get-ChildItem (Join-Path $repo 'tools\fmtool') -Recurse -File -Include *.py) +
           @(Get-Item (Join-Path $repo 'tools\build-fmsave.ps1'))
 $newest = ($inputs | Sort-Object LastWriteTimeUtc -Descending | Select-Object -First 1).LastWriteTimeUtc

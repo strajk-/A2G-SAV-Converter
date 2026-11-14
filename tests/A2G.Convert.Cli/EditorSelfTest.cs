@@ -121,7 +121,7 @@ namespace A2G.Convert.Cli
                 Check("library: a new project gets kit, texts and crest of the club", addedB == 1 && Kits.For(projB, kitClub).ToArray().SequenceEqual(wantedKit.ToArray())
                     && ClubTexts.Stadium(kitClub, projB, 30) == "Test Arena" && ClubTexts.Capacity(kitClub, projB) == 12345 && crestsB == 1 && File.Exists(Path.Combine(folderB, kitClub.Uid + ".bmp")));
                 Kits.SetOverride(projB, kitClub, Kits.Default(kitClub));
-                ClubTexts.SetOverride(projB, kitClub, "", "", "", ClubTexts.DefaultCapacity(kitClub));
+                ClubTexts.SetOverride(projB, kitClub, "", "", "", ClubTexts.DefaultCapacity(kitClub, projB));
                 SharedLibrary.Sync(projB, syncedB, false);
                 Check("library: resetting a club in a project removes it from the library", SharedLibrary.LoadClubs().Count == 0);
                 SharedLibrary.Root = null;
@@ -360,7 +360,18 @@ namespace A2G.Convert.Cli
                     && ClubTexts.Capacity(c0, cs) % 100 == 0);
                 ClubTexts.SetOverride(cs, c0, null, null, null, 51500);
                 Check("capacity: override is used and the default is not stored", ClubTexts.Capacity(c0, cs) == 51500
-                    && ClubTexts.SetOverride(cs, c0, null, null, null, ClubTexts.DefaultCapacity(c0)) && cs.FindClubInfo(c0.Uid) == null);
+                    && ClubTexts.SetOverride(cs, c0, null, null, null, ClubTexts.DefaultCapacity(c0, cs)) && cs.FindClubInfo(c0.Uid) == null);
+                var savedGround = c0.StadiumCapacity;
+                c0.StadiumCapacity = 48123;
+                var estimateOnly = new ConversionSettings { StadiumFromReputation = true };
+                Check("capacity: the save's stadium is used (rounded), the option switches back to the estimate, an override wins",
+                    ClubTexts.Capacity(c0, new ConversionSettings()) == 48100
+                    && ClubTexts.Capacity(c0, estimateOnly) == ClubTexts.EstimatedCapacity(c0)
+                    && ClubTexts.SetOverride(cs, c0, null, null, null, 51500) && ClubTexts.Capacity(c0, cs) == 51500);
+                ClubTexts.SetOverride(cs, c0, null, null, null, ClubTexts.DefaultCapacity(c0, cs));
+                c0.StadiumCapacity = 900;
+                Check("capacity: a tiny ground is raised to the game's minimum", ClubTexts.Capacity(c0, new ConversionSettings()) == ClubTexts.MinCapacity);
+                c0.StadiumCapacity = savedGround;
                 var rowsCap = new[] { new ClubInfoRow { Uid = c0.Uid, Capacity = "62.500" } };
                 ClubInfoCsv.Apply(cs, fm, rowsCap);
                 Check("capacity: text with thousands separator is imported", ClubTexts.Capacity(c0, cs) == 62500);

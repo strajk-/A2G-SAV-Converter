@@ -15,7 +15,7 @@ param(
 $ErrorActionPreference = 'Stop'
 
 $repo      = Split-Path -Parent $PSScriptRoot
-$source    = Join-Path $repo 'third_party\fmsave\fmsave-0.10.0'
+$source    = Join-Path $repo 'third_party\fmsave\fmsave-0.12.4'
 $buildDir  = Join-Path $PSScriptRoot '_build'
 $venv      = Join-Path $buildDir 'venv'
 $outDir    = Join-Path $PSScriptRoot 'fmsave'

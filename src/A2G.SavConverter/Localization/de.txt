@@ -532,3 +532,8 @@
 28061	Der Originaldatensatz kann nicht ersetzt werden. Bitte verwenden Sie einen anderen Namen.
 28070	Startjahr
 28071	KLEINIG.SAV: das Jahr, in dem das Spiel beginnt. Die Wappen eines Landes gehören zu den Dateien des Landes.
+28080	Die Stadiontabelle konnte nicht exportiert werden. Die Stadiongrößen werden aus dem Ansehen der Vereine geschätzt.
+28081	Stadien
+28082	Stadiongrößen aus dem Ansehen der Vereine schätzen
+28083	Aus (Standard): Jeder Verein bekommt die Kapazität seines Stadions aus dem FM-Spielstand; Vereine, für die der Spielstand kein Stadion hat (nicht geladene Ligen, Vereine ohne Liga), bekommen die Schätzung aus ihrem Ansehen. An: Alle Vereine bekommen die Schätzung. Eine von Hand gesetzte Größe gilt immer. Die Stadiontabelle gehört zum Export: Exportieren Sie erneut, um sie in ein älteres Projekt zu bekommen.
+28084	Stadiongrößen: {0} von {1} Vereinen nutzen das Stadion aus dem FM-Spielstand, die anderen werden aus ihrem Ansehen geschätzt.

@@ -64,7 +64,41 @@ namespace A2G.Convert.Fm
             if (File.Exists(staffPath)) set.LoadStaff(staffPath);
             var fixtures = Path.Combine(folder, "fixtures.csv");
             if (File.Exists(fixtures)) set.Leagues = FmLeagueDetector.Detect(fixtures, set);
+            var stadiums = Path.Combine(folder, "stadiums.csv");
+            if (File.Exists(stadiums)) set.LoadStadiums(stadiums);
             return set;
+        }
+
+        /// <summary>True when stadiums.csv was exported (older projects have none: export again to get the stadium sizes of the save).</summary>
+        public bool HasStadiumData { get; private set; }
+
+        /// <summary>
+        /// Gives every club the capacity of its ground: stadiums.csv lists, per ground, the clubs whose home ground it is
+        /// ("home_club_uids", separated by semicolons; a club has at most one ground there).
+        /// </summary>
+        private void LoadStadiums(string path)
+        {
+            CsvHeader h = null;
+            int iCapacity = -1, iHome = -1;
+            foreach (var row in CsvReader.ReadRecords(path))
+            {
+                if (h == null)
+                {
+                    h = new CsvHeader(row);
+                    iCapacity = h.Has("total_capacity") ? h.IndexOf("total_capacity") : h.Has("all_seater_capacity") ? h.IndexOf("all_seater_capacity") : -1;   // the column was called all_seater_capacity before fmsave 0.10.0
+                    iHome = h.Has("home_club_uids") ? h.IndexOf("home_club_uids") : -1;
+                    HasStadiumData = iCapacity >= 0 && iHome >= 0;
+                    if (!HasStadiumData) return;
+                    continue;
+                }
+                var capacity = CsvHeader.GetInt(row, iCapacity);
+                if (capacity <= 0) continue;
+                foreach (var uid in CsvHeader.Get(row, iHome).Split(';'))
+                {
+                    FmClub club;
+                    if (Clubs.TryGetValue(uid.Trim(), out club) && capacity > club.StadiumCapacity) club.StadiumCapacity = capacity;
+                }
+            }
         }
 
         public FmNation NationBySaveId(int saveId)

@@ -25,7 +25,7 @@ The license covers the program. It does not give you rights to the games, their 
 
 ## Third-party software
 
-The Football Manager reader inside the program is **fmsave** 0.10.0 by Randal S. Olson, released under the MIT license
+The Football Manager reader inside the program is **fmsave** 0.12.4 by Randal S. Olson, released under the MIT license
 (<https://github.com/rhiever/fmsave>). Its license text is shipped with the source of the project and unpacked together with the reader; the MIT license is compatible with the GPL.
 
 ## Back up your game

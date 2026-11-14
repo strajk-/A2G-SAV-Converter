@@ -323,7 +323,8 @@ namespace A2G.SavConverter
                     _exporter.WriteBuiltInNationNames(namesFile, progress);
                     if (info.Version != 26) Log(Loc.T(20077, info.Version));
                 }
-                var failed = results.Where(r => !r.Succeeded).ToList();
+                var failed = results.Where(r => !r.Succeeded && Array.IndexOf(FmSaveExporter.OptionalTables, r.Table) < 0).ToList();
+                if (results.Any(r => !r.Succeeded && Array.IndexOf(FmSaveExporter.OptionalTables, r.Table) >= 0)) Log(Loc.T(28080));
                 if (failed.Count == 0)
                 {
                     _state.Config.FmVersion = info.Version;   // the FM version of the exported data: used for the suggested profile name

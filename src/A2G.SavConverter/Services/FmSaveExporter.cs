@@ -43,7 +43,10 @@ namespace A2G.SavConverter.Services
         }
 
         /// <summary>The tables the converter needs, in export order ("fixtures" is used to find each nation's leagues).</summary>
-        public static readonly string[] ConversionTables = { "players", "clubs", "nations", "fixtures", "staff" };
+        public static readonly string[] ConversionTables = { "players", "clubs", "nations", "fixtures", "staff", "stadiums" };
+
+        /// <summary>Tables the conversion works without (the stadium capacities then come from the reputation estimate); a failed export of one only produces a note.</summary>
+        public static readonly string[] OptionalTables = { "stadiums" };
 
         /// <summary>
         /// Reads the nation names from the installed FM database (a save has only ids) and writes nation_names.csv.

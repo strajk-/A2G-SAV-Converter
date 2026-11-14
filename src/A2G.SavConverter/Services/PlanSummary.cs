@@ -1,4 +1,4 @@
-﻿using A2G.SavConverter.Localization;
+using A2G.SavConverter.Localization;
 using System.Linq;
 using System.Text;
 using A2G.Convert.Plan;
@@ -24,6 +24,10 @@ namespace A2G.SavConverter.Services
                 sb.AppendLine();
             }
             sb.AppendLine(Loc.T(23003, plan.Avereine.Teams.Count, plan.Avereine.Teams.Select(t => t.Club.NationId).Distinct().Count(), plan.Avereine.ExtraClubs.Count));
+            // stadium sizes: how many clubs have the ground of the FM save (the others are estimated from their reputation)
+            var planClubs = plan.Countries.SelectMany(c => c.AllTeams).Concat(plan.Avereine.Teams).Select(t => t.Club).ToList();
+            var withGround = planClubs.Count(c => c.StadiumCapacity > 0);
+            if (withGround > 0) sb.AppendLine(Loc.T(28084, withGround, planClubs.Count));
             if (plan.Warnings.Count > 0)
             {
                 sb.AppendLine();

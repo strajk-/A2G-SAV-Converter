@@ -98,7 +98,7 @@ Developers: [architecture and repository layout](docs/Dev/architecture.md), file
 
 The release is one file: the program's libraries and the Football Manager reader are built into it.
 
-- **[fmsave](https://github.com/rhiever/fmsave)** (0.10.0, Randal S. Olson, MIT) reads the Football Manager save. It is embedded in the
+- **[fmsave](https://github.com/rhiever/fmsave)** (0.12.4, Randal S. Olson, MIT) reads the Football Manager save. It is embedded in the
   `.exe` and unpacked once into `%LOCALAPPDATA%\A2G-SAV-Converter\fmsave` the first time it is needed.
 - **A2G.Sav** and **A2G.Convert**, this project's own libraries, are embedded as well.
 

@@ -145,6 +145,12 @@ namespace A2G.Convert.Engine
         /// <summary>The year the game starts in (1998-2098; the game's own start is 1998): 0 = the year of the FM save.</summary>
         [DataMember] public int StartYear { get; set; }
 
+        /// <summary>
+        /// Stadium sizes: false (default) = the capacity of the club's ground in the FM save where the save has one, else the estimate
+        /// from the club's reputation; true = the estimate from the reputation for every club.
+        /// </summary>
+        [DataMember] public bool StadiumFromReputation { get; set; }
+
         /// <summary>Skin from the player's nationality (a rough rule, see <see cref="PlayerLook"/>); off = every player has the lightest skin.</summary>
         [DataMember] public bool SkinFromNationality { get; set; }
         /// <summary>Skin and hair the user set for single players, keyed on the FM player id.</summary>

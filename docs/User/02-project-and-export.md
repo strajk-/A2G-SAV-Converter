@@ -73,6 +73,8 @@ Press **Export from FM save**. The program reads these tables from the save and 
 - **nations** - the nations of the save
 - **fixtures** - used to find out which clubs play in which league
 - **staff** - coaches and other staff, used for the trainer and staff files
+- **stadiums** - the grounds of the save with their capacity; every club gets the capacity of its home ground (see
+  [Options](03-options.md)). An export made with an older version of this program has no stadium table: export again to use it.
 - **nation names** - FM saves only contain nation ids. The names are read from the installed Football Manager when the same version
   is installed on this PC; otherwise the program's built-in FM26 list is used. For an FM27 save without FM27 installed a few nation
   names may differ; the log tells you.

@@ -20,6 +20,11 @@ namespace A2G.Convert.Fm
         public int Reputation { get; set; }
         /// <summary>Final position of the last finished season in the club's own league (0 = none).</summary>
         public int LastLeaguePosition { get; set; }
+        /// <summary>
+        /// Total capacity (seated and standing) of the ground the club plays its home matches at, from the save's stadium table
+        /// (stadiums.csv); 0 when the save has no ground for the club (only clubs whose matches are in the save have one).
+        /// </summary>
+        public int StadiumCapacity { get; set; }
         /// <summary>Team id of the club's first team (slot 0), or -1.</summary>
         public int FirstTeamId { get; set; }
         /// <summary>True for men's clubs that are not a reserve/affiliate of another club.</summary>

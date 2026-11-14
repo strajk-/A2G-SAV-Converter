@@ -531,3 +531,8 @@
 28061	The Original data set cannot be replaced. Please use another name.
 28070	Start year
 28071	KLEINIG.SAV: the year the game starts in. The crests of a country are part of the country's files.
+28080	The stadium table could not be exported. Stadium sizes will be estimated from the club reputation.
+28081	Stadiums
+28082	Estimate the stadium sizes from the club reputation
+28083	Off (default): every club gets the capacity of its ground in the FM save; clubs the save has no ground for (leagues that are not loaded, the non-league clubs) get the estimate from their reputation. On: every club gets the estimate. A size you set by hand always wins. The stadium table is part of the export: export again to get it into an older project.
+28084	Stadium sizes: {0} of {1} clubs use the ground of the FM save, the others are estimated from their reputation.

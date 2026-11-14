@@ -111,6 +111,15 @@
 
                 <Border Style="{StaticResource Card}" Margin="0,0,0,12">
                     <StackPanel>
+                        <TextBlock Text="{loc:LocalizedText 28081}" Style="{StaticResource SectionTitle}" />
+                        <CheckBox x:Name="StadiumEstimateCheck" Margin="0,0,0,8">
+                            <TextBlock Text="{loc:LocalizedText 28082}" TextWrapping="Wrap" />
+                        </CheckBox>
+                        <TextBlock Text="{loc:LocalizedText 28083}" TextWrapping="Wrap" Style="{StaticResource Muted}" />
+                    </StackPanel>
+                </Border>
+                <Border Style="{StaticResource Card}" Margin="0,0,0,12">
+                    <StackPanel>
                         <TextBlock Text="{loc:LocalizedText 10049}" Style="{StaticResource SectionTitle}" />
                         <TextBlock TextWrapping="Wrap" Style="{StaticResource Muted}" Margin="0,0,0,8"
                                    Text="{loc:LocalizedText 10050}" />

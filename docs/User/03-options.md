@@ -88,6 +88,14 @@ defaults:
 
 The limits must increase from left to right. Strength 8 is a random event inside the game and is **never** written.
 
+## Stadiums
+
+| Setting | Default | Meaning |
+|---------|---------|---------|
+| **Estimate stadium sizes from club reputation** | off | Off: every club gets the capacity of its home ground in the FM save (rounded to 100, between 3,000 and 110,000). Clubs for which the save has no ground (an FM save only knows the grounds of clubs whose matches are loaded) are estimated from their reputation. On: all clubs are estimated from their reputation. |
+
+A capacity you set by hand for a club always wins. The plan summary shows how many clubs use the ground of the save.
+
 ## Positions and abilities
 
 | Setting | Default | Meaning |

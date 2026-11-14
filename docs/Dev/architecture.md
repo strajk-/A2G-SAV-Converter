@@ -15,7 +15,7 @@ Developer notes for working on the code. The user-facing guide is in [`docs/User
 | `tests/run-checks.ps1` | Builds the solution and runs every automated check on scratch copies (nothing touches a real install) |
 | `docs/User/` | The user guide (Markdown, written for publishing online) |
 | `docs/Dev/` | Developer documentation: this page, file formats (`sav-format-verified.md`), conversion rules, profiles, projects, patches, screenshots |
-| `third_party/fmsave/` | Vendored [fmsave](https://github.com/rhiever/fmsave) 0.10.0 source (MIT, (c) Randal S. Olson) |
+| `third_party/fmsave/` | Vendored [fmsave](https://github.com/rhiever/fmsave) 0.12.4 source (MIT, (c) Randal S. Olson) |
 | `tools/build-fmsave.ps1` | Builds `tools/fmsave/fmsave.exe` from the vendored source (private venv in `tools/_build`) |
 | `tools/fmsave/` | The built `fmsave.exe` (not committed); the build embeds it into the app's exe, which unpacks it on first use |
 | `tools/publish.ps1` | Builds the single-file release `dist\A2G-SAV-Converter.exe` (see [patches.md](patches.md)) |
@@ -69,7 +69,7 @@ Only `.sav` files and the crest `.bmp` files in `WAPPEN` are written; no binarie
 The app runs `fmsave export <save> <table> --all --format csv` for `players`, `clubs`, `nations`, `fixtures` and `staff`, and adds the
 nation names (from the installed FM database, or from a bundled table when FM is not installed), into the project's `fm_export` folder.
 
-Supported FM26 builds (fmsave 0.10.0): 26.1.0, 26.3.1, 26.3.2; FM27 saves are read as well.
+Supported FM26 builds (fmsave 0.12.4): 26.1.0, 26.3.1, 26.3.2; FM27 saves are read as well.
 
 - Use a **fresh** save (start of a new career, all wanted leagues loaded). A save from a long career holds generated future players.
 - `nations.csv` only maps save nation ids to database ids; the names are in `nation_names.csv`.

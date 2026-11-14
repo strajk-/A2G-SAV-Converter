@@ -157,6 +157,7 @@ namespace A2G.SavConverter
             MinPlayersBox.Text = s.MinPlayersForTeam.ToString(CultureInfo.InvariantCulture);
             TeamMinBox.Text = s.TeamMinimum.ToString(CultureInfo.InvariantCulture);
             CapBox.Text = s.AvereinePerNationCap.ToString(CultureInfo.InvariantCulture);
+            StadiumEstimateCheck.IsChecked = s.StadiumFromReputation;
             for (var i = 0; i < 6; i++) _bands[i].Text = s.StrengthBands[i].ToString(CultureInfo.InvariantCulture);
             SecondaryBox.Text = s.SecondaryPositionMinRating.ToString(CultureInfo.InvariantCulture);
             MaxPosBox.Text = s.MaxPositiveAbilities.ToString(CultureInfo.InvariantCulture);
@@ -214,6 +215,7 @@ namespace A2G.SavConverter
             s.SquadSize = size; s.MinGoalkeepers = keepers; s.MinPlayersForTeam = minPlayers; s.TeamMinimum = teamMin;
             s.AvereinePerNationCap = cap; s.StrengthBands = bands; s.SecondaryPositionMinRating = secondary;
             s.MaxPositiveAbilities = maxPos; s.MaxNegativeAbilities = maxNeg; s.MaxTraits = maxTraits;
+            s.StadiumFromReputation = StadiumEstimateCheck.IsChecked == true;
             return null;
         }
 

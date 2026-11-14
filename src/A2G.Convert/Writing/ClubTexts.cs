@@ -25,20 +25,34 @@ namespace A2G.Convert.Writing
 
         public const int MinCapacity = 3000, MaxCapacity = 110000;
 
-        /// <summary>Stadium capacity from the club's reputation (FM has no stadium data here): 3,000 up to about 65,000.</summary>
-        public static int DefaultCapacity(FmClub club)
+        /// <summary>Estimate of the stadium capacity from the club's reputation: 3,000 up to about 65,000.</summary>
+        public static int EstimatedCapacity(FmClub club)
         {
             var x = Math.Max(0, Math.Min(1.0, (club.Reputation - 1000) / 8000.0));
             var v = (int)Math.Round((3000 + 62000 * x * x) / 100.0) * 100;
             return Math.Max(MinCapacity, Math.Min(MaxCapacity, v));
         }
 
-        /// <summary>The capacity: the user's value, else the reputation-based default.</summary>
+        /// <summary>
+        /// The capacity a club gets when the user has not set one: the capacity of its ground in the FM save (rounded to 100, kept inside
+        /// the game's limits) when the save has one, otherwise - or when the setting asks for it - the estimate from the reputation.
+        /// </summary>
+        public static int DefaultCapacity(FmClub club, ConversionSettings s)
+        {
+            if ((s == null || !s.StadiumFromReputation) && club.StadiumCapacity > 0)
+            {
+                var v = (int)Math.Round(club.StadiumCapacity / 100.0) * 100;
+                return Math.Max(MinCapacity, Math.Min(MaxCapacity, v));
+            }
+            return EstimatedCapacity(club);
+        }
+
+        /// <summary>The capacity: the user's value, else the default (the save's ground, or the reputation-based estimate).</summary>
         public static int Capacity(FmClub club, ConversionSettings s)
         {
             var o = s == null ? null : s.FindClubInfo(club.Uid);
             if (o != null && o.Capacity > 0) return Math.Max(MinCapacity, Math.Min(MaxCapacity, o.Capacity));
-            return DefaultCapacity(club);
+            return DefaultCapacity(club, s);
         }
 
         public static bool SetOverride(ConversionSettings s, FmClub club, string city, string nickname, string stadium, int capacity)
@@ -55,7 +69,7 @@ namespace A2G.Convert.Writing
             o.Nickname = nickname.Length == 0 || nickname == NameShortener.Fit(cityNow, ClubNamer.MaxNickname) ? null : nickname;
             o.Stadium = stadium.Length == 0 || stadium == NameShortener.Fit(cityNow + " Stadion", ClubNamer.MaxStadium) ? null : stadium;
             capacity = Math.Max(MinCapacity, Math.Min(MaxCapacity, capacity));
-            o.Capacity = capacity == DefaultCapacity(club) ? 0 : capacity;
+            o.Capacity = capacity == DefaultCapacity(club, s) ? 0 : capacity;
             if (o.City == null && o.Nickname == null && o.Stadium == null && o.Capacity == 0 && o.Kit == null) s.ClubInfo.Remove(o);
             var after = City(club, s, ClubNamer.MaxCity) + "|" + Nickname(club, s) + "|" + Stadium(club, s, ClubNamer.MaxStadium) + "|" + Capacity(club, s);
             return before != after;

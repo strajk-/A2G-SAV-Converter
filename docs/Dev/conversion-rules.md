@@ -46,9 +46,10 @@ stay valid), `Stad*.sav` (names), `Avereine.sav` (130 clubs x 11 players, 40 spa
 `JUGEDEUT/ENGL/FRAN/ITAL/SPAN.SAV` (name pools from FM players of the nation).
 
 Placeholders, because FM saves do not contain the data: city = place word taken from the club name, nickname = city,
-stadium name = "<city> Stadion", Avereine kit colours = deterministic from the club id, capacity from reputation.
+stadium name = "<city> Stadion", Avereine kit colours = deterministic from the club id, capacity = home ground of the save (`stadiums` table, `home_club_uids`, rounded to 100, clamped 3,000-110,000) unless
+`StadiumFromReputation` is set or the club has no ground, then the reputation estimate (`ClubTexts.EstimatedCapacity`).
 The stadium shape (section layout, facilities) and the trainer / staff blocks come from the original slots, paired by
-stadium size (bigger stadiums go to higher-reputation clubs); the section capacities are rescaled to the club's capacity.
+stadium size (bigger stadiums go to clubs with the larger capacity, ties by reputation); the section capacities are rescaled to the club's capacity.
 
 Squads (src/A2G.Convert/Engine/PlanBuilder.cs `SquadSelector`, positions from `PositionRules`): picked by A2 main position, not just by
 ability. Players under 17 are never picked (Anstoss 2 players are 17 to 50).

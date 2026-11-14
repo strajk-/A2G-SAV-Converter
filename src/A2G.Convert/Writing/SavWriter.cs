@@ -255,7 +255,8 @@ namespace A2G.Convert.Writing
                 .OrderByDescending(i => StadiumScaler.Total(stad.Records[i]))
                 .ThenBy(i => i)
                 .ToList();
-            var ordered = teams.OrderByDescending(t => t.Club.Reputation).ToList();
+            // the biggest stadium shape goes to the club with the biggest capacity (the save's ground, or the reputation estimate), then by reputation
+            var ordered = teams.OrderByDescending(t => ClubTexts.Capacity(t.Club, mapper.Settings)).ThenByDescending(t => t.Club.Reputation).ToList();
             var result = new List<Slot>();
             for (var k = 0; k < templates.Count; k++)
             {

@@ -82,7 +82,7 @@ them here:
 | **City** | 16 characters | the place word of the club name |
 | **Nickname** | 18 characters | the city |
 | **Stadium name** | 26 characters | "<city> Stadion" |
-| **Stadium capacity** | 3,000 to 110,000 | from the club's reputation |
+| **Stadium capacity** | 3,000 to 110,000 | the home ground in the FM save, else from the club's reputation (see [Options](03-options.md)) |
 
 The highlighted fields are what the game will show. **Save** stores your changes, **Use defaults** removes them. If you change only the
 city, a nickname and stadium name that are still the default follow it. The stadium's section capacities are rescaled to your capacity.

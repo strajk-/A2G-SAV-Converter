@@ -29,6 +29,8 @@ namespace A2G.Convert.Engine
             }
 
             BuildAvereine(plan, fm, settings, mainNationIds);
+            if (!fm.HasStadiumData && !settings.StadiumFromReputation)
+                plan.Warnings.Add("Stadium sizes: this export has no stadium table, so they are estimated from the club reputation. Export again to use the stadiums of the FM save.");
             return plan;
         }
 
