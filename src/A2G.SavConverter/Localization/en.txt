@@ -552,3 +552,6 @@
 28103	The downloaded file is damaged (its checksum differs). Please try again.
 28104	Reload
 28105	Downloading the community save: {0} %
+28110	Full name
+28111	Short name
+28112	Custom

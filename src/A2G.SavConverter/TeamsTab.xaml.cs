@@ -229,7 +229,7 @@ namespace A2G.SavConverter
                         rows.Add(new A2G.Convert.Writing.ClubInfoRow
                         {
                             Uid = club.Uid, Nation = nation != null ? nation.Name : string.Empty, League = group.Name, FmName = club.Name,
-                            WrittenName = A2G.Convert.Engine.ClubNamer.ClubName(club),
+                            WrittenName = A2G.Convert.Writing.ClubTexts.Name(club, _state.Settings),
                             City = A2G.Convert.Writing.ClubTexts.City(club, _state.Settings, A2G.Convert.Engine.ClubNamer.MaxCity),
                             Nickname = A2G.Convert.Writing.ClubTexts.Nickname(club, _state.Settings),
                             Stadium = A2G.Convert.Writing.ClubTexts.Stadium(club, _state.Settings, A2G.Convert.Engine.ClubNamer.MaxStadium),

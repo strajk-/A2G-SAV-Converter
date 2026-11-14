@@ -119,7 +119,7 @@ namespace A2G.Convert.Engine
                 settings.ClubInfo.Add(o);
             }
             o.Kit = isDefault ? null : kit.ToArray();
-            if (o.City == null && o.Nickname == null && o.Stadium == null && o.Capacity == 0 && o.Kit == null) settings.ClubInfo.Remove(o);
+            if (o.IsEmpty) settings.ClubInfo.Remove(o);
         }
     }
 }

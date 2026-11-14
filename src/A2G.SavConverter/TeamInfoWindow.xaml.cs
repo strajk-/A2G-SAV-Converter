@@ -49,7 +49,8 @@ namespace A2G.SavConverter
 
         private readonly AppState _state;
         private readonly FmClub _club;
-        private TextBox _cityBox, _nickBox, _stadiumBox;
+        private TextBox _cityBox, _nickBox, _stadiumBox, _nameBox;
+        private ComboBox _nameMode;   // 0 full name, 1 short name, 2 custom
         private Stepper _capacity;
         private TeamInfoData _data;
         private ClubKit _kit;
@@ -80,7 +81,7 @@ namespace A2G.SavConverter
             NoteText.Text = data.InPlan ? string.Empty : Loc.T(22102);
             Fact(22090, nation != null ? nation.Name : "-");
             Fact(22091, data.GroupName);
-            Fact(22104, ClubNamer.ClubName(club));
+            BuildNameRow();
             _cityBox = Editable(22097, ClubTexts.City(club, state.Settings, ClubNamer.MaxCity), ClubNamer.MaxCity);
             _nickBox = Editable(22098, ClubTexts.Nickname(club, state.Settings), ClubNamer.MaxNickname);
             _stadiumBox = Editable(22099, ClubTexts.Stadium(club, state.Settings, ClubNamer.MaxStadium), ClubNamer.MaxStadium);
@@ -318,6 +319,52 @@ namespace A2G.SavConverter
             return box;
         }
 
+        /// <summary>The club name written to the game: a choice of the FM full name, the FM short name or the user's own text.</summary>
+        private void BuildNameRow()
+        {
+            var grid = new Grid { Margin = new Thickness(0, 0, 0, 5) };
+            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1.4, GridUnitType.Star) });
+            var label = new TextBlock { Text = Loc.T(22104), Margin = new Thickness(0, 0, 8, 0), VerticalAlignment = VerticalAlignment.Top };
+            label.SetResourceReference(TextBlock.ForegroundProperty, "AccentBrush");
+            _nameMode = new ComboBox { Margin = new Thickness(0, 0, 0, 4) };
+            _nameMode.Items.Add(Loc.T(28110)); _nameMode.Items.Add(Loc.T(28111)); _nameMode.Items.Add(Loc.T(28112));
+            _nameBox = new TextBox { MaxLength = ClubNamer.MaxName };
+            var panel = new StackPanel();
+            panel.Children.Add(_nameMode); panel.Children.Add(_nameBox);
+            Grid.SetColumn(panel, 1);
+            grid.Children.Add(label); grid.Children.Add(panel);
+            Facts.Children.Add(grid);
+            ShowName();
+            _nameMode.SelectionChanged += (s, e) => NameModeChanged();
+        }
+
+        private bool _nameLoading;
+
+        /// <summary>Shows the stored choice: the box holds the written name and can be typed in only for "Custom".</summary>
+        private void ShowName()
+        {
+            _nameLoading = true;
+            var o = _state.Settings.FindClubInfo(_club.Uid);
+            var mode = o == null ? ClubTexts.NameShort : o.NameMode;
+            _nameMode.SelectedIndex = mode == ClubTexts.NameFull ? 0 : mode == ClubTexts.NameCustom ? 2 : 1;
+            _nameBox.Text = ClubTexts.Name(_club, _state.Settings);
+            _nameBox.IsEnabled = mode == ClubTexts.NameCustom;
+            _nameLoading = false;
+        }
+
+        private void NameModeChanged()
+        {
+            if (_nameLoading) return;
+            var index = _nameMode.SelectedIndex;
+            _nameBox.IsEnabled = index == 2;
+            if (index == 0) _nameBox.Text = ClubNamer.FullClubName(_club);
+            else if (index == 1) _nameBox.Text = ClubNamer.ClubName(_club);
+            else { _nameBox.Focus(); _nameBox.SelectAll(); }
+        }
+
+        private int ChosenNameMode { get { return _nameMode.SelectedIndex == 0 ? ClubTexts.NameFull : _nameMode.SelectedIndex == 2 ? ClubTexts.NameCustom : ClubTexts.NameShort; } }
+
         /// <summary>A line with a − / + stepper for the stadium capacity (no typing).</summary>
         private Stepper EditableNumber(int labelKey, int value)
         {
@@ -425,6 +472,7 @@ namespace A2G.SavConverter
         /// <summary>Stores the texts that differ from the generated defaults for this club (the project settings file).</summary>
         private void Save_Click(object sender, RoutedEventArgs e)
         {
+            ClubTexts.SetNameOverride(_state.Settings, _club, ChosenNameMode, _nameBox.Text);
             ClubTexts.SetOverride(_state.Settings, _club, _cityBox.Text, _nickBox.Text, _stadiumBox.Text, _capacity.IntValue);
             Kits.SetOverride(_state.Settings, _club, _kit);
             _state.SaveSettings();
@@ -434,6 +482,7 @@ namespace A2G.SavConverter
         {
             var o = _state.Settings.FindClubInfo(_club.Uid);
             if (o != null) _state.Settings.ClubInfo.Remove(o);
+            ShowName();
             _cityBox.Text = ClubTexts.City(_club, _state.Settings, ClubNamer.MaxCity);
             _nickBox.Text = ClubTexts.Nickname(_club, _state.Settings);
             _stadiumBox.Text = ClubTexts.Stadium(_club, _state.Settings, ClubNamer.MaxStadium);

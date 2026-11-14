@@ -126,7 +126,7 @@ namespace A2G.SavConverter
         private byte[] CurrentBmp(FmClub club, out string sourceFile)
         {
             var bmp = new CrestLibrary(_state.Project.Crests).TryGet(club, out sourceFile);
-            return bmp ?? CrestWriter.Render(club.Uid, ClubNamer.ClubName(club));
+            return bmp ?? CrestWriter.Render(club.Uid, A2G.Convert.Writing.ClubTexts.Name(club, _state.Settings));
         }
 
         private void ShowCrest()

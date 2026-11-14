@@ -553,3 +553,6 @@
 28103	Die heruntergeladene Datei ist beschädigt (die Prüfsumme weicht ab). Bitte versuche es erneut.
 28104	Neu laden
 28105	Community-Spielstand wird heruntergeladen: {0} %
+28110	Voller Name
+28111	Kurzname
+28112	Eigener Name

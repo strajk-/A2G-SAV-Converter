@@ -64,14 +64,16 @@ namespace A2G.Convert.Engine
         public const int MaxStadium = 26;
         public const int MaxAvereineShortName = 12;
 
-        /// <summary>The full name if it fits, else FM's short name if it fits, else the full name cut with a dot.</summary>
+        /// <summary>The name written for a club by default: FM's short name (the name people use), cut with a dot if it is too long.</summary>
         public static string ClubName(Fm.FmClub club)
         {
-            var name = NameShortener.Fit(club.Name, int.MaxValue);
-            if (name.Length <= MaxName) return name;
-            var shortName = NameShortener.Fit(club.ShortName ?? string.Empty, int.MaxValue);
-            if (shortName.Length > 0 && shortName.Length <= MaxName) return shortName;
-            return NameShortener.Fit(name, MaxName);
+            return NameShortener.Fit(string.IsNullOrWhiteSpace(club.ShortName) ? club.Name : club.ShortName, MaxName);
+        }
+
+        /// <summary>FM's full club name, cut with a dot if it is too long.</summary>
+        public static string FullClubName(Fm.FmClub club)
+        {
+            return NameShortener.Fit(club.Name, MaxName);
         }
     }
 

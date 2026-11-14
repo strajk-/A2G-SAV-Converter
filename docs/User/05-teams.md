@@ -74,11 +74,12 @@ average age. A team that is not in the plan (a pool club) shows the squad the co
 
 ### Club information
 
-An FM save does not contain city, nickname, stadium name or stadium size, so the program generates them from the club name. Change
-them here:
+The club name comes from the FM save (it has a full and a short name); an FM save does not contain city, nickname, stadium name or
+stadium size, so the program generates those from the club name. Change them here:
 
 | Field | Limit | Default |
 |-------|-------|---------|
+| **Written as** (club name) | 19 characters | the club's short name from the FM save (for example "FC Bayern"). Choose **Full name** for the long official name, or **Custom** to type your own. |
 | **City** | 16 characters | the place word of the club name |
 | **Nickname** | 18 characters | the city |
 | **Stadium name** | 26 characters | "<city> Stadion" |

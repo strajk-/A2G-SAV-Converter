@@ -171,7 +171,7 @@ namespace A2G.Convert.Writing
             stad.Records.Clear();
             foreach (var s in newOrder) stad.Records.Add(s.Stadium);
 
-            var tail = country.TailClubs.Select(ClubNamer.ClubName).ToList();
+            var tail = country.TailClubs.Select(c => ClubTexts.Name(c, mapper.Settings)).ToList();
             for (var i = 0; i < land.TailClubNames.Count; i++)
             {
                 if (i < tail.Count) land.TailClubNames[i] = tail[i];
@@ -231,7 +231,7 @@ namespace A2G.Convert.Writing
                     else
                     {
                         var kit = Kits.For(settings, slot.Club);   // the crest wears the colours of the home kit
-                        bytes = CrestWriter.Render(slot.Club.Uid, ClubNamer.ClubName(slot.Club), Kits.Rgb[kit.Home.Shirt], Kits.Rgb[kit.Home.Shorts]);
+                        bytes = CrestWriter.Render(slot.Club.Uid, ClubTexts.Name(slot.Club, settings), Kits.Rgb[kit.Home.Shirt], Kits.Rgb[kit.Home.Shorts]);
                         source = "generated";
                     }
                 }
@@ -285,7 +285,7 @@ namespace A2G.Convert.Writing
             var city = ClubTexts.City(club, settings, ClubNamer.MaxCity);
             var team = new LandTeam
             {
-                Name = ClubNamer.ClubName(club),
+                Name = ClubTexts.Name(club, settings),
                 ShortName = "---",
                 City = city,
                 Nickname = ClubTexts.Nickname(club, settings),
@@ -370,7 +370,7 @@ namespace A2G.Convert.Writing
                 var kit = Kits.For(mapper.Settings, club);
                 var t = new AvereineTeam
                 {
-                    Name = ClubNamer.ClubName(club),
+                    Name = ClubTexts.Name(club, mapper.Settings),
                     ShortName = NameShortener.Fit(string.IsNullOrEmpty(club.ShortName) ? city : club.ShortName, ClubNamer.MaxAvereineShortName),
                     Stadium = ClubTexts.Stadium(club, mapper.Settings, 25),
                     City = NameShortener.Fit(city, 14)
@@ -394,7 +394,7 @@ namespace A2G.Convert.Writing
                 if (i >= sortedExtras.Count || sortedExtras[i] == null) continue;   // keeps the shipped spare club of that nation
                 var club = sortedExtras[i];
                 var nation = fm.NationBySaveId(club.NationId);
-                file.ExtraClubs[i].Name = ClubNamer.ClubName(club);
+                file.ExtraClubs[i].Name = ClubTexts.Name(club, mapper.Settings);
                 file.ExtraClubs[i].Country = nations.Resolve(nation != null ? nation.Name : null);
             }
             return file;

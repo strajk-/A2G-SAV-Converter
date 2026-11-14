@@ -49,10 +49,20 @@ namespace A2G.Convert.Engine
         [DataMember] public string City { get; set; }
         [DataMember] public string Nickname { get; set; }
         [DataMember] public string Stadium { get; set; }
+        /// <summary>Which FM name is written as the club name: 0 = the short name (default), 1 = the full name, 2 = the text in <see cref="Name"/>.</summary>
+        [DataMember] public int NameMode { get; set; }
+        /// <summary>The club name the user typed (used when <see cref="NameMode"/> is 2).</summary>
+        [DataMember] public string Name { get; set; }
         /// <summary>Stadium capacity (spectators); 0 = the default derived from the club's reputation.</summary>
         [DataMember] public int Capacity { get; set; }
         /// <summary>The kit the user chose: home pattern, shirt, shorts, socks, then the same for away (null = the default kit).</summary>
         [DataMember] public int[] Kit { get; set; }
+
+        /// <summary>True when nothing differs from the generated defaults (the entry can be dropped).</summary>
+        public bool IsEmpty
+        {
+            get { return City == null && Nickname == null && Stadium == null && Capacity == 0 && Kit == null && NameMode == 0 && Name == null; }
+        }
     }
 
     /// <summary>A club the user put into a slot of the last season's results (champion, UEFA place 2, promoted 1, ...) of a league.</summary>

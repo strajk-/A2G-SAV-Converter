@@ -18,7 +18,7 @@ European nations. Clubs of other nations can only appear as non-league clubs or 
 works](11-how-conversion-works.md).
 
 **Why are some club names shorter or different?**
-The game limits club names to 19 characters (city 16, nickname 18, stadium 26); names are shortened to fit.
+The game limits club names to 19 characters (city 16, nickname 18, stadium 26); names are shortened to fit (cut with a dot).
 
 **Why do players have strength 1 to 7 only?**
 That is the game's range. Strength 8 is a random event inside the game and is never written. The limits that turn FM's current ability

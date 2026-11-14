@@ -463,7 +463,7 @@ namespace A2G.SavConverter
 
             _last.Text = a.LastName;
             _first.Text = a.FirstName;
-            _club.Text = club != null ? ClubNamer.ClubName(club) : "vereinslos";
+            _club.Text = club != null ? (_state != null ? A2G.Convert.Writing.ClubTexts.Name(club, _state.Settings) : ClubNamer.ClubName(club)) : "vereinslos";
             _alter.Text = a.Age.ToString();
             _staerke.Text = a.Strength.ToString();
             _hp.Text = PositionNames[Math.Max(1, Math.Min(10, a.Position1))];

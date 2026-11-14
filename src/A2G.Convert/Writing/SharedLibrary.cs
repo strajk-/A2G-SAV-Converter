@@ -46,7 +46,7 @@ namespace A2G.Convert.Writing
 
         private static ClubInfoOverride Copy(ClubInfoOverride o)
         {
-            return new ClubInfoOverride { Uid = o.Uid, City = o.City, Nickname = o.Nickname, Stadium = o.Stadium, Capacity = o.Capacity, Kit = o.Kit == null ? null : (int[])o.Kit.Clone() };
+            return new ClubInfoOverride { Uid = o.Uid, City = o.City, Nickname = o.Nickname, Stadium = o.Stadium, NameMode = o.NameMode, Name = o.Name, Capacity = o.Capacity, Kit = o.Kit == null ? null : (int[])o.Kit.Clone() };
         }
 
         /// <summary>

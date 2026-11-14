@@ -361,6 +361,18 @@ namespace A2G.Convert.Cli
                 ClubTexts.SetOverride(cs, c0, null, null, null, 51500);
                 Check("capacity: override is used and the default is not stored", ClubTexts.Capacity(c0, cs) == 51500
                     && ClubTexts.SetOverride(cs, c0, null, null, null, ClubTexts.DefaultCapacity(c0, cs)) && cs.FindClubInfo(c0.Uid) == null);
+                {
+                    var ns = new ConversionSettings();
+                    var shortName = ClubNamer.ClubName(c0);
+                    var full = ClubNamer.FullClubName(c0);
+                    var okDefault = ClubTexts.Name(c0, ns) == shortName && shortName.Length <= ClubNamer.MaxName;
+                    var okFull = ClubTexts.SetNameOverride(ns, c0, ClubTexts.NameFull, null) == (full != shortName) && ClubTexts.Name(c0, ns) == full;
+                    ClubTexts.SetNameOverride(ns, c0, ClubTexts.NameCustom, "  Mein Verein  ");
+                    var okCustom = ClubTexts.Name(c0, ns) == "Mein Verein" && ns.FindClubInfo(c0.Uid).NameMode == ClubTexts.NameCustom;
+                    ClubTexts.SetNameOverride(ns, c0, ClubTexts.NameShort, "ignored");
+                    Check("club name: short by default, full or custom on request, back to short stores nothing",
+                        okDefault && okFull && okCustom && ClubTexts.Name(c0, ns) == shortName && ns.FindClubInfo(c0.Uid) == null);
+                }
                 var savedGround = c0.StadiumCapacity;
                 c0.StadiumCapacity = 48123;
                 var estimateOnly = new ConversionSettings { StadiumFromReputation = true };

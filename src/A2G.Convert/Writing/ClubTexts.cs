@@ -10,6 +10,39 @@ namespace A2G.Convert.Writing
     /// </summary>
     public static class ClubTexts
     {
+        public const int NameShort = 0, NameFull = 1, NameCustom = 2;
+
+        /// <summary>The club name written to the game: the user's choice (short name, full name or his own text); the short name by default.</summary>
+        public static string Name(FmClub club, ConversionSettings s)
+        {
+            var o = s == null ? null : s.FindClubInfo(club.Uid);
+            if (o != null)
+            {
+                if (o.NameMode == NameFull) return ClubNamer.FullClubName(club);
+                if (o.NameMode == NameCustom && !string.IsNullOrWhiteSpace(o.Name)) return NameShortener.Fit(o.Name.Trim(), ClubNamer.MaxName);
+            }
+            return ClubNamer.ClubName(club);
+        }
+
+        /// <summary>Stores the name choice for a club (mode: <see cref="NameShort"/>, <see cref="NameFull"/>, <see cref="NameCustom"/> with the text). Returns true when the written name changed.</summary>
+        public static bool SetNameOverride(ConversionSettings s, FmClub club, int mode, string custom)
+        {
+            var before = Name(club, s);
+            custom = (custom ?? string.Empty).Trim();
+            if (mode == NameCustom && (custom.Length == 0 || custom == ClubNamer.ClubName(club))) mode = NameShort;
+            var o = s.FindClubInfo(club.Uid);
+            if (o == null)
+            {
+                if (mode == NameShort) return false;
+                o = new ClubInfoOverride { Uid = club.Uid };
+                s.ClubInfo.Add(o);
+            }
+            o.NameMode = mode;
+            o.Name = mode == NameCustom ? custom : null;
+            if (o.IsEmpty) s.ClubInfo.Remove(o);
+            return before != Name(club, s);
+        }
+
         public static string DefaultCity(FmClub club) { return SavWriter.CityFor(club); }
         public static string DefaultNickname(FmClub club) { return NameShortener.Fit(SavWriter.CityFor(club), ClubNamer.MaxNickname); }
         public static string DefaultStadium(FmClub club, int max) { return NameShortener.Fit(SavWriter.CityFor(club) + " Stadion", max); }
@@ -57,7 +90,7 @@ namespace A2G.Convert.Writing
 
         public static bool SetOverride(ConversionSettings s, FmClub club, string city, string nickname, string stadium, int capacity)
         {
-            var before = City(club, s, ClubNamer.MaxCity) + "|" + Nickname(club, s) + "|" + Stadium(club, s, ClubNamer.MaxStadium) + "|" + Capacity(club, s);
+            var before = Name(club, s) + "|" + City(club, s, ClubNamer.MaxCity) + "|" + Nickname(club, s) + "|" + Stadium(club, s, ClubNamer.MaxStadium) + "|" + Capacity(club, s);
             city = (city ?? string.Empty).Trim();
             nickname = (nickname ?? string.Empty).Trim();
             stadium = (stadium ?? string.Empty).Trim();
@@ -70,8 +103,8 @@ namespace A2G.Convert.Writing
             o.Stadium = stadium.Length == 0 || stadium == NameShortener.Fit(cityNow + " Stadion", ClubNamer.MaxStadium) ? null : stadium;
             capacity = Math.Max(MinCapacity, Math.Min(MaxCapacity, capacity));
             o.Capacity = capacity == DefaultCapacity(club, s) ? 0 : capacity;
-            if (o.City == null && o.Nickname == null && o.Stadium == null && o.Capacity == 0 && o.Kit == null) s.ClubInfo.Remove(o);
-            var after = City(club, s, ClubNamer.MaxCity) + "|" + Nickname(club, s) + "|" + Stadium(club, s, ClubNamer.MaxStadium) + "|" + Capacity(club, s);
+            if (o.IsEmpty) s.ClubInfo.Remove(o);
+            var after = Name(club, s) + "|" + City(club, s, ClubNamer.MaxCity) + "|" + Nickname(club, s) + "|" + Stadium(club, s, ClubNamer.MaxStadium) + "|" + Capacity(club, s);
             return before != after;
         }
         private static string Pick(string custom, string fallback, int max)
