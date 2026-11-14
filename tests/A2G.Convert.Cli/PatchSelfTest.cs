@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using A2G.Convert.Patching;
 using A2G.Convert.Profiles;
+using A2G.Convert.Projects;
 
 namespace A2G.Convert.Cli
 {
@@ -43,6 +44,47 @@ namespace A2G.Convert.Cli
             patch.Extract(extracted);
             Check("the files unpack exactly", Hash(Path.Combine(extracted, "DATA.DEF", "LandDeut.sav")) == changed
                 && Directory.GetFiles(extracted, "*", SearchOption.AllDirectories).Length == expectedFiles);
+
+            // a patch with the project inside: somebody else can unpack it and continue the work
+            {
+                Check("a patch made without a project has none", !patch.Info.HasProject);
+                var proj = Path.Combine(scratch, "sender-project");
+                Directory.CreateDirectory(Path.Combine(proj, "fm_export"));
+                Directory.CreateDirectory(Path.Combine(proj, "mapping"));
+                Directory.CreateDirectory(Path.Combine(proj, "Crests"));
+                Directory.CreateDirectory(Path.Combine(proj, "Anstoss2"));
+                File.WriteAllText(Path.Combine(proj, "fm_export", "clubs.csv"), "uid,name\r\n1,Test FC\r\n");
+                File.WriteAllText(Path.Combine(proj, "mapping", "settings.json"), "{\"StartYear\":2026}");
+                File.WriteAllBytes(Path.Combine(proj, "Crests", "1.bmp"), new byte[] { 1, 2, 3, 4 });
+                File.WriteAllText(Path.Combine(proj, "Anstoss2", "ignored.txt"), "not part of the project");
+                File.WriteAllText(Path.Combine(proj, "project.json"),
+                    "{\"Anstoss2Path\":\"E:\\\\Games\\\\ASCARON\\\\ANSTOSS 2\",\"FmInstallPath\":null,\"FmSavePath\":\"https:\\/\\/example.org\\/x.fm\",\"FmVersion\":26,\"FmYear\":2025,\"LibraryApplied\":false}");
+                var withProject = Path.Combine(scratch, "With Project.exe");
+                PatchPackage.Build(program, newData, withProject, "Shared Set", "has a project", null, proj);
+                var pp = PatchPackage.TryOpen(withProject);
+                Check("a patch built with a project lists its files", pp != null && pp.Info.HasProject && pp.Info.ProjectFiles.Count == 4 && pp.Info.Files.Count == expectedFiles);
+
+                var catalog = Path.Combine(scratch, "receiver-data");
+                ProjectCatalog.BaseFolder = catalog;
+                Directory.CreateDirectory(ProjectCatalog.PathOf("Shared Set"));   // the name is taken: the project gets another one
+                bool created;
+                var opened = PatchProject.Import(pp, out created);
+                var config = File.ReadAllText(Path.Combine(opened, "project.json"));
+                Check("the project is unpacked into a new project folder, paths of the sender removed",
+                    created && Path.GetFileName(opened) == "Shared Set-2"
+                    && File.ReadAllText(Path.Combine(opened, "fm_export", "clubs.csv")).Contains("Test FC")
+                    && File.ReadAllText(Path.Combine(opened, "mapping", "settings.json")).Contains("2026")
+                    && File.ReadAllBytes(Path.Combine(opened, "Crests", "1.bmp")).SequenceEqual(new byte[] { 1, 2, 3, 4 })
+                    && !Directory.Exists(Path.Combine(opened, "Anstoss2"))
+                    && !config.Contains("ASCARON") && !config.Contains("example.org") && config.Contains("\"FmYear\":2025") && config.Contains("\"LibraryApplied\":true"));
+                bool again;
+                var second2 = PatchProject.Import(PatchPackage.TryOpen(withProject), out again);
+                Check("opening the same patch again gives the same project, not a copy", !again && second2 == opened && ProjectCatalog.List().Count == 2);
+                bool refused2 = false;
+                try { PatchProject.Import(patch, out created); } catch (InvalidOperationException) { refused2 = true; }
+                Check("a patch without a project cannot be opened for editing", refused2);
+                ProjectCatalog.BaseFolder = null;
+            }
 
             // a patch made from a patch carries only the new data
             var second = Path.Combine(scratch, "Second.exe");

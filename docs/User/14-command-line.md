@@ -1,4 +1,4 @@
-# 14. Command line
+﻿# 14. Command line
 
 ## The converter
 
@@ -14,10 +14,11 @@ A2G-SAV-Converter.exe [project folder] [--autoplan]
 
 ## A patch file
 
-A patch file (see [Patch files and the patcher](10-patches.md)) understands two options. All other arguments are ignored.
+A patch file (see [Patch files and the patcher](10-patches.md)) understands these options. All other arguments are ignored.
 
 | Option | Meaning |
 |--------|---------|
+| `--edit` | Does not open the patcher: unpacks the project that is inside the patch into your projects folder and opens it in the converter, to continue the work ([Patch files](10-patches.md#continue-a-patch-as-a-project)). |
 | `-q` | **Quiet mode.** Installs the patch and makes it live **without any window, popup or question**. Also accepted: `/q`, `--quiet` (upper or lower case). |
 | `-F <folder>` | The Anstoss 2 folder: the folder where `anstoss2.exe` is located and which contains `DATA.DEF` and `DATA.VER`. Also accepted: `-F:folder`, `-F=folder`, `/F folder`, `--folder`. Without `-q` the folder is only filled into the window. |
 

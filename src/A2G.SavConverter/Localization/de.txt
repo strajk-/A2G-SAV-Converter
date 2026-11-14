@@ -556,3 +556,14 @@
 28110	Voller Name
 28111	Kurzname
 28112	Eigener Name
+28120	Aus Patch ...
+28121	Eine Patch-Datei (.exe) als neues Projekt öffnen und weiterbearbeiten, ohne den FM-Spielstand
+28122	Patch-Datei als Projekt öffnen
+28123	Patch-Dateien (*.exe)|*.exe
+28124	Diese Datei ist kein Patch.
+28125	Dieser Patch enthält keine Projektdaten (er wurde mit einer älteren Version erstellt) und kann daher nicht zum Bearbeiten geöffnet werden. Frage den Autor nach einer neuen Version des Patches.
+28126	Das Projekt '{0}' wurde aus dem Patch erstellt und geöffnet. Du kannst es weiterbearbeiten; ein FM-Spielstand wird nicht gebraucht.
+28127	Dieser Patch wurde schon einmal geöffnet: Das Projekt '{0}' (mit deinen Änderungen) ist geöffnet.
+28128	Als Projekt bearbeiten
+28129	Öffnet den Konverter mit dem Projekt, aus dem dieser Patch erstellt wurde, um die Arbeit fortzusetzen (kein FM-Spielstand nötig)
+28130	Das Projekt des Patches konnte nicht geöffnet werden: {0}

@@ -29,8 +29,12 @@ namespace A2G.Convert.Patching
         /// <summary>True when only some files of DATA.DEF / DATA.VER are in the patch: the others stay as they are in the install.</summary>
         [DataMember] public bool Partial { get; set; }
         [DataMember] public List<PatchFileInfo> Files { get; set; }
+        /// <summary>The files of the project the patch was made from (FM export, settings, crests): lets somebody else continue the work. Empty in older patches.</summary>
+        [DataMember] public List<PatchFileInfo> ProjectFiles { get; set; }
 
-        public PatchInfo() { Files = new List<PatchFileInfo>(); }
+        public bool HasProject { get { return ProjectFiles != null && ProjectFiles.Count > 0; } }
+
+        public PatchInfo() { Files = new List<PatchFileInfo>(); ProjectFiles = new List<PatchFileInfo>(); }
     }
 
     /// <summary>
@@ -43,6 +47,10 @@ namespace A2G.Convert.Patching
         private const string Magic = "A2GPATCH";   // the last 8 bytes of a patch
         private const string InfoEntry = "patch.json";
         private const string DataPrefix = "data/";
+        private const string ProjectPrefix = "project/";
+
+        /// <summary>Tells one patch from another (the same patch opened twice is the same project).</summary>
+        public string Id { get { return Info.Name + "|" + Info.CreatedUtc; } }
 
         public PatchInfo Info { get; private set; }
         public string ExePath { get; private set; }
@@ -120,7 +128,7 @@ namespace A2G.Convert.Patching
         /// (DATA.DEF and DATA.VER below <paramref name="sourceDir"/>). With a <paramref name="filter"/> only the files for which it
         /// returns true (relative paths such as "DATA.DEF\LandDeut.sav") are taken and the patch is marked partial.
         /// </summary>
-        public static PatchInfo Build(string programExe, string sourceDir, string outputExe, string name, string description, Func<string, bool> filter)
+        public static PatchInfo Build(string programExe, string sourceDir, string outputExe, string name, string description, Func<string, bool> filter, string projectDir = null)
         {
             var info = new PatchInfo { Name = name, Description = description ?? string.Empty, CreatedUtc = DateTime.UtcNow.ToString("o"), Partial = filter != null };
             var files = new List<KeyValuePair<string, string>>();   // relative path -> full path
@@ -148,6 +156,7 @@ namespace A2G.Convert.Patching
                         info.Files.Add(new PatchFileInfo { Path = f.Key, Size = new FileInfo(f.Value).Length, Sha256 = HashFile(f.Value) });
                         zip.CreateEntryFromFile(f.Value, DataPrefix + f.Key.Replace('\\', '/'), CompressionLevel.Optimal);
                     }
+                    if (projectDir != null) AddProject(zip, info, projectDir);
                     var entry = zip.CreateEntry(InfoEntry);
                     using (var s = entry.Open()) new DataContractJsonSerializer(typeof(PatchInfo)).WriteObject(s, info);
                 }
@@ -170,6 +179,67 @@ namespace A2G.Convert.Patching
                 if (File.Exists(outputExe + ".tmp")) File.Delete(outputExe + ".tmp");
             }
             return info;
+        }
+
+        /// <summary>
+        /// Puts what is needed to continue the work into the patch: the FM export, the project settings and edits, the custom crests and the project file
+        /// (without the paths of this PC). The written Anstoss 2 files are already the patch's data.
+        /// </summary>
+        private static void AddProject(ZipArchive zip, PatchInfo info, string projectDir)
+        {
+            foreach (var folder in new[] { "fm_export", "mapping", "Crests" })
+            {
+                var dir = System.IO.Path.Combine(projectDir, folder);
+                if (!Directory.Exists(dir)) continue;
+                foreach (var file in Directory.GetFiles(dir, "*", SearchOption.AllDirectories).OrderBy(f => f, StringComparer.OrdinalIgnoreCase))
+                {
+                    var rel = folder + "\\" + file.Substring(dir.Length).TrimStart('\\', '/').Replace('/', '\\');
+                    info.ProjectFiles.Add(new PatchFileInfo { Path = rel, Size = new FileInfo(file).Length, Sha256 = HashFile(file) });
+                    zip.CreateEntryFromFile(file, ProjectPrefix + rel.Replace('\\', '/'), CompressionLevel.Optimal);
+                }
+            }
+            var config = System.IO.Path.Combine(projectDir, "project.json");
+            if (File.Exists(config))
+            {
+                var bytes = Encoding.UTF8.GetBytes(StripPaths(File.ReadAllText(config, Encoding.UTF8)));
+                info.ProjectFiles.Add(new PatchFileInfo { Path = "project.json", Size = bytes.Length, Sha256 = HashBytes(bytes) });
+                var entry = zip.CreateEntry(ProjectPrefix + "project.json", CompressionLevel.Optimal);
+                using (var s = entry.Open()) s.Write(bytes, 0, bytes.Length);
+            }
+        }
+
+        /// <summary>The project file for somebody else: no folders of this PC, and the shared library of the new user is not merged into the project.</summary>
+        public static string StripPaths(string json)
+        {
+            json = System.Text.RegularExpressions.Regex.Replace(json, @"(""(?:FmSavePath|FmInstallPath|Anstoss2Path)""\s*:\s*)(null|""(?:[^""\\]|\\.)*"")", "$1null");
+            return System.Text.RegularExpressions.Regex.Replace(json, @"(""LibraryApplied""\s*:\s*)false", "$1true");
+        }
+
+        /// <summary>Unpacks the project of the patch into <paramref name="targetDir"/> (an empty project folder) and checks every file against its hash.</summary>
+        public void ExtractProject(string targetDir)
+        {
+            using (var file = File.OpenRead(ExePath))
+            using (var zip = new ZipArchive(new SubStream(file, _payloadStart, _payloadLength), ZipArchiveMode.Read))
+            {
+                var root = System.IO.Path.GetFullPath(targetDir).TrimEnd('\\') + "\\";
+                foreach (var f in Info.ProjectFiles)
+                {
+                    var entry = zip.GetEntry(ProjectPrefix + f.Path.Replace('\\', '/'));
+                    if (entry == null) throw new InvalidDataException("The patch is damaged: " + f.Path + " is missing.");
+                    var dest = System.IO.Path.GetFullPath(System.IO.Path.Combine(targetDir, f.Path));
+                    if (!dest.StartsWith(root, StringComparison.OrdinalIgnoreCase)) throw new InvalidDataException("Invalid path in the patch: " + f.Path);
+                    Directory.CreateDirectory(System.IO.Path.GetDirectoryName(dest));
+                    using (var s = entry.Open())
+                    using (var o = File.Create(dest)) s.CopyTo(o);
+                    if (new FileInfo(dest).Length != f.Size || HashFile(dest) != f.Sha256)
+                        throw new InvalidDataException("The patch is damaged: " + f.Path + " does not match its checksum.");
+                }
+            }
+        }
+
+        private static string HashBytes(byte[] bytes)
+        {
+            using (var sha = SHA256.Create()) return BitConverter.ToString(sha.ComputeHash(bytes)).Replace("-", string.Empty);
         }
 
         /// <summary>Unpacks the data files into <paramref name="targetDir"/> (DATA.DEF and DATA.VER below it) and checks every file against its hash.</summary>

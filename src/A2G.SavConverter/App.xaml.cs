@@ -43,6 +43,29 @@ namespace A2G.SavConverter
                 new MainWindow().Show();
                 return;
             }
+            if (arguments.Edit && !arguments.Quiet)
+            {
+                // --edit: the project inside the patch becomes a project of this PC and the converter opens it
+                try
+                {
+                    if (!patch.Info.HasProject)
+                    {
+                        ThemedMessageBox.Show(null, Loc.T(28125), "Anstoss 2", MessageBoxButton.OK, MessageBoxImage.Information);
+                        Shutdown(1);
+                        return;
+                    }
+                    bool created;
+                    var project = A2G.Convert.Patching.PatchProject.Import(patch, out created);
+                    A2G.Convert.Projects.ProjectCatalog.RememberLast(project);   // the converter opens the last project
+                    new MainWindow().Show();
+                }
+                catch (System.Exception ex)
+                {
+                    ThemedMessageBox.Show(null, Loc.T(28130, ex.Message), "Anstoss 2", MessageBoxButton.OK, MessageBoxImage.Error);
+                    Shutdown(1);
+                }
+                return;
+            }
             if (arguments.Quiet)
             {
                 // quiet mode (installers): no window and no message box at all; problems end the program with an exit code and a console message

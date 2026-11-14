@@ -53,7 +53,8 @@
                             <Button Content="{loc:LocalizedText 28040}" Style="{StaticResource PrimaryButton}" Margin="0,0,8,0" Click="NewProject_Click" />
                             <Button Content="{loc:LocalizedText 28041}" Margin="0,0,8,0" Click="RenameProject_Click" />
                             <Button Content="{loc:LocalizedText 28042}" Margin="0,0,8,0" Click="DeleteProject_Click" />
-                            <Button Content="{loc:LocalizedText 28043}" ToolTip="{loc:LocalizedText 20003}" Click="BrowseProject_Click" />
+                            <Button Content="{loc:LocalizedText 28043}" ToolTip="{loc:LocalizedText 20003}" Margin="0,0,8,0" Click="BrowseProject_Click" />
+                            <Button Content="{loc:LocalizedText 28120}" ToolTip="{loc:LocalizedText 28121}" Click="OpenPatch_Click" />
                         </StackPanel>
 
                         <TextBlock Grid.Row="1" Text="{loc:LocalizedText 10007}" VerticalAlignment="Center" Margin="0,0,8,6" />

@@ -22,6 +22,8 @@ On tab **7 Write & Install**, after you have written the files ([Write and insta
 
 Notes:
 
+- The patch also contains **the project** it was made from (the FM export, your settings and edits, your crests), so that others can
+  continue your work, see [Continue a patch as a project](#continue-a-patch-as-a-project). This makes a patch about 15 MB larger.
 - The patch contains **the generated files of the open project** (what **Install** would install), not the live data of your game.
   Your game is not touched.
 - If the project has no written files yet, the program asks you to write them first.
@@ -56,6 +58,21 @@ Give the `.exe` to the player. They only need Anstoss 2; Football Manager and th
 The lower half lists all **data sets in this installation**: the **Original** data, data sets from the converter and from other patches.
 To go back, select the data set (for example **Original**) and press **Switch to the selected data set**. Installing a patch always
 keeps what was there before as its own data set, so nothing is lost. See [Data sets (profiles) and rollback](09-profiles.md).
+
+## Continue a patch as a project
+
+A patch made with this version of the program carries the project it was made from. Somebody else can use it as a base and continue
+the work - **without the FM save or anything else**:
+
+- Start the patch and press **Edit as project** in the patcher window, or start it from the command line with `--edit`, or
+- in the converter, press **From patch...** next to **Other folder...** on tab **1 Project & Export** and choose the patch file.
+
+The program unpacks the project into the projects folder (a new project with the name of the patch, or `name-2`, `name-3` if that name
+is taken) and opens it. The folders of the sender's PC are not part of it: your own Anstoss 2 folder is found as usual. All tabs work
+as in the sender's project: change the teams, players, options and kits, write the files, install them or make a new patch.
+Opening the same patch again opens the project made from it (with your changes) instead of making a second copy.
+
+Patches made with an earlier version have no project data; the program says so and asks you to get a newer patch.
 
 ## Quiet install for installers
 

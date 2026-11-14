@@ -6,12 +6,14 @@ namespace A2G.SavConverter.Services
 {
     /// <summary>
     /// The command line of a patch: <c>-q</c> installs and activates the patch without any window (for installers),
-    /// <c>-F &lt;folder&gt;</c> names the Anstoss 2 folder (the one with anstoss2.exe, DATA.DEF and DATA.VER). Also accepted: /q, --quiet,
+    /// <c>--edit</c> opens the project inside the patch in the converter (to continue the work), <c>-F &lt;folder&gt;</c> names the Anstoss 2 folder (the one with anstoss2.exe, DATA.DEF and DATA.VER). Also accepted: /q, --quiet,
     /// -F:folder, -F=folder, any case. Without -q the folder is only filled into the window.
     /// </summary>
     internal sealed class PatchArguments
     {
         public bool Quiet;
+        /// <summary>--edit: do not open the patcher but unpack the project inside the patch and open it in the converter.</summary>
+        public bool Edit;
         public string Folder;
 
         public static PatchArguments Parse(IList<string> args)
@@ -30,6 +32,9 @@ namespace A2G.SavConverter.Services
                     case "q":
                     case "quiet":
                         result.Quiet = true;
+                        break;
+                    case "edit":
+                        result.Edit = true;
                         break;
                     case "f":
                     case "folder":

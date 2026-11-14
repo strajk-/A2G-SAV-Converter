@@ -30,7 +30,8 @@
                 <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                     <TextBlock Text="{loc:LocalizedText 28008}" VerticalAlignment="Center" Margin="0,0,10,0" />
                     <TextBox x:Name="ProfileNameBox" Width="240" Margin="0,0,16,0" />
-                    <Button x:Name="InstallButton" Content="{loc:LocalizedText 28004}" Style="{StaticResource PrimaryButton}" Click="Install_Click" />
+                    <Button x:Name="InstallButton" Content="{loc:LocalizedText 28004}" Style="{StaticResource PrimaryButton}" Margin="0,0,8,0" Click="Install_Click" />
+                    <Button x:Name="EditButton" Content="{loc:LocalizedText 28128}" ToolTip="{loc:LocalizedText 28129}" Visibility="Collapsed" Click="Edit_Click" />
                 </StackPanel>
                 <TextBlock x:Name="StatusText" TextWrapping="Wrap" />
             </StackPanel>

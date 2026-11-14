@@ -94,7 +94,7 @@ namespace A2G.SavConverter
             {
                 // usage: A2G-SAV-Converter.exe [project folder] [--autoplan]
                 var args = Environment.GetCommandLineArgs().Skip(1).ToList();
-                var folder = args.FirstOrDefault(a => !a.StartsWith("--", StringComparison.Ordinal)) ?? ProjectCatalog.LastProject() ?? ProjectLayout.DefaultRoot;
+                var folder = args.FirstOrDefault(a => !a.StartsWith("-", StringComparison.Ordinal) && !a.StartsWith("/", StringComparison.Ordinal)) ?? ProjectCatalog.LastProject() ?? ProjectLayout.DefaultRoot;
                 OpenProject(folder);
                 if (!FmSaveExporter.IsAvailable)
                     Log(Loc.T(20000, FmSaveExporter.ExePath));
@@ -289,6 +289,32 @@ namespace A2G.SavConverter
                 Log(Loc.T(28102, dialog.StartYear));
             }
             RefreshSaveStatus();
+        }
+
+        /// <summary>Opens somebody else's patch file as a new project: the project inside it is unpacked into the projects folder and opened.</summary>
+        private async void OpenPatch_Click(object sender, RoutedEventArgs e)
+        {
+            if (!Tabs.IsEnabled) return;
+            var dialog = new OpenFileDialog { Title = Loc.T(28122), Filter = Loc.T(28123) };
+            if (dialog.ShowDialog(this) != true) return;
+            var patch = A2G.Convert.Patching.PatchPackage.TryOpen(dialog.FileName);
+            if (patch == null) { Warn(Loc.T(28124)); return; }
+            if (!patch.Info.HasProject) { Warn(Loc.T(28125)); return; }
+            string project = null;
+            var created = false;
+            await RunBusyAsync(async token =>
+            {
+                try
+                {
+                    bool made = false;
+                    project = await System.Threading.Tasks.Task.Run(() => A2G.Convert.Patching.PatchProject.Import(patch, out made));
+                    created = made;
+                }
+                catch (Exception ex) { Log(Loc.T(28130, ex.Message)); }
+            });
+            if (project == null) return;
+            OpenProject(project);
+            Log(created ? Loc.T(28126, Path.GetFileName(project)) : Loc.T(28127, Path.GetFileName(project)));
         }
 
         private void BrowseA2_Click(object sender, RoutedEventArgs e)
@@ -674,14 +700,17 @@ namespace A2G.SavConverter
             var dialog = new Microsoft.Win32.SaveFileDialog { Title = Loc.T(28025), Filter = Loc.T(28021), FileName = fileName, InitialDirectory = _state.Project.Root, DefaultExt = ".exe" };
             if (dialog.ShowDialog(this) != true) return;
             var filter = BuildFilter();
+            _state.SaveSettings();
+            SyncConfig();
+            var projectDir = _state.Project.Root;   // goes into the patch so somebody else can continue the work
             var source = _state.Project.Anstoss2;
-            var program = System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName;
+            var program =System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName;
             var output = dialog.FileName;
             await RunBusyAsync(async token =>
             {
                 try
                 {
-                    await Task.Run(() => A2G.Convert.Patching.PatchPackage.Build(program, source, output, name.Trim(), description.Trim(), filter));
+                    await Task.Run(() => A2G.Convert.Patching.PatchPackage.Build(program, source, output, name.Trim(), description.Trim(), filter, projectDir));
                     var size = new FileInfo(output).Length / 1048576.0;
                     Log(Loc.T(28022, output, size.ToString("0.0")).Replace("\n\n", " ").Replace("\n", " "));
                     ThemedMessageBox.Show(this, Loc.T(28022, output, size.ToString("0.0")), Title, MessageBoxButton.OK, MessageBoxImage.Information);

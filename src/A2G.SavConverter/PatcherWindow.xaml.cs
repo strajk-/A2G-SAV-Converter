@@ -46,7 +46,19 @@ namespace A2G.SavConverter
             PatchDescription.Visibility = string.IsNullOrWhiteSpace(patch.Info.Description) ? Visibility.Collapsed : Visibility.Visible;
             var made = (patch.Info.CreatedUtc ?? string.Empty).Replace('T', ' ').Split('.')[0];
             PatchDetails.Text = (patch.Info.Partial ? Loc.T(28009, patch.Info.Files.Count) : Loc.T(28010, patch.Info.Files.Count)) + "  " + Loc.T(28011, made);
+            EditButton.Visibility = patch.Info.HasProject ? Visibility.Visible : Visibility.Collapsed;
             Loaded += (s, e) => Start();
+        }
+
+        /// <summary>Continue the work of this patch: starts the same program with --edit (it unpacks the patch's project and opens the converter).</summary>
+        private void Edit_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                System.Diagnostics.Process.Start(_patch.ExePath, "--edit");
+                Close();
+            }
+            catch (Exception ex) { ThemedMessageBox.Show(this, Loc.T(28130, ex.Message), Title, MessageBoxButton.OK, MessageBoxImage.Error); }
         }
 
         /// <summary>The folder used last, else the one the converter's detection finds; empty when there is none.</summary>

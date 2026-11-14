@@ -555,3 +555,14 @@
 28110	Full name
 28111	Short name
 28112	Custom
+28120	From patch...
+28121	Open a patch file (.exe) as a new project and continue editing it, without the FM save
+28122	Open a patch file as a project
+28123	Patch files (*.exe)|*.exe
+28124	This file is not a patch.
+28125	This patch has no project data (it was made with an older version), so it cannot be opened for editing. Ask its author for a new version of the patch.
+28126	Project '{0}' was created from the patch and opened. You can continue editing it; no FM save is needed.
+28127	This patch was opened before: project '{0}' (with your changes) is open.
+28128	Edit as project
+28129	Opens the converter with the project this patch was made from, to continue its work (no FM save needed)
+28130	The project of the patch could not be opened: {0}
