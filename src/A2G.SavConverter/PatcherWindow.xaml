@@ -13,11 +13,20 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0" Margin="0,0,0,16">
-            <TextBlock x:Name="PatchTitle" FontSize="26" FontWeight="SemiBold" TextWrapping="Wrap" />
-            <TextBlock x:Name="PatchDescription" TextWrapping="Wrap" Margin="0,6,0,0" />
-            <TextBlock x:Name="PatchDetails" Style="{StaticResource Muted}" TextWrapping="Wrap" Margin="0,6,0,0" />
-        </StackPanel>
+        <Grid Grid.Row="0" Margin="0,0,0,16">
+            <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
+            <StackPanel>
+                <TextBlock x:Name="PatchTitle" FontSize="26" FontWeight="SemiBold" TextWrapping="Wrap" />
+                <TextBlock x:Name="PatchDescription" TextWrapping="Wrap" Margin="0,6,0,0" />
+                <TextBlock x:Name="PatchDetails" Style="{StaticResource Muted}" TextWrapping="Wrap" Margin="0,6,0,0" />
+            </StackPanel>
+            <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Top" Margin="16,4,0,0">
+                <TextBlock Text="{loc:LocalizedText 20053}" Style="{StaticResource Muted}" VerticalAlignment="Center" Margin="0,0,8,0" />
+                <ComboBox x:Name="LangBox" Width="120" Margin="0,0,18,0" SelectionChanged="LangBox_SelectionChanged" ToolTip="{loc:LocalizedText 20054}" />
+                <TextBlock Text="{loc:LocalizedText 10002}" Style="{StaticResource Muted}" VerticalAlignment="Center" Margin="0,0,8,0" />
+                <ComboBox x:Name="ThemeBox" Width="110" SelectionChanged="ThemeBox_SelectionChanged" ToolTip="{loc:LocalizedText 10003}" />
+            </StackPanel>
+        </Grid>
 
         <Border Grid.Row="1" Style="{StaticResource Card}" Margin="0,0,0,16">
             <StackPanel>

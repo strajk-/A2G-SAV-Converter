@@ -31,12 +31,6 @@ namespace A2G.SavConverter
         private readonly FmSaveExporter _exporter = new FmSaveExporter();
         private CancellationTokenSource _cts;
 
-        private sealed class ThemeChoice
-        {
-            public ThemeMode Mode;
-            public override string ToString() { return Loc.T(Mode == ThemeMode.System ? 20050 : Mode == ThemeMode.Light ? 20051 : 20052); }
-        }
-
         private bool _fillingHeader;
 
         /// <summary>Fills the theme and language drop-downs (the languages are those found in the application).</summary>

@@ -39,15 +39,58 @@ namespace A2G.SavConverter
             _patch = patch;
             _folderFromCommandLine = folder;
             InitializeComponent();
-            Title = Loc.T(28000, patch.Info.Name);
             SourceInitialized += (s, e) => ThemeManager.ApplyTitleBar(this);
             PatchTitle.Text = patch.Info.Name;
             PatchDescription.Text = patch.Info.Description ?? string.Empty;
             PatchDescription.Visibility = string.IsNullOrWhiteSpace(patch.Info.Description) ? Visibility.Collapsed : Visibility.Visible;
-            var made = (patch.Info.CreatedUtc ?? string.Empty).Replace('T', ' ').Split('.')[0];
-            PatchDetails.Text = (patch.Info.Partial ? Loc.T(28009, patch.Info.Files.Count) : Loc.T(28010, patch.Info.Files.Count)) + "  " + Loc.T(28011, made);
+            ShowTexts();
+            FillHeaderCombos();
+            Loc.LanguageChanged += OnLanguageChanged;
+            Closed += (s, e) => Loc.LanguageChanged -= OnLanguageChanged;
             EditButton.Visibility = patch.Info.HasProject ? Visibility.Visible : Visibility.Collapsed;
             Loaded += (s, e) => Start();
+        }
+
+        // ---- language and theme (the same two drop-downs as in the converter) ----------------------
+
+        private bool _fillingHeader;
+
+        private void FillHeaderCombos()
+        {
+            _fillingHeader = true;
+            ThemeBox.ItemsSource = new[] { ThemeMode.System, ThemeMode.Light, ThemeMode.Dark }.Select(m => new ThemeChoice { Mode = m }).ToList();
+            ThemeBox.SelectedIndex = (int)ThemeManager.Mode;
+            LangBox.ItemsSource = Loc.Available.Select(l => l.Name).ToList();
+            LangBox.SelectedItem = Loc.Available.Where(l => l.Code == Loc.CurrentCode).Select(l => l.Name).FirstOrDefault();
+            _fillingHeader = false;
+        }
+
+        private void ThemeBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var choice = ThemeBox.SelectedItem as ThemeChoice;
+            if (!_fillingHeader && choice != null && choice.Mode != ThemeManager.Mode) ThemeManager.SetMode(choice.Mode);
+        }
+
+        private void LangBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var name = LangBox.SelectedItem as string;
+            var code = Loc.Available.Where(l => l.Name == name).Select(l => l.Code).FirstOrDefault();
+            if (!_fillingHeader && code != null) Loc.SetLanguage(code);
+        }
+
+        /// <summary>The texts the window sets from code (the others follow the language by themselves).</summary>
+        private void ShowTexts()
+        {
+            Title = Loc.T(28000, _patch.Info.Name);
+            var made = (_patch.Info.CreatedUtc ?? string.Empty).Replace('T', ' ').Split('.')[0];
+            PatchDetails.Text = (_patch.Info.Partial ? Loc.T(28009, _patch.Info.Files.Count) : Loc.T(28010, _patch.Info.Files.Count)) + "  " + Loc.T(28011, made);
+        }
+
+        private void OnLanguageChanged()
+        {
+            ShowTexts();
+            FillHeaderCombos();
+            if (IsLoaded) RefreshProfiles();
         }
 
         /// <summary>Continue the work of this patch: starts the same program with --edit (it unpacks the patch's project and opens the converter).</summary>
