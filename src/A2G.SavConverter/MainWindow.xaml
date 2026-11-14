@@ -58,7 +58,10 @@
 
                         <TextBlock Grid.Row="1" Text="{loc:LocalizedText 10007}" VerticalAlignment="Center" Margin="0,0,8,6" />
                         <TextBox x:Name="SaveBox" Grid.Row="1" Grid.Column="1" Margin="0,0,8,6" LostFocus="SaveBox_LostFocus" />
-                        <Button Grid.Row="1" Grid.Column="2" Content="{loc:LocalizedText 10008}" Margin="0,0,0,6" Click="BrowseSave_Click" />
+                        <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Horizontal" Margin="0,0,0,6">
+                            <Button Content="{loc:LocalizedText 10008}" Margin="0,0,8,0" Click="BrowseSave_Click" />
+                            <Button Content="{loc:LocalizedText 28090}" Click="CommunitySave_Click" />
+                        </StackPanel>
                         <TextBlock x:Name="SaveStatusText" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" TextWrapping="Wrap" Margin="2,0,0,12" Style="{StaticResource Muted}" />
 
                         <TextBlock Grid.Row="3" Text="{loc:LocalizedText 10010}" VerticalAlignment="Center" Margin="0,0,8,10" />

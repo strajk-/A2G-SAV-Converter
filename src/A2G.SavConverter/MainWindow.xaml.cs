@@ -275,6 +275,22 @@ namespace A2G.SavConverter
             if (dialog.ShowDialog(this) == true) { SaveBox.Text = AppState.NormalizePath(dialog.FileName); SyncConfig(); RefreshSaveStatus(); }
         }
 
+        private void CommunitySave_Click(object sender, RoutedEventArgs e)
+        {
+            var dialog = new CommunitySavesWindow(this);
+            if (dialog.ShowDialog() != true || dialog.SelectedUrl == null) return;
+            SaveBox.Text = dialog.SelectedUrl;
+            SyncConfig();
+            if (dialog.StartYear > 0)
+            {
+                // the community save asks for its own start year (an FM26 update save is dated 2025 but is meant for 2026)
+                _state.Settings.StartYear = dialog.StartYear;
+                _state.SaveSettings();
+                Log(Loc.T(28102, dialog.StartYear));
+            }
+            RefreshSaveStatus();
+        }
+
         private void BrowseA2_Click(object sender, RoutedEventArgs e)
         {
             var folder = PickFolder(Loc.T(20007), A2Box.Text);
@@ -303,6 +319,23 @@ namespace A2G.SavConverter
             var versions = _state.FmVersions;
             await RunBusyAsync(async token =>
             {
+                if (CommunitySaves.IsUrl(save))
+                {
+                    // a community save: download it first (or reuse the copy on this PC while its hash is unchanged)
+                    var bar = new Progress<double>(f => { Busy.IsIndeterminate = false; Busy.Value = f * 100; Busy.ToolTip = Loc.T(28105, (int)(f * 100)); });
+                    string folder, name;
+                    CommunitySaves.TryParseUrl(save, out folder, out name);
+                    try
+                    {
+                        save = await CommunitySaves.EnsureLocalAsync(save, bar, code =>
+                        {
+                            var p = code.Split(new[] { '|' }, 2);
+                            Dispatcher.Invoke(() => Log(p[0] == "download" ? Loc.T(28099, name, p[1]) : p[0] == "current" ? Loc.T(28100, name, p[1]) : Loc.T(28101, p[1])));
+                        }, token);
+                    }
+                    catch (System.IO.InvalidDataException) { Log(Loc.T(28103)); return; }
+                    finally { Dispatcher.Invoke(() => { Busy.IsIndeterminate = true; Busy.Value = 0; Busy.ToolTip = null; }); }
+                }
                 var info = await _exporter.ReadSaveInfoAsync(save, token);
                 if (!info.Recognised)
                 {
@@ -356,6 +389,12 @@ namespace A2G.SavConverter
             var path = SaveBox.Text;
             var id = ++_saveCheckId;
             _saveInfo = null;
+            if (CommunitySaves.IsUrl(path))
+            {
+                _saveChecking = false;
+                ShowSaveStatus();
+                return;
+            }
             if (string.IsNullOrWhiteSpace(path) || !File.Exists(path))
             {
                 _saveChecking = false;
@@ -378,7 +417,8 @@ namespace A2G.SavConverter
             string text;
             string brush = "MutedBrush";
             var path = SaveBox.Text;
-            if (_saveChecking) text = Loc.T(20079);
+            if (CommunitySaves.IsUrl(path)) text = Loc.T(28098);
+            else if (_saveChecking) text = Loc.T(20079);
             else if (_saveInfo == null) text = Loc.T(20078);
             else if (!_saveInfo.Recognised) { text = Loc.T(20082, _saveInfo.Error); brush = "DangerBrush"; }
             else if (_saveInfo.Supported)
@@ -401,7 +441,7 @@ namespace A2G.SavConverter
 
         private bool ValidateSave()
         {
-            if (!File.Exists(SaveBox.Text)) { Warn(Loc.T(20012)); return false; }
+            if (!CommunitySaves.IsUrl(SaveBox.Text) && !File.Exists(SaveBox.Text)) { Warn(Loc.T(20012)); return false; }
             return true;
         }
 

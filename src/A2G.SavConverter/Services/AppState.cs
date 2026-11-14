@@ -199,6 +199,7 @@ namespace A2G.SavConverter.Services
         public static string NormalizePath(string path)
         {
             if (string.IsNullOrWhiteSpace(path)) return path;
+            if (CommunitySaves.IsUrl(path.Trim())) return path.Trim();   // a community save is kept as its address
             try
             {
                 var full = Path.GetFullPath(path.Trim());

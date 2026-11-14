@@ -54,6 +54,21 @@ the world is full of generated players instead of the real ones.
 The in-game date of the save is used later as the default **start year** of the game
 ([Write and install](08-write-and-install.md)).
 
+## Community saves
+
+Next to **Browse** there is a button **Community saves**. It opens a list of ready-made saves that are kept in the `CommunitySaves`
+folder of the project's GitHub repository, for example an update save with the current transfers and real club names. The list shows
+the folder name (such as `2026`), the file and its size. **An internet connection is required**: the list is loaded from GitHub.
+
+Choose a save and press **Select**: its web address is put into the FM save field. Nothing is downloaded yet. **Export from FM save**
+downloads it first (the bar at the bottom shows the progress and **Cancel** stops it) and then exports it as usual. The file is kept in
+`%APPDATA%\A2G-SAV-Converter\CommunitySaves`; the next export compares the checksum with the one in the repository and only downloads
+again when the save has changed. Without a connection an already downloaded copy is still used.
+
+A folder can contain a `settings.json` (`{ "StartYear": 2026 }`) with defaults for its saves. Selecting a save of that folder then sets
+the **start year** of the game to that value (an FM26 update save is dated 2025 but meant for 2026). You can still change it afterwards
+on the **Write & Install** tab. How to add saves is described in `CommunitySaves/README.md`.
+
 ## The Anstoss 2 folder
 
 **Anstoss 2 folder** is the folder where `anstoss2.exe` is located; it contains `DATA.DEF` and `DATA.VER`. The program finds it

@@ -536,3 +536,19 @@
 28082	Estimate the stadium sizes from the club reputation
 28083	Off (default): every club gets the capacity of its ground in the FM save; clubs the save has no ground for (leagues that are not loaded, the non-league clubs) get the estimate from their reputation. On: every club gets the estimate. A size you set by hand always wins. The stadium table is part of the export: export again to get it into an older project.
 28084	Stadium sizes: {0} of {1} clubs use the ground of the FM save, the others are estimated from their reputation.
+28090	Community saves
+28091	Community saves
+28092	Saves shared in the project's repository, for example update saves with current transfers and real club names. An internet connection is required: the list is loaded from GitHub and the chosen save is downloaded when you export.
+28093	Loading the list...
+28094	The list could not be loaded. Check your internet connection and try again.
+28095	Select
+28096	on this PC
+28097	There are no community saves yet.
+28098	Community save: it is downloaded when you export (internet connection required). A copy on this PC is reused while it is up to date.
+28099	Downloading {0} ({1})...
+28100	{0} is up to date on this PC ({1}); nothing to download.
+28101	No connection to the repository ({0}). Using the copy of the save on this PC.
+28102	Start year set to {0} by the community save.
+28103	The downloaded file is damaged (its checksum differs). Please try again.
+28104	Reload
+28105	Downloading the community save: {0} %

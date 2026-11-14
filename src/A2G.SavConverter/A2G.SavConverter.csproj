@@ -24,6 +24,7 @@
   <ItemGroup>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
     <ProjectReference Include="..\A2G.Convert\A2G.Convert.csproj" />
     <ProjectReference Include="..\A2G.Sav\A2G.Sav.csproj" />
   </ItemGroup>

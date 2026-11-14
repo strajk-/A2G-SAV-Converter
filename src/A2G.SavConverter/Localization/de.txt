@@ -537,3 +537,19 @@
 28082	Stadiongrößen aus dem Ansehen der Vereine schätzen
 28083	Aus (Standard): Jeder Verein bekommt die Kapazität seines Stadions aus dem FM-Spielstand; Vereine, für die der Spielstand kein Stadion hat (nicht geladene Ligen, Vereine ohne Liga), bekommen die Schätzung aus ihrem Ansehen. An: Alle Vereine bekommen die Schätzung. Eine von Hand gesetzte Größe gilt immer. Die Stadiontabelle gehört zum Export: Exportieren Sie erneut, um sie in ein älteres Projekt zu bekommen.
 28084	Stadiongrößen: {0} von {1} Vereinen nutzen das Stadion aus dem FM-Spielstand, die anderen werden aus ihrem Ansehen geschätzt.
+28090	Community-Spielstände
+28091	Community-Spielstände
+28092	Spielstände, die im Repository des Projekts bereitgestellt werden, zum Beispiel Update-Spielstände mit aktuellen Transfers und echten Vereinsnamen. Eine Internetverbindung ist nötig: Die Liste wird von GitHub geladen und der gewählte Spielstand beim Export heruntergeladen.
+28093	Liste wird geladen ...
+28094	Die Liste konnte nicht geladen werden. Prüfe die Internetverbindung und versuche es erneut.
+28095	Auswählen
+28096	auf diesem PC
+28097	Es gibt noch keine Community-Spielstände.
+28098	Community-Spielstand: Er wird beim Export heruntergeladen (Internetverbindung nötig). Eine Kopie auf diesem PC wird wiederverwendet, solange sie aktuell ist.
+28099	{0} wird heruntergeladen ({1}) ...
+28100	{0} ist auf diesem PC aktuell ({1}); es muss nichts heruntergeladen werden.
+28101	Keine Verbindung zum Repository ({0}). Die Kopie des Spielstands auf diesem PC wird verwendet.
+28102	Startjahr vom Community-Spielstand auf {0} gesetzt.
+28103	Die heruntergeladene Datei ist beschädigt (die Prüfsumme weicht ab). Bitte versuche es erneut.
+28104	Neu laden
+28105	Community-Spielstand wird heruntergeladen: {0} %

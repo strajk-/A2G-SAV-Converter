@@ -11,6 +11,7 @@ All of the program's own data is in your Windows user profile, in `%APPDATA%\A2G
 |------|-----------|
 | `Projects\<name>\` | One folder per project (see below). |
 | `Library\` | The shared library (see below). |
+| `CommunitySaves\` | Downloaded community saves (see [Project and export](02-project-and-export.md)); can be deleted, they are downloaded again when needed. |
 | `language.txt`, `theme.txt` | The language and theme you chose. |
 | `last-project.txt` | The project that is opened at the next start. |
 | `patcher-install.txt` | The Anstoss 2 folder a patch used last. |
