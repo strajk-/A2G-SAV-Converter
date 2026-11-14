@@ -98,7 +98,13 @@ namespace A2G.SavConverter
                 OpenProject(folder);
                 if (!FmSaveExporter.IsAvailable)
                     Log(Loc.T(20000, FmSaveExporter.ExePath));
-                if (args.Contains("--autoplan") && _state.HasExport)
+                if (args.Contains("--edit", StringComparer.OrdinalIgnoreCase) && _state.HasExport)
+                {
+                    // started from a patch (--edit): its project is open, build the plan from its export and show it
+                    await BuildPlanCoreAsync();
+                    Tabs.SelectedItem = PlanTabItem;
+                }
+                else if (args.Contains("--autoplan") && _state.HasExport)
                 {
                     await BuildPlanCoreAsync();
                     Tabs.SelectedItem = PlayersTab;
@@ -315,6 +321,12 @@ namespace A2G.SavConverter
             if (project == null) return;
             OpenProject(project);
             Log(created ? Loc.T(28126, Path.GetFileName(project)) : Loc.T(28127, Path.GetFileName(project)));
+            if (_state.HasExport)
+            {
+                // the patch carries the FM export: build the plan right away (the edits of the project are replayed) and show it
+                await BuildPlanCoreAsync();
+                Tabs.SelectedItem = PlanTabItem;
+            }
         }
 
         private void BrowseA2_Click(object sender, RoutedEventArgs e)

@@ -68,7 +68,7 @@ the work - **without the FM save or anything else**:
 - in the converter, press **From patch...** next to **Other folder...** on tab **1 Project & Export** and choose the patch file.
 
 The program unpacks the project into the projects folder (a new project with the name of the patch, or `name-2`, `name-3` if that name
-is taken) and opens it. The folders of the sender's PC are not part of it: your own Anstoss 2 folder is found as usual. All tabs work
+is taken), opens it and **builds the plan from the patch's FM export right away** (the sender's manual edits are applied to it). The folders of the sender's PC are not part of it: your own Anstoss 2 folder is found as usual. All tabs work
 as in the sender's project: change the teams, players, options and kits, write the files, install them or make a new patch.
 Opening the same patch again opens the project made from it (with your changes) instead of making a second copy.
 

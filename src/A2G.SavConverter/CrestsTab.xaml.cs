@@ -126,7 +126,10 @@ namespace A2G.SavConverter
         private byte[] CurrentBmp(FmClub club, out string sourceFile)
         {
             var bmp = new CrestLibrary(_state.Project.Crests).TryGet(club, out sourceFile);
-            return bmp ?? CrestWriter.Render(club.Uid, A2G.Convert.Writing.ClubTexts.Name(club, _state.Settings));
+            if (bmp != null) return bmp;
+            // the generated crest wears the colours of the home kit (band = shirt, caps = shorts), as it is written to the game
+            var kit = Kits.For(_state.Settings, club);
+            return CrestWriter.Render(club.Uid, A2G.Convert.Writing.ClubTexts.Name(club, _state.Settings), Kits.Rgb[kit.Home.Shirt], Kits.Rgb[kit.Home.Shorts]);
         }
 
         private void ShowCrest()
