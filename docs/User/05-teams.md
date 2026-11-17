@@ -179,8 +179,8 @@ Press **Season results...** (next to the group box on the left) for the open lea
   winner at the same time.
 - Slots you chose are shown in **bold**; the reset button next to a slot returns it to the rule, **Back to the rules** resets the
   whole league.
-- The **rules** (FM has no trophy data): the best last league position is champion and cup winner, the second best is runner-up and cup
-  finalist, the next clubs get the UEFA Cup places; the clubs with the lowest reputation are promoted; in lower divisions the clubs
+- The **rules** (FM has no trophy data): the best last league position is champion and cup winner, the second best is runner-up, the next clubs
+  get the UEFA Cup places, and the cup finalist is the first club after them (so the finalist takes the place in the second European cup); the clubs with the lowest reputation are promoted; in lower divisions the clubs
   with the highest reputation are relegated.
 - The number of UEFA, promoted and relegated slots follows the original data of that league.
 

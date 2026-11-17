@@ -145,7 +145,9 @@ namespace A2G.Convert.Engine
         /// <summary>
         /// The rule-based occupants: the weakest clubs by reputation are the promoted ones, in a lower division the strongest are the
         /// relegated ones; in the top division the others are ranked by last position: champion, runner-up, then the UEFA places.
-        /// The cup winner is the champion and the finalist the runner-up (FM has no cup results).
+        /// The cup winner is the champion (FM has no cup results; a champion who wins the cup too is normal). The finalist is the best club
+        /// that has no league place: the game gives the second European cup's place of a double winner to the cup finalist, and a finalist
+        /// who already plays in the Champions League or the UEFA Cup would leave that place empty (a hole in the draw that crashes the game).
         /// </summary>
         public static Dictionary<string, FmClub> AutoSlots(IList<FmClub> clubs, bool topDivision, LeagueCounts counts)
         {
@@ -164,8 +166,10 @@ namespace A2G.Convert.Engine
             }
             var ranked = Ranked(clubs.Where(c => !used.Contains(c))).ToList();
             if (ranked.Count > 0) { result[Champion] = ranked[0]; result[CupWinner] = ranked[0]; }
-            if (ranked.Count > 1) { result[RunnerUp] = ranked[1]; result[CupFinalist] = ranked[1]; }
+            if (ranked.Count > 1) result[RunnerUp] = ranked[1];
             for (var i = 0; i < counts.Uefa && 2 + i < ranked.Count; i++) result[Uefa(i + 1)] = ranked[2 + i];
+            var finalistIndex = 2 + counts.Uefa;   // the first club behind the champion, the runner-up and the UEFA places
+            if (ranked.Count > 1) result[CupFinalist] = finalistIndex < ranked.Count ? ranked[finalistIndex] : ranked[1];
             return result;
         }
 

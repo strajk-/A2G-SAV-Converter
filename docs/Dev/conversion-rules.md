@@ -227,7 +227,9 @@ to be confirmed in the editor. Other bits, e.g. 16 in the Regionalliga teams, st
 Slots per league (the numbers of UEFA places, promoted and relegated clubs come from the original data of that league): top division
 champion, runner-up, UEFA places, cup winner, cup finalist, promoted; lower divisions relegated and promoted. Defaults, since FM has
 no trophy data: the weakest clubs by reputation are promoted, in lower divisions the strongest are relegated, in the top division the
-best last league position is champion and cup winner, the second best runner-up and finalist, then the UEFA places. The Teams tab
+best last league position is champion and cup winner, the second best runner-up, then the UEFA places, and the cup finalist is the first club behind
+them (a finalist who is already in a European competition leaves the second European cup one team short: its draw then has an empty slot and the
+game aborts with "Falsche LandNr 0" while it simulates that round; found with a crash dump of the game). The Teams tab
 has a "Season results..." button: every slot can be given to another club of the league (the two clubs swap slots); choices are stored
 per league by FM club id. Non-league clubs: per nation the champion (best last position) and the cup winner (second best), as positions
 among the nation's clubs in the file; the window lists every nation of the triplets.

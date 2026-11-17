@@ -108,7 +108,8 @@ FM saves have none of these, so they are generated, and you can change every one
 
 Last season's champion, runner-up, UEFA Cup places, cup winner and finalist, promoted and relegated teams are written as markers on
 the teams. Without trophy data in FM the converter uses these rules (changeable in **Season results...**): the best last league
-position is champion and cup winner, the second best runner-up and cup finalist, the next ones get UEFA Cup places; the lowest
+position is champion and cup winner, the second best runner-up, the next ones get UEFA Cup places and the first club after them is the cup
+finalist; the lowest
 reputation are promoted; in lower divisions the highest reputation are relegated. For non-league clubs one champion and one cup winner
 per nation are written.
 

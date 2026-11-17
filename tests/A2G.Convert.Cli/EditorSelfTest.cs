@@ -179,6 +179,14 @@ namespace A2G.Convert.Cli
                 var written = deLiga.TeamIds.Select(id => deLand.Teams[id - 1].StaffBlock.Values[SeasonResults.FlagIndex]).ToList();
                 var champClub = auto.Single(kv => kv.Value.League == LeagueResult.Champion).Key;
                 var champTeam = deLand.Teams.First(t => t.Name == ClubNamer.ClubName(champClub));
+                {
+                    // the cup finalist must not already be in a European competition (a hole in the second cup's draw crashes the game)
+                    var ten = Enumerable.Range(1, 10).Select(i => new FmClub { Uid = "x" + i, Name = "Club " + i, LastLeaguePosition = i, Reputation = 5000 - i }).ToList();
+                    var autoSlots = SeasonResults.AutoSlots(ten, true, new LeagueCounts { Uefa = 3, Promoted = 0, Relegated = 0 });
+                    var qualified = new[] { SeasonResults.Champion, SeasonResults.RunnerUp, "uefa1", "uefa2", "uefa3" }.Select(k => autoSlots[k]).ToList();
+                    Check("season: champion is cup winner too, the cup finalist is the first club without a league place",
+                        autoSlots[SeasonResults.CupWinner] == autoSlots[SeasonResults.Champion] && !qualified.Contains(autoSlots[SeasonResults.CupFinalist]) && autoSlots[SeasonResults.CupFinalist].LastLeaguePosition == 6);
+                }
                 Check("season: the Bundesliga flags are written (1 champion with the cup, 1 runner-up, 3 UEFA places, 3 promoted)",
                     written.Count(v => (v & 7) == 1) == 1 && written.Count(v => (v & 7) == 6) == 1 && written.Count(v => (v & 7) == 2) == 3 && written.Count(v => (v & 7) == 4) == 3
                     && (champTeam.StaffBlock.Values[SeasonResults.FlagIndex] & 65) == 65);
