@@ -63,7 +63,7 @@ It is a Windows program.
 | Problem | Cause and solution |
 |---------|--------------------|
 | `Build the plan first` | Step 3 is not done. |
-| `Validation problems (n)` | The lines name the file and the limit that was broken. Do not install; fix the cause (usually a manual edit or an unusual option) and write again. |
+| `Validation problems (n)` | The lines name the file and the limit that was broken. The program lists every problem in the log and refuses to install or make a patch until the files are valid; fix the cause (usually a manual edit or an unusual option) and write again. |
 | Warnings after writing | Not errors: places where original data was kept or squads were topped up. Read them. |
 
 ### Install and patcher

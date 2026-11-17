@@ -192,4 +192,22 @@ original clubs of the game are kept".
 
 Spare teams are in no league and have no results.
 
+## European cups (winners of last season)
+
+The button **European cups...** next to **Season results...** opens the winners of last season's European cups: **Champions League**,
+**Pokal der Pokalsieger** (the Conference League) and **UEFA-Pokal** (the Europa League). In the game's editor they are listed as
+"Vorjahressieger Europapokale"; a title holder has a place in the same competition again. An FM save has no trophy data, so you choose
+the three clubs yourself from the teams of Germany, England, France, Italy and Spain. Type a part of the club name (or DEU, ENG, FRA,
+ITA, ESP) into the search box above a list to shorten it; when one club is left it is selected. **Default** lets the program pick strong clubs by
+reputation (the strongest, the fifth and the tenth of the top divisions). The choice is stored in the project and written to `KLEINIG.SAV`.
+
+## Checking the results before writing
+
+The program checks the last season's results and the European cup winners whenever the plan is built and whenever you close the **Season
+results** or **European cups** window. If something would make the game fail, **7 Write & Install** is locked, a red line next to the
+tabs says why, and the **Teams** tab lists the problems under the team lists. The checks are: every slot of the results has a club, no club
+holds two places of the same kind, and in the top division of every country the cup winner or the cup finalist must be a club
+**without** a league place (champion, runner-up and UEFA places) - otherwise the second European cup misses a club of that country and the
+game can crash while it plays that round. Change the club of the slot in **Season results...** and the lock goes away.
+
 Next: [Players](06-players.md).

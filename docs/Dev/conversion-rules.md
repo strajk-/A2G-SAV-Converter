@@ -116,6 +116,11 @@ The automatic result is a `ConversionPlan` (saved in the project folder), not fi
 User edits are stored as overrides keyed on FM's stable club and player ids so they re-apply when the FM export is
 refreshed. The `.sav` files are written from the plan as the last step.
 
+## Slots without enough clubs with squads
+When a slot group (a tier or the spare teams) still lacks clubs after the cascade, the next strongest clubs of the nation fill the slots even if they have fewer than
+`MinPlayersForTeam` real players (at least one eligible player); `FillFromFreePool` completes their squads from the free players of the nation. A warning names them.
+Only when the nation has no such clubs either does a slot keep the original team of the shipped game.
+
 ## German Regionalliga (tier 3 = four parallel groups of 18)
 The FM save does not expose club locations (only a numeric `city_id` without names), and a hand-maintained region
 table would have to be updated for every new FM release. So no regions are used:
@@ -206,6 +211,20 @@ colours always differ). The team popup shows both kits (drawn from the game's 13
 ## Shared library
 
 Club information (city, nickname, stadium, capacity, kit) and crests are also kept in a per-user library, `%APPDATA%\A2G-SAV-Converter\Library` (`clubs.json`, `Crests\`), keyed by FM club id. A project that is opened for the first time gets the library content for every club it has no edit for; afterwards every save feeds the project edits back (resetting a club removes it from the library). `Config.LibraryApplied` in project.json marks the first adoption.
+
+## Winners of last season's European cups (KLEINIG.SAV)
+The editor's dialog "Kleinigkeiten" lists them as "Vorjahressieger Europapokale" (Champions League, Pokal der Pokalsieger, UEFA-Pokal). KLEINIG.SAV:
+magic, N (= lines[1]), one more number, N numbers (pairs: the ranking of the nations), then three (country number, team number from 1 in that
+nation's Land file) pairs in that order (shipped: Spain 3, England 2, France 36 = the Spanish, English and French team at those positions), then the
+tax rate block and the start year (see GameYear). The game adds a title holder first to its competition's participant list (`FUN_0041a310` in anstoss2.exe).
+`TitleHolders` picks them (`ConversionSettings.TitleChampionsLeague / TitleCupWinners / TitleUefaCup`, FM club ids; default by reputation: 1st, 10th and
+5th club of the five top divisions), `TitleHolderFile` writes them; the team number is the position of the club in the written Land file.
+
+## Plan validator
+`PlanValidator.Validate(plan, settings, a2Folder)` returns `PlanProblem`s (empty slot, a club with two places of one kind, `CupPlaceLost`: winner and
+finalist both already hold a league place, no title holder). The UI (`AppState.RefreshProblems`, called from `MainWindow.UpdateStepState`) runs it
+after the plan was built and after the Season results / European cups windows closed; with problems tab 7 is disabled, the Teams tab lists them and a red
+text next to the tabs gives the reason. Rule-based only: it does not simulate the game's participant lists (`FUN_0041a310`).
 
 ## Results of the last season (flags)
 The game keeps the last season's results per team: in a Land*.sav the number at index 17 of the team's staff block, for the

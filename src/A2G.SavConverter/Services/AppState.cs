@@ -131,6 +131,17 @@ namespace A2G.SavConverter.Services
         }
 
         /// <summary>Loads the exported FM data and builds the automatic conversion plan.</summary>
+        /// <summary>What is wrong with the last season's results and the European cup winners of the plan (empty = the files can be written).</summary>
+        public List<A2G.Convert.Engine.PlanProblem> Problems { get; private set; }
+
+        /// <summary>Checks the plan again (after the plan was built or one of the two result windows was closed).</summary>
+        public void RefreshProblems()
+        {
+            Problems = Plan == null || Settings == null
+                ? new List<A2G.Convert.Engine.PlanProblem>()
+                : A2G.Convert.Engine.PlanValidator.Validate(Plan, Settings, Config == null ? null : Config.Anstoss2Path);
+        }
+
         public Task BuildPlanAsync()
         {
             var folder = Project.FmExport;
@@ -182,6 +193,15 @@ namespace A2G.SavConverter.Services
                 errors.AddRange(SavValidator.Validate(Project.DataVer, Path.Combine(a2, "DATA.VER")));
                 return new WriteOutcome { Report = report, Problems = errors };
             });
+        }
+
+        /// <summary>Validates the files written into the project's Anstoss2 folder (what Install and the patch would use); empty = fine.</summary>
+        public List<string> CheckWrittenFiles()
+        {
+            var a2 = Config.Anstoss2Path;
+            var errors = SavValidator.Validate(Project.DataDef, Path.Combine(a2, "DATA.DEF"));
+            errors.AddRange(SavValidator.Validate(Project.DataVer, Path.Combine(a2, "DATA.VER")));
+            return errors.Distinct().ToList();
         }
 
         /// <summary>Creates the project's crest folder with its instructions and the list of FM club ids (clubs of the main five nations).</summary>

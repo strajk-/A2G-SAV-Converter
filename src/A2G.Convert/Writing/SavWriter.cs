@@ -57,8 +57,9 @@ namespace A2G.Convert.Writing
             _library = new CrestLibrary(crestFolder);
             var crests = new Dictionary<string, byte[]>(StringComparer.OrdinalIgnoreCase);   // file name in WAPPEN -> BMP
             var crestRows = new List<string[]>();                  // country, file, written name, FM name, league
+            var positions = new Dictionary<string, KeyValuePair<A2CountrySpec, int>>();   // club id -> its country and team number (from 1) in the Land file
             foreach (var country in plan.Countries)
-                WriteCountry(country, templateDir, mapper, fm, generated, report, crests, crestRows);
+                WriteCountry(country, templateDir, mapper, fm, generated, report, crests, crestRows, positions);
 
             generated["Avereine.sav"] = BuildAvereine(plan.Avereine, templateDir, fm, mapper, nations, report);
 
@@ -88,6 +89,18 @@ namespace A2G.Convert.Writing
             if (startYear > 0)
                 foreach (var target in new[] { outDef, outVer })
                     if (!GameYear.Apply(Path.Combine(target, "KLEINIG.SAV"), startYear, report)) break;
+            // the winners of last season's European cups (KLEINIG.SAV)
+            var holders = new int[3][];
+            foreach (var competition in TitleHolders.Competitions)
+            {
+                var club = TitleHolders.Effective(plan, settings, competition);
+                KeyValuePair<A2CountrySpec, int> place;
+                if (club == null || !positions.TryGetValue(club.Uid, out place)) continue;
+                var countryNumber = nations.Resolve(place.Key.FmNationName);
+                if (countryNumber > 0) holders[competition] = new[] { countryNumber, place.Value };
+            }
+            foreach (var target in new[] { outDef, outVer })
+                if (!TitleHolderFile.Apply(Path.Combine(target, "KLEINIG.SAV"), holders, report)) break;
             if (crests.Count > 0)
                 foreach (var target in new[] { outDef, outVer })
                     File.WriteAllText(Path.Combine(target, "WAPPEN", "Crests.md"), CrestWriter.Overview(crestRows), new System.Text.UTF8Encoding(true));
@@ -95,7 +108,7 @@ namespace A2G.Convert.Writing
                 report.Notes.Add("Crests: " + crests.Count + " WAPPEN\\VW_*.BMP files: " + crestRows.Count(r => r[5].StartsWith("your crest")) +
                                  " from your crest folder, " + crestRows.Count(r => r[5] == "generated") + " generated (letters and colours per club), the rest original; see WAPPEN\\Crests.md.");
 
-            report.Notes.Add("Not generated from FM data (kept from the original files): sponsors, ISCHIRIS, Kunden, KLEINIG, Fangesa, " +
+            report.Notes.Add("Not generated from FM data (kept from the original files): sponsors, ISCHIRIS, Kunden, KLEINIG (apart from the start year and the European cup title holders), Fangesa, " +
                              "the 21-number staff block and the stadium numbers of each team, the tail person of the Land files and the " +
                              "Avereine country triplets.");
             report.Warnings.AddRange(plan.Warnings);
@@ -114,7 +127,8 @@ namespace A2G.Convert.Writing
         }
 
         private static void WriteCountry(CountryPlan country, string templateDir, PlayerMapper mapper, FmDataSet fm,
-            Dictionary<string, SavFile> generated, WriteReport report, Dictionary<string, byte[]> crests, List<string[]> crestRows)
+            Dictionary<string, SavFile> generated, WriteReport report, Dictionary<string, byte[]> crests, List<string[]> crestRows,
+            Dictionary<string, KeyValuePair<A2CountrySpec, int>> positions = null)
         {
             var spec = country.Spec;
             var nation = fm.NationByName(spec.FmNationName);
@@ -165,6 +179,23 @@ namespace A2G.Convert.Writing
             if (newOrder.Count != land.Teams.Count)
                 throw new InvalidOperationException(spec.Key + ": team count changed from " + land.Teams.Count + " to " + newOrder.Count);
 
+            // A slot that keeps its original team must not repeat the name of a club written into the same file (the validator refuses duplicate
+            // team names): the kept team gets a reserve-team style name instead ("BFC Preussen" -> "BFC Preussen II").
+            var usedNames = new HashSet<string>(newOrder.Where(x => x.Club != null).Select(x => x.Team.Name), StringComparer.OrdinalIgnoreCase);
+            foreach (var kept in newOrder.Where(x => x.Club == null))
+            {
+                if (usedNames.Add(kept.Team.Name)) continue;
+                var original = kept.Team.Name;
+                var suffixes = new[] { " II", " III", " IV", " V", " VI" };
+                var unique = suffixes.Select(sfx => NameShortener.Fit(original + sfx, ClubNamer.MaxName)).FirstOrDefault(c => !usedNames.Contains(c));
+                if (unique == null) { var n = 2; do { unique = NameShortener.Fit(original, ClubNamer.MaxName - 3) + " " + n; n++; } while (usedNames.Contains(unique)); }
+                kept.Team.Name = unique;
+                usedNames.Add(unique);
+                report.Warnings.Add(spec.Key + ": a spare slot keeps the original club '" + original + "', renamed to '" + unique + "' because a club of that name is in the file.");
+            }
+            if (positions != null)
+                for (var i = 0; i < newOrder.Count; i++)
+                    if (newOrder[i].Club != null) positions[newOrder[i].Club.Uid] = new KeyValuePair<A2CountrySpec, int>(spec, i + 1);
             CollectCrests(spec.Key, newOrder, templateDir, crests, crestRows, mapper.Settings);
             land.Teams.Clear();
             land.Teams.AddRange(newOrder.Select(s => s.Team));

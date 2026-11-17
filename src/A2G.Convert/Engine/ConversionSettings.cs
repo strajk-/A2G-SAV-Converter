@@ -156,6 +156,14 @@ namespace A2G.Convert.Engine
         [DataMember] public int StartYear { get; set; }
 
         /// <summary>
+        /// The winners of last season's European cups (the FM club ids, a team of one of the five main nations; null = the rule of <see cref="TitleHolders"/>):
+        /// Champions League, Pokal der Pokalsieger (Conference League) and UEFA-Pokal (Europa League).
+        /// </summary>
+        [DataMember] public string TitleChampionsLeague { get; set; }
+        [DataMember] public string TitleCupWinners { get; set; }
+        [DataMember] public string TitleUefaCup { get; set; }
+
+        /// <summary>
         /// Stadium sizes: false (default) = the capacity of the club's ground in the FM save where the save has one, else the estimate
         /// from the club's reputation; true = the estimate from the reputation for every club.
         /// </summary>

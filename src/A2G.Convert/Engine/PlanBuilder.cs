@@ -63,6 +63,7 @@ namespace A2G.Convert.Engine
             while (pools.Count < groupSizes.Count + 1) pools.Add(new List<FmClub>());
 
             var groups = new List<List<FmClub>>();
+            var fallbackUsed = new HashSet<FmClub>();
             for (var t = 0; t < groupSizes.Count; t++)
             {
                 var size = groupSizes[t];
@@ -79,6 +80,20 @@ namespace A2G.Convert.Engine
                     if (best == null) break;
                     pools[best.Pool].Remove(best.Club);
                     take.Add(best.Club);
+                }
+                if (take.Count < size)
+                {
+                    // still short: the next strongest clubs of the nation fill the slots even though they have fewer than the required real players
+                    // (their squads are completed from the free players of the nation, see FillFromFreePool) - better than keeping a club of the original game
+                    var fallback = ByReputation(candidates.Where(c => !squadSet.Contains(c) && !fallbackUsed.Contains(c) && fm.PlayersOf(c).Any(SquadSelector.Eligible)).ToList())
+                        .Take(size - take.Count).ToList();
+                    if (fallback.Count > 0)
+                    {
+                        foreach (var c in fallback) fallbackUsed.Add(c);
+                        take.AddRange(fallback);
+                        warnings.Add(string.Format("{0}: slot group {1} had only {2} of {3} clubs with enough players; filled with {4} more club(s) that have fewer than {5} real players (completed from free players): {6}.",
+                            spec.Key, t + 1, take.Count - fallback.Count, size, fallback.Count, s.MinPlayersForTeam, string.Join(", ", fallback.Select(c => c.Name))));
+                    }
                 }
                 if (take.Count < size)
                     warnings.Add(string.Format("{0}: slot group {1} has only {2} of {3} clubs with squads.",

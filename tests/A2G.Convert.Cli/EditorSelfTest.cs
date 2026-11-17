@@ -210,11 +210,55 @@ namespace A2G.Convert.Cli
                 var writtenVer = File.ReadAllLines(Path.Combine(yearOut, "DATA.VER", "KLEINIG.SAV"), latin1);
                 var line = GameYear.FindYearLine(original);
                 Check("start year: the year line is found in the shipped file", line > 0 && original[line] == "1998");
-                Check("start year: only that line changes (DATA.DEF and DATA.VER)", written.Length == original.Length && writtenVer.Length == original.Length
-                    && written[line] == "2025" && writtenVer[line] == "2025" && Enumerable.Range(0, original.Length).Where(i => i != line).All(i => original[i] == written[i]));
+                var holderStart = TitleHolderFile.FindStart(original);   // the six numbers of the European cup title holders change too
+                Check("start year: only that line and the title holders change (DATA.DEF and DATA.VER)", written.Length == original.Length && writtenVer.Length == original.Length
+                    && holderStart > 0 && written[line] == "2025" && writtenVer[line] == "2025"
+                    && Enumerable.Range(0, original.Length).Where(i => i != line && (i < holderStart || i >= holderStart + 6)).All(i => original[i] == written[i]));
+                {
+                    // the winners of last season's European cups: written as (country number, team number from 1) into KLEINIG.SAV
+                    var holderSettings = new ConversionSettings { StartYear = 2025 };
+                    var second = TitleHolders.Candidates(plan).OrderByDescending(c => c.Reputation).Skip(1).First();
+                    TitleHolders.Choose(holderSettings, TitleHolders.CupWinners, second.Uid);
+                    var holderOut = Path.Combine(scratch, "holder-out");
+                    SavWriter.Write(plan, fm, holderSettings, a2, holderOut);
+                    var pairs = TitleHolderFile.Read(File.ReadAllLines(Path.Combine(holderOut, "DATA.DEF", "KLEINIG.SAV"), latin1));
+                    var pairsVer = TitleHolderFile.Read(File.ReadAllLines(Path.Combine(holderOut, "DATA.VER", "KLEINIG.SAV"), latin1));
+                    var allGood = pairs != null && pairsVer != null && pairs.Zip(pairsVer, (x, y) => x.SequenceEqual(y)).All(b => b);
+                    foreach (var competition in TitleHolders.Competitions)
+                    {
+                        if (pairs == null) break;
+                        var club = TitleHolders.Effective(plan, holderSettings, competition);
+                        var country = plan.Countries.First(c => c.AllTeams.Any(t => t.Club == club));
+                        var landFile = (A2G.Sav.LandFile)A2G.Sav.SavLoader.Load(Path.Combine(holderOut, "DATA.DEF", country.Spec.LandFile));
+                        var number = pairs[competition][1];
+                        allGood &= number >= 1 && number <= landFile.Teams.Count && landFile.Teams[number - 1].Name == ClubTexts.Name(club, holderSettings)
+                                   && new[] { 14, 16, 20, 28, 63 }.Contains(pairs[competition][0]);
+                    }
+                    Check("European cups: the three title holders are written as country and team number and a chosen club is used", allGood
+                        && TitleHolders.Effective(plan, holderSettings, TitleHolders.CupWinners) == second);
+                }
+                {
+                    // the validator: the defaults are fine, a cup winner and finalist that both have a league place are refused
+                    var vs = new ConversionSettings();
+                    var clean = PlanValidator.Validate(plan, vs, a2);
+                    var country = plan.Countries.First(c => c.Tiers[0].Leagues[0].Teams.Count > 4);
+                    var league = country.Tiers[0].Leagues[0];
+                    var key = SeasonResults.LeagueKey(league.Spec);
+                    var slots = SeasonResults.Assign(vs, key, league.Teams.Select(t => t.Club).ToList(), true, SeasonResults.CountsFor(a2, country.Spec, league.Spec));
+                    SeasonResults.SetSlot(vs, key, SeasonResults.CupFinalist, slots[SeasonResults.RunnerUp]);   // the runner-up is the finalist again (the old default)
+                    var bad = PlanValidator.Validate(plan, vs, a2);
+                    SeasonResults.SetSlot(vs, key, SeasonResults.CupFinalist, null);
+                    var noHolder = new ConversionSettings();
+                    Check("validator: the default results pass, a finalist that already has a league place is found, title holders exist",
+                        clean.Count == 0 && bad.Count == 1 && bad[0].Kind == PlanProblemKind.CupPlaceLost && bad[0].Country == country.Spec.Key
+                        && PlanValidator.Validate(plan, vs, a2).Count == 0 && TitleHolders.Competitions.All(k => TitleHolders.Effective(plan, noHolder, k) != null));
+                }
                 var keepOut = Path.Combine(scratch, "year-keep");
                 SavWriter.Write(plan, fm, new ConversionSettings(), a2, keepOut);
-                Check("start year: without a year the file stays as shipped", File.ReadAllBytes(Path.Combine(keepOut, "DATA.DEF", "KLEINIG.SAV")).SequenceEqual(File.ReadAllBytes(Path.Combine(a2, "DATA.DEF", "KLEINIG.SAV"))));
+                var keptLines = File.ReadAllLines(Path.Combine(keepOut, "DATA.DEF", "KLEINIG.SAV"), latin1);
+                var keptStart = TitleHolderFile.FindStart(original);
+                Check("start year: without a year the start year stays as shipped (only the title holders differ)", keptLines.Length == original.Length && keptStart > 0
+                    && Enumerable.Range(0, original.Length).Where(i => i < keptStart || i >= keptStart + 6).All(i => original[i] == keptLines[i]));
                 Check("start year: the year of an FM date is read", GameYear.FromFmDate("2025-07-21") == 2025 && GameYear.FromFmDate("") == 0);
             }
             // names: a common name that holds the first name is split, surnames stay within the 15 characters the game shows correctly

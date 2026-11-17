@@ -372,6 +372,21 @@ namespace A2G.SavConverter
 
         private void SeasonResults_Click(object sender, RoutedEventArgs e) { ShowSeasonResults(null); }
 
+        /// <summary>Lists the problems of the season results and European cup winners under the team lists (nothing shown when there are none).</summary>
+        public void ShowProblems(IList<string> problems)
+        {
+            ProblemsCard.Visibility = problems == null || problems.Count == 0 ? Visibility.Collapsed : Visibility.Visible;
+            ProblemsText.Text = problems == null ? string.Empty : string.Join(Environment.NewLine, problems);
+        }
+
+        /// <summary>The winners of last season's European cups (KLEINIG.SAV); they have a place in the same competition again.</summary>
+        private void EuropeanCups_Click(object sender, RoutedEventArgs e)
+        {
+            if (_state.Plan == null) return;
+            new EuropeanCupsWindow(Window.GetWindow(this), _state).ShowDialog();
+            if (Edited != null) Edited();   // the results are checked again
+        }
+
         /// <summary>Opens the results of the last season for the league on the left (a country key such as AVE selects that country first).</summary>
         public void ShowSeasonResults(string country)
         {
@@ -384,6 +399,7 @@ namespace A2G.SavConverter
             if (group == null || Editor == null) return;
             if (group.League == null && group.Country != "AVE") { Notify(Loc.T(22282)); return; }
             new SeasonResultsWindow(Window.GetWindow(this), _state, group).ShowDialog();
+            if (Edited != null) Edited();   // the results are checked again
         }
 
         private static void Notify(string message)

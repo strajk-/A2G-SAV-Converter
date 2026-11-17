@@ -528,6 +528,8 @@ namespace A2G.SavConverter
                     : Loc.T(20025, outcome.Problems.Count) + Environment.NewLine + string.Join(Environment.NewLine, outcome.Problems.Take(40)) + Environment.NewLine;
                 WriteResultBox.Text = text;
                 Log(outcome.Problems.Count == 0 ? Loc.T(20026, _state.Project.Anstoss2) : Loc.T(20027, outcome.Problems.Count));
+                foreach (var problem in outcome.Problems.Distinct().Take(20)) Log("  " + problem);
+                if (outcome.Problems.Count > 0) Log(Loc.T(28170));
                 RefreshProfiles();
             });
         }
@@ -646,6 +648,18 @@ namespace A2G.SavConverter
             return null;
         }
 
+        /// <summary>Validates the written files; with problems shows them and returns false (nothing invalid is installed or put into a patch).</summary>
+        private bool WrittenFilesAreValid()
+        {
+            List<string> problems;
+            try { problems = _state.CheckWrittenFiles(); }
+            catch (Exception ex) { Warn(Loc.T(20002, ex.Message)); return false; }
+            if (problems.Count == 0) return true;
+            foreach (var problem in problems.Take(20)) Log("  " + problem);
+            Warn(Loc.T(28171, problems.Count) + Environment.NewLine + Environment.NewLine + string.Join(Environment.NewLine, problems.Take(10)) + Environment.NewLine + Environment.NewLine + Loc.T(28170));
+            return false;
+        }
+
         private async void InstallProfile_Click(object sender, RoutedEventArgs e)
         {
             var pm = OpenManager();
@@ -655,6 +669,7 @@ namespace A2G.SavConverter
                 Warn(Loc.T(20035));
                 return;
             }
+            if (!WrittenFilesAreValid()) return;
             var name = NewProfileBox.Text.Trim();
             // a data set of the same name is replaced (never the Original one), but only after the user agreed
             var exists = pm.List().Any(p => string.Equals(p.Name, name, StringComparison.OrdinalIgnoreCase));
@@ -696,6 +711,7 @@ namespace A2G.SavConverter
                 Warn(Loc.T(20035));
                 return;
             }
+            if (!WrittenFilesAreValid()) return;
             // the same data set and name as "Install": the generated files of this project under the name in the box
             var name = NewProfileBox.Text.Trim();
             if (name.Length == 0) { Warn(Loc.T(28029)); return; }
@@ -866,6 +882,15 @@ namespace A2G.SavConverter
             CrestsTabItem.IsEnabled = hasPlan;
             CrestsTabItem.ToolTip = hasPlan ? null : Loc.T(20072);
             WriteButton.IsEnabled = hasPlan;
+            // the last season's results and the European cup winners must be usable for the game (see PlanValidator); otherwise nothing can be written
+            _state.RefreshProblems();
+            var problems = _state.Problems;
+            var locked = hasPlan && problems.Count > 0;
+            WriteTabItem.IsEnabled = !locked;
+            WriteTabItem.ToolTip = locked ? Loc.T(28164, problems.Count) : null;
+            WriteLockText.Text = locked ? Loc.T(28164, problems.Count) : string.Empty;
+            WriteLockText.Visibility = locked ? Visibility.Visible : Visibility.Collapsed;
+            TeamsEditor.ShowProblems(locked ? PlanProblemText.Format(problems) : new List<string>());
             var edits = hasPlan && _state.Editor != null ? _state.Editor.Log.Ops.Count : 0;
             WriteInfoText.Text = hasPlan ? Loc.T(20071, edits) : Loc.T(20070);
             var selected = Tabs.SelectedItem as TabItem;

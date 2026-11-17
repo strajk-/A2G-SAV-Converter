@@ -566,3 +566,20 @@
 28128	Edit as project
 28129	Opens the converter with the project this patch was made from, to continue its work (no FM save needed)
 28130	The project of the patch could not be opened: {0}
+28140	European cups...
+28141	Winners of last season's European cups
+28142	The winners of the European cups of last season have a place in the same competition again. FM saves contain no trophy data, so choose the three clubs yourself (teams of Germany, England, France, Italy and Spain). Without a choice the program picks strong clubs.
+28143	Champions League
+28144	Pokal der Pokalsieger (Conference League)
+28145	UEFA-Pokal (Europa League)
+28146	Default: {0}
+28147	Save
+28148	Choose the winners of last season's European cups (Champions League, Pokal der Pokalsieger, UEFA-Pokal)
+28160	{0} · {1}: no club for "{2}" in the results of the last season.
+28161	{0} · {1}: {2} holds two places of the same kind ({3} and {4}).
+28162	{0} · {1}: the cup winner and the cup finalist both have a European place from the league already. The second European cup would get no club from this country and the game can crash. Give the cup winner or the cup finalist to a club without a league place (button Season results).
+28163	European cups: no title holder for {0}.
+28164	Write & Install is locked: {0} problem(s) in the season results or the European cup winners (see the Teams tab).
+28165	To fix before the files can be written:
+28170	The files must be valid before they can be installed or put into a patch. Fix the cause (see the list above and the log), then press Write again.
+28171	The written files have {0} validation problem(s) and are not installed or put into a patch:

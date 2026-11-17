@@ -86,7 +86,7 @@ namespace A2G.SavConverter
 
         // ---- layout -------------------------------------------------------------------------
 
-        private static string SlotLabel(string slot)
+        internal static string SlotLabel(string slot)
         {
             if (slot == SeasonResults.Champion) return Loc.T(22275);
             if (slot == SeasonResults.RunnerUp) return Loc.T(22276);

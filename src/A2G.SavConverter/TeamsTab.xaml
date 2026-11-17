@@ -15,6 +15,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <!-- country and global actions -->
@@ -31,6 +32,14 @@
             </DockPanel>
         </Border>
 
+        <!-- what has to be fixed before the files can be written (season results, European cup winners) -->
+        <Border x:Name="ProblemsCard" Grid.Row="2" Style="{StaticResource Card}" Padding="12" Margin="0,12,0,0" Visibility="Collapsed">
+            <StackPanel>
+                <TextBlock Text="{loc:LocalizedText 28165}" FontWeight="SemiBold" Foreground="{DynamicResource DangerBrush}" Margin="0,0,0,4" />
+                <TextBlock x:Name="ProblemsText" TextWrapping="Wrap" Foreground="{DynamicResource DangerBrush}" />
+            </StackPanel>
+        </Border>
+
         <!-- two team lists -->
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
@@ -41,9 +50,10 @@
                 <Grid>
                     <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="Auto" /><RowDefinition Height="*" /></Grid.RowDefinitions>
                     <Grid Margin="0,0,0,8">
-                        <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
+                        <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
                         <ComboBox x:Name="LeftGroupBox" SelectionChanged="LeftGroupBox_SelectionChanged" />
                         <Button Grid.Column="1" Content="{loc:LocalizedText 22260}" ToolTip="{loc:LocalizedText 22261}" Margin="8,0,0,0" Padding="12,0" Click="SeasonResults_Click" />
+                        <Button Grid.Column="2" Content="{loc:LocalizedText 28140}" ToolTip="{loc:LocalizedText 28148}" Margin="8,0,0,0" Padding="12,0" Click="EuropeanCups_Click" />
                     </Grid>
                     <TextBox x:Name="LeftSearch" Grid.Row="1" Margin="0,0,0,8" TextChanged="LeftSearch_TextChanged" ToolTip="{loc:LocalizedText 22198}" Tag="{loc:LocalizedText 22198}" />
                     <ListBox x:Name="LeftList" ItemTemplate="{StaticResource TeamMagnifyRow}" Grid.Row="2" MouseDoubleClick="TeamList_DoubleClick" />

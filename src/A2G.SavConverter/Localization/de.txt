@@ -567,3 +567,20 @@
 28128	Als Projekt bearbeiten
 28129	Öffnet den Konverter mit dem Projekt, aus dem dieser Patch erstellt wurde, um die Arbeit fortzusetzen (kein FM-Spielstand nötig)
 28130	Das Projekt des Patches konnte nicht geöffnet werden: {0}
+28140	Europapokale ...
+28141	Vorjahressieger der Europapokale
+28142	Die Sieger der Europapokale der letzten Saison haben wieder einen Platz im selben Wettbewerb. FM-Spielstände enthalten keine Titeldaten, wähle die drei Vereine deshalb selbst (Teams aus Deutschland, England, Frankreich, Italien und Spanien). Ohne Auswahl nimmt das Programm starke Vereine.
+28143	Champions League
+28144	Pokal der Pokalsieger (Conference League)
+28145	UEFA-Pokal (Europa League)
+28146	Standard: {0}
+28147	Speichern
+28148	Die Sieger der Europapokale der letzten Saison wählen (Champions League, Pokal der Pokalsieger, UEFA-Pokal)
+28160	{0} · {1}: kein Verein für "{2}" in den Ergebnissen der letzten Saison.
+28161	{0} · {1}: {2} hat zwei Plätze derselben Art ({3} und {4}).
+28162	{0} · {1}: Pokalsieger und Pokalfinalist haben beide schon einen Europapokalplatz über die Liga. Der zweite Europapokal bekäme dann keinen Verein dieses Landes und das Spiel kann abstürzen. Gib Pokalsieger oder Pokalfinalist an einen Verein ohne Ligaplatz (Schaltfläche Saisonergebnisse).
+28163	Europapokale: kein Vorjahressieger für {0}.
+28164	Schreiben & Installieren ist gesperrt: {0} Problem(e) bei den Saisonergebnissen oder den Europapokalsiegern (siehe Reiter Teams).
+28165	Vor dem Schreiben der Dateien zu beheben:
+28170	Die Dateien müssen gültig sein, bevor sie installiert oder in einen Patch gepackt werden können. Behebe die Ursache (siehe Liste oben und das Protokoll) und drücke dann erneut Schreiben.
+28171	Die geschriebenen Dateien haben {0} Prüfproblem(e) und werden weder installiert noch in einen Patch gepackt:
